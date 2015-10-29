@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Web;
 
 namespace Restful.Query.Filter.Order
 {
     public class Order
     {
-        private const string Pattern = @"filter\[order]\=(?<property>\w+)(,(%20)?(?<property>\w+))*%20(?<sorts>ASC|DESC)";
+        private const string Pattern = @"filter\[order]\=(?<property>\w+)(,(\s)?(?<property>\w+))*\s(?<sorts>ASC|DESC)";
         private readonly ICollection<string> _properties;
 
         public Sorts Sorts { get; private set; }
@@ -20,6 +21,8 @@ namespace Restful.Query.Filter.Order
 
         public static implicit operator Order(string query)
         {
+            query = HttpUtility.UrlDecode(query);
+
             var properties = GetProperties(query);
             if (properties == null)
             {

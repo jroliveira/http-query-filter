@@ -1,4 +1,5 @@
 using System.Text.RegularExpressions;
+using System.Web;
 
 namespace Restful.Query.Filter
 {
@@ -20,6 +21,8 @@ namespace Restful.Query.Filter
 
         public static implicit operator Limit(string query)
         {
+            query = HttpUtility.UrlDecode(query);
+
             var match = Regex.Match(query, Pattern, RegexOptions.IgnoreCase);
 
             int limit;

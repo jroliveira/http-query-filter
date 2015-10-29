@@ -8,6 +8,7 @@ namespace Restful.Query.Filter.Test
     {
         [TestCase("?filter[limit]=9", 9)]
         [TestCase("?FILTER[LIMIT]=9", 9)]
+        [TestCase("?filter%5Blimit%5D=9", 9)]
         public void Parse_DadaQuery_ValueDeveSerIgual(string query, int expected)
         {
             Limit limit = query;

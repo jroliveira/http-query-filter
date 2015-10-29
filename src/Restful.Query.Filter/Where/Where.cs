@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Web;
 
 namespace Restful.Query.Filter.Where
 {
@@ -18,6 +19,8 @@ namespace Restful.Query.Filter.Where
 
         public static implicit operator Where(string query)
         {
+            query = HttpUtility.UrlDecode(query);
+
             var match = Regex.Match(query, Pattern, RegexOptions.IgnoreCase);
 
             var property = GetProperty(match);

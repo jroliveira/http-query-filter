@@ -8,6 +8,7 @@ namespace Restful.Query.Filter.Test
     {
         [TestCase("?filter[skip]=9", 9)]
         [TestCase("?FILTER[SKIP]=9", 9)]
+        [TestCase("?filter%5Bskip%5D=1", 1)]
         public void Parse_DadaQuery_ValueDeveSerIgual(string query, int expected)
         {
             Skip skip = query;

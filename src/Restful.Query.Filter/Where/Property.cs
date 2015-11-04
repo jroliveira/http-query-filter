@@ -2,8 +2,8 @@ namespace Restful.Query.Filter.Where
 {
     public class Property
     {
-        public string Name { get; private set; }
-        public object Value { get; private set; }
+        public virtual string Name { get; protected set; }
+        public virtual object Value { get; protected set; }
 
         public Property(string name, object value)
         {

@@ -2,13 +2,18 @@ namespace Restful.Query.Filter
 {
     public class Filter
     {
-        public Limit Limit { get; private set; }
-        public Skip Skip { get; private set; }
-        public Order.Order Order { get; private set; }
-        public Where.Where Where { get; private set; }
+        public virtual Limit Limit { get; protected set; }
+        public virtual Skip Skip { get; protected set; }
+        public virtual Order.Order Order { get; protected set; }
+        public virtual Where.Where Where { get; protected set; }
 
-        public bool HasOrder { get { return Order != null; } }
-        public bool HasWhere { get { return Where != null; } }
+        public virtual bool HasOrder { get { return Order != null; } }
+        public virtual bool HasWhere { get { return Where != null; } }
+
+        protected Filter()
+        {
+
+        }
 
         public static implicit operator Filter(string query)
         {

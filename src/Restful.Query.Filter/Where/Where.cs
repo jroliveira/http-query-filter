@@ -8,8 +8,13 @@ namespace Restful.Query.Filter.Where
     {
         private const string Pattern = @"filter\[where]\[(?<property>\w+)\](\[(?<op>gt|lt)\])?=(?<value>[^&]*)&?";
 
-        public Operator Operator { get; private set; }
-        public Property Property { get; private set; }
+        public virtual Operator Operator { get; protected set; }
+        public virtual Property Property { get; protected set; }
+
+        protected Where()
+        {
+
+        }
 
         public Where(Property property, Operator @operator)
         {

@@ -10,8 +10,13 @@ namespace Restful.Query.Filter.Order
         private const string Pattern = @"filter\[order]\=(?<property>\w+)(,(\s)?(?<property>\w+))*\s(?<sorts>ASC|DESC)";
         private readonly ICollection<string> _properties;
 
-        public Sorts Sorts { get; private set; }
-        public string Property { get { return _properties.First(); } }
+        public virtual Sorts Sorts { get; protected set; }
+        public virtual string Property { get { return _properties.First(); } }
+
+        protected Order()
+        {
+
+        }
 
         public Order(ICollection<string> properties, Sorts sorts)
         {

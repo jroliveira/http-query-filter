@@ -7,7 +7,11 @@ namespace Restful.Query.Filter
     {
         private const string Pattern = @"filter\[limit]\=(?<limit>\d+)";
 
-        public int Value { get; private set; }
+        public virtual int Value { get; protected set; }
+
+        protected Limit()
+        {
+        }
 
         public Limit(int value)
         {

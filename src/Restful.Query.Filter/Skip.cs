@@ -7,7 +7,12 @@ namespace Restful.Query.Filter
     {
         private const string Pattern = @"filter\[skip]\=(?<skip>\d+)";
 
-        public int Value { get; private set; }
+        public virtual int Value { get; protected set; }
+
+        protected Skip()
+        {
+
+        }
 
         public Skip(int value)
         {

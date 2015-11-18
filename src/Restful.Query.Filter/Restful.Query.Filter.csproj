@@ -37,6 +37,7 @@
   <ItemGroup>
     <Compile Include="Filter.cs" />
     <Compile Include="Limit.cs" />
+    <Compile Include="Order\Field.cs" />
     <Compile Include="Order\Order.cs" />
     <Compile Include="Order\Sorts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

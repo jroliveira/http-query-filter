@@ -7,73 +7,60 @@ namespace Restful.Query.Filter.Order
 {
     public class Order
     {
-        private const string Pattern = @"filter\[order]\=(?<property>\w+)(,(\s)?(?<property>\w+))*\s(?<sorts>ASC|DESC)";
-        private readonly ICollection<string> _properties;
+        private const string Pattern = @"filter\[order](\[\d+])?\=(?<property>\w+)(,(\s)?(?<property>\w+))*\s(?<sorts>asc|desc)";
 
-        public virtual Sorts Sorts { get; protected set; }
-        public virtual string Property { get { return _properties.First(); } }
+        public virtual IEnumerable<Field> Fields { get; protected set; }
 
         protected Order()
         {
 
         }
 
-        public Order(ICollection<string> properties, Sorts sorts)
+        public Order(IEnumerable<Field> fields)
         {
-            _properties = properties;
-            Sorts = sorts;
+            Fields = fields;
         }
 
         public static implicit operator Order(string query)
         {
             query = HttpUtility.UrlDecode(query);
 
-            var properties = GetProperties(query);
-            if (properties == null)
+            var fields = Get(query);
+            if (fields == null || !fields.Any())
             {
                 return null;
             }
 
-            var sorts = GetSorts(query);
-
-            return new Order(properties, sorts);
+            return new Order(fields);
         }
 
-        private static Sorts GetSorts(string query)
-        {
-            var match = Regex.Match(query, Pattern, RegexOptions.IgnoreCase);
-
-            var sort = match.Groups["sorts"].Value.ToLower();
-
-            var sorts = new Dictionary<string, Sorts>
-            {
-                { "asc", Sorts.Asc },
-                { "desc", Sorts.Desc }
-            };
-
-            return sorts[sort];
-        }
-
-        private static ICollection<string> GetProperties(string query)
+        private static IEnumerable<Field> Get(string query)
         {
             var matches = Regex.Matches(query, Pattern, RegexOptions.IgnoreCase);
 
-            var properties = new List<string>();
-
-            foreach (Match m in matches)
+            var types = new Dictionary<string, Sorts>
             {
-                var range = from object capture in m.Groups["property"].Captures
-                            select capture.ToString();
+                { "asc", Sorts.Asc},
+                { "desc", Sorts.Desc }
+            };
 
-                properties.AddRange(range);
-            }
+            return
+                from
+                    Match m in matches
 
-            if (!properties.Any())
-            {
-                return null;
-            }
+                let property = from
+                                   object capture in m.Groups["property"].Captures
+                               select capture.ToString()
 
-            return properties;
+                let sorts = from
+                                object capture in m.Groups["sorts"].Captures
+                            select capture.ToString().ToLower()
+
+                select new Field
+                {
+                    Name = property.First(),
+                    Sorts = types[sorts.First()]
+                };
         }
     }
 }

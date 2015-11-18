@@ -45,7 +45,13 @@ De forma CRESCENTE:
 De forma DESCRESCENTE:
 
 ``` js
-/accounts?filter[order]=name%desc
+/accounts?filter[order]=name%20desc
+```
+
+Com vários campos:
+
+``` js
+/accounts?filter[order][0]=id%20asc&filter[order][1]=name%20desc
 ```
 
 ### Where

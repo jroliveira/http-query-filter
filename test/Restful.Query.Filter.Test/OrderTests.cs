@@ -10,49 +10,41 @@ namespace Restful.Query.Filter.Test
     public class OrderTests
     {
         [TestCase("?filter[order]=id asc", new[] { "id" })]
-        [TestCase("?FILTER[ORDER]=NAME%20ASC", new[] { "NAME" })]
-        [TestCase("?Filter[Order]=Surname Asc", new[] { "Surname" })]
+        [TestCase("?FILTER[ORDER]=ID ASC", new[] { "ID" })]
         [TestCase("?filter%5Border%5D=id%20asc", new[] { "id" })]
-        [TestCase("?Filter[order]=id asc", new[] { "id" })]
         [TestCase("?filter[order][0]=id asc&filter[order][1]=name asc", new[] { "id", "name" })]
-        public void Parse_DadoQuery_DeveRetornarProperty(string query, IEnumerable<string> expected)
+        public void Parse_DadoQuery_DeveRetornarProperty(string query, IEnumerable<string> fieldsExpected)
         {
-            Order.Order order = query;
+            Order.Order actual = query;
 
-            var fields = new List<Field>();
+            var expected = new List<Field>(fieldsExpected.Select(name => new Field(name, Sorts.Asc)));
 
-            fields.AddRange(expected.Select(name => new Field { Name = name, Sorts = Sorts.Asc }));
-
-            order.Fields.ShouldBeEquivalentTo(fields);
+            actual.Fields.ShouldBeEquivalentTo(expected);
         }
 
-        [TestCase("?filter[order]=id%20ASC", new[] { Sorts.Asc })]
         [TestCase("?filter[order]=id asc", new[] { Sorts.Asc })]
-        [TestCase("?filter[order]=id%20Asc", new[] { Sorts.Asc })]
-        [TestCase("?filter[order]=id DESC", new[] { Sorts.Desc })]
-        [TestCase("?filter[order]=id%20desc", new[] { Sorts.Desc })]
-        [TestCase("?filter[order]=id Desc", new[] { Sorts.Desc })]
+        [TestCase("?FILTER[ORDER]=id ASC", new[] { Sorts.Asc })]
+        [TestCase("?filter%5Border%5D=id%20asc", new[] { Sorts.Asc })]
+        [TestCase("?filter[order]=id desc", new[] { Sorts.Desc })]
+        [TestCase("?FILTER[ORDER]=id DESC", new[] { Sorts.Desc })]
         [TestCase("?filter%5Border%5D=id%20desc", new[] { Sorts.Desc })]
-        [TestCase("?filter[order]=id ASC", new[] { Sorts.Asc })]
         [TestCase("?filter[order][0]=id asc&filter[order][1]=id desc", new[] { Sorts.Asc, Sorts.Desc })]
-        public void Parse_DadaQuery_DeveRetornarSorts(string query, IEnumerable<Sorts> expected)
+        public void Parse_DadaQuery_DeveRetornarSorts(string query, IEnumerable<Sorts> fieldsExpected)
         {
-            Order.Order order = query;
+            Order.Order actual = query;
 
-            var fields = new List<Field>();
+            var expected = new List<Field>(fieldsExpected.Select(sorts => new Field("id", sorts)));
 
-            fields.AddRange(expected.Select(sorts => new Field { Name = "id", Sorts = sorts }));
-
-            order.Fields.ShouldBeEquivalentTo(fields);
+            actual.Fields.ShouldBeEquivalentTo(expected);
         }
 
-        [TestCase("?filter[order]=Name%20DES")]
-        [TestCase("?filter[order]=last name%20ASC")]
+        [TestCase("?filter[order]=name%20des")]
+        [TestCase("?filter[order]=last name asc")]
         public void Parse_DadaQuery_DeveRetornarNull(string query)
         {
-            Order.Order order = query;
+            Order.Order actual = query;
 
-            order.Should().BeNull();
+            actual.Should().BeNull();
         }
     }
 }

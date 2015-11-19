@@ -1,27 +1,29 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 
-namespace Restful.Query.Filter.Order
+namespace Restful.Query.Filter.Fields
 {
-    public class Order
+    public class Fields : Collection<Field>
     {
-        private const string Pattern = @"filter\[order](\[\d+])?\=(?<property>\w+)\s(?<sorts>asc|desc)";
+        private const string Pattern = @"filter\[fields]\[(?<property>\w+)]\=(?<show>true|false)";
 
-        public virtual IEnumerable<Field> Fields { get; protected set; }
-
-        protected Order()
+        protected Fields()
         {
 
         }
 
-        public Order(IEnumerable<Field> fields)
+        public Fields(IEnumerable<Field> fields)
         {
-            Fields = fields;
+            foreach (var field in fields)
+            {
+                Items.Add(field);
+            }
         }
 
-        public static implicit operator Order(string query)
+        public static implicit operator Fields(string query)
         {
             query = HttpUtility.UrlDecode(query);
 
@@ -31,17 +33,17 @@ namespace Restful.Query.Filter.Order
                 return null;
             }
 
-            return new Order(fields);
+            return new Fields(fields);
         }
 
         private static IEnumerable<Field> Get(string query)
         {
             var matches = Regex.Matches(query, Pattern, RegexOptions.IgnoreCase);
 
-            var types = new Dictionary<string, Sorts>
+            var types = new Dictionary<string, bool>
             {
-                { "asc", Sorts.Asc},
-                { "desc", Sorts.Desc }
+                { "true", true },
+                { "false", false }
             };
 
             return
@@ -53,7 +55,7 @@ namespace Restful.Query.Filter.Order
                                select capture.ToString()
 
                 let sorts = from
-                                object capture in m.Groups["sorts"].Captures
+                                object capture in m.Groups["show"].Captures
                             select capture.ToString().ToLower()
 
                 select new Field(property.First(), types[sorts.First()]);

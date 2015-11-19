@@ -35,6 +35,8 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Fields\Field.cs" />
+    <Compile Include="Fields\Fields.cs" />
     <Compile Include="Filter.cs" />
     <Compile Include="Limit.cs" />
     <Compile Include="Order\Field.cs" />
@@ -46,6 +48,7 @@
     <Compile Include="Where\Property.cs" />
     <Compile Include="Where\Where.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -72,6 +72,26 @@ Onde for MENOR QUE:
 /accounts?filter[where][id][lt]=100
 ```
 
+### Fields
+
+Retorna os dados respeitando a configuração de visualização de cada campo.
+
+obs.: A coluna por padrão será retornada na consulta.
+
+Exemplos:
+
+Onde for VERDADEIRO:
+
+``` js
+/accounts?filter[fields][id]=true
+```
+
+Onde for FALSO:
+
+``` js
+/accounts?filter[fields][id]=false
+```
+
 ## Instalação
 
 * `Install-Package Restful.Query.Filter`

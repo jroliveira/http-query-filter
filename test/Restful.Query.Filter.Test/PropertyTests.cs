@@ -13,9 +13,9 @@ namespace Restful.Query.Filter.Test
         [TestCase("?filter%5Bwhere%5D%5Bid%5D%5Bgt%5D=2", "2")]
         public void Parse_DadoQuery_DeveRetornarPropertyValue(string query, object expected)
         {
-            Where.Where where = query;
+            Where.Where actual = query;
 
-            where.Property.Value.Should().Be(expected);
+            actual.Property.Value.Should().Be(expected);
         }
 
         [TestCase("?filter[where][id][gt]=2", "id")]
@@ -24,9 +24,9 @@ namespace Restful.Query.Filter.Test
         [TestCase("?filter%5Bwhere%5D%5Bid%5D%5Bgt%5D=2", "id")]
         public void Parse_DadoQuery_DeveRetornarPropertyName(string query, string expected)
         {
-            Where.Where where = query;
+            Where.Where actual = query;
 
-            where.Property.Name.Should().Be(expected);
+            actual.Property.Name.Should().Be(expected);
         }
 
         [TestCase("?filter[where][id][gt]=2", Operator.GreaterThan)]
@@ -38,9 +38,9 @@ namespace Restful.Query.Filter.Test
         [TestCase("?filter%5Bwhere%5D%5Bid%5D%5Bgt%5D=2", Operator.GreaterThan)]
         public void Parse_DadaQuery_DeveRetornarSorts(string query, Operator expected)
         {
-            Where.Where where = query;
+            Where.Where actual = query;
 
-            where.Operator.Should().Be(expected);
+            actual.Operator.Should().Be(expected);
         }
 
         [TestCase("?filter[condition][id][gt]=1")]
@@ -49,9 +49,9 @@ namespace Restful.Query.Filter.Test
         [TestCase("?filter[where][id][gt]=")]
         public void Parse_DadaQuery_DeveRetornarNull(string query)
         {
-            Where.Where where = query;
+            Where.Where actual = query;
 
-            where.Should().BeNull();
+            actual.Should().BeNull();
         }
     }
 }

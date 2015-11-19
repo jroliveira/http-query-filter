@@ -11,18 +11,18 @@ namespace Restful.Query.Filter.Test
         [TestCase("?filter%5Bskip%5D=1", 1)]
         public void Parse_DadaQuery_ValueDeveSerIgual(string query, int expected)
         {
-            Skip skip = query;
+            Skip actual = query;
 
-            Assert.AreEqual(expected, skip);
+            Assert.AreEqual(expected, actual);
         }
 
         [TestCase("?filter[skip]=Nine")]
         [TestCase("?filter[skip]=")]
         public void Parse_DadaQuery_DeveRetornarNull(string query)
         {
-            Skip skip = query;
+            Skip actual = query;
 
-            skip.Should().BeNull();
+            actual.Should().BeNull();
         }
     }
 }

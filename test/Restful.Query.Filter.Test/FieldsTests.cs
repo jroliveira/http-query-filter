@@ -7,7 +7,7 @@ using Restful.Query.Filter.Fields;
 namespace Restful.Query.Filter.Test
 {
     [TestFixture]
-    public class FiltersTests
+    public class FieldsTests
     {
         [TestCase("?filter[fields][id]=true", new[] { "id" })]
         [TestCase("?FILTER[FIELDS][ID]=TRUE", new[] { "ID" })]

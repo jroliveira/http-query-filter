@@ -60,6 +60,12 @@ Retorna os dados respeitando as condições solicitadas.
 
 Exemplos:
 
+Onde for IGUAL:
+
+``` js
+/accounts?filter[where][id]=100
+```
+
 Onde for MAIOR QUE:
 
 ``` js

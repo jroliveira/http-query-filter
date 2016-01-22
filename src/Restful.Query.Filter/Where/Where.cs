@@ -60,6 +60,11 @@ namespace Restful.Query.Filter.Where
         {
             var operation = match.Groups["op"].Value.ToLower();
 
+            if (string.IsNullOrEmpty(operation))
+            {
+                return Operator.Equal;
+            }
+
             var operations = new Dictionary<string, Operator>
             {
                 { "gt", Operator.GreaterThan },

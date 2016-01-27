@@ -32,7 +32,7 @@ Exemplo:
 
 ### Order
 
-Retorna os dados ordenados de forma crescente (asc) ou descrescente(desc) com base em um propriedade especifica.
+Retorna os dados ordenados de forma crescente (asc) ou decrescente(desc) com base em um propriedade especifica.
 
 Exemplos:
 
@@ -42,13 +42,13 @@ De forma CRESCENTE:
 /accounts?filter[order]=name%20asc
 ```
 
-De forma DESCRESCENTE:
+De forma DECRESCENTE:
 
 ``` js
 /accounts?filter[order]=name%20desc
 ```
 
-Com vários campos:
+De forma crescente E decrescente:
 
 ``` js
 /accounts?filter[order][0]=id%20asc&filter[order][1]=name%20desc
@@ -76,6 +76,18 @@ Onde for MENOR QUE:
 
 ``` js
 /accounts?filter[where][id][lt]=100
+```
+
+Onde for maior que E igual:
+
+``` js
+/accounts?filter[where][and][0][id][gt]=100&filter[where][and][1][name]=junior
+```
+
+Onde for menor que OU igual:
+
+``` js
+/accounts?filter[where][or][0][id][lt]=100&filter[where][or][1][name]=junior
 ```
 
 ### Fields

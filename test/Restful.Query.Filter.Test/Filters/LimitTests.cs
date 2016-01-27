@@ -1,7 +1,8 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
+using Restful.Query.Filter.Filters;
 
-namespace Restful.Query.Filter.Test
+namespace Restful.Query.Filter.Test.Filters
 {
     [TestFixture]
     public class LimitTests

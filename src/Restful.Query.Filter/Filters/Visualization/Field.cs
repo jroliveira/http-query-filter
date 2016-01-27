@@ -1,4 +1,4 @@
-﻿namespace Restful.Query.Filter.Fields
+﻿namespace Restful.Query.Filter.Filters.Visualization
 {
     public class Field
     {

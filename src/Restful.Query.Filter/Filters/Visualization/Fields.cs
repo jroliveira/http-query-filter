@@ -3,8 +3,9 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
+using Restful.Query.Filter.Infraestructure.Extensions;
 
-namespace Restful.Query.Filter.Fields
+namespace Restful.Query.Filter.Filters.Visualization
 {
     public class Fields : Collection<Field>
     {
@@ -40,25 +41,24 @@ namespace Restful.Query.Filter.Fields
         {
             var matches = Regex.Matches(query, Pattern, RegexOptions.IgnoreCase);
 
+            return
+                from Match match in matches
+                let property = match.Get("property")
+                let show = GetShow(match)
+                select new Field(property, show);
+        }
+
+        private static bool GetShow(Match match)
+        {
+            var show = match.Groups["show"].Value.ToLower();
+
             var types = new Dictionary<string, bool>
             {
                 { "true", true },
                 { "false", false }
             };
 
-            return
-                from
-                    Match m in matches
-
-                let property = from
-                                   object capture in m.Groups["property"].Captures
-                               select capture.ToString()
-
-                let sorts = from
-                                object capture in m.Groups["show"].Captures
-                            select capture.ToString().ToLower()
-
-                select new Field(property.First(), types[sorts.First()]);
+            return types[show];
         }
     }
 }

@@ -1,7 +1,7 @@
 using System.Text.RegularExpressions;
 using System.Web;
 
-namespace Restful.Query.Filter
+namespace Restful.Query.Filter.Filters
 {
     public class Skip
     {

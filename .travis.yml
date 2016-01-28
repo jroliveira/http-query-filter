@@ -1,7 +1,7 @@
 language: csharp
-solution: restful-query-filter.sln
+solution: Restful.Query.Filter.sln
 env:
  matrix:
   - MONO_VERSION="3.8.0"
 script:
- - xbuild /verbosity:minimal /p:Configuration=Release restful-query-filter.sln
+ - xbuild /verbosity:minimal /p:Configuration=Release Restful.Query.Filter.sln

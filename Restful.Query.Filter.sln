@@ -22,9 +22,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "~", "~", "{9265E734-8697-48
 		.gitignore = .gitignore
 		.travis.yml = .travis.yml
 		appveyor.yml = appveyor.yml
-		Gemfile = Gemfile
-		Rakefile = Rakefile
+		gulpfile.js = gulpfile.js
+		package.json = package.json
 		README.md = README.md
+		Restful.Query.Filter.nuspec = Restful.Query.Filter.nuspec
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{9F46BA6A-73B5-4B54-944E-72D8470BC745}"
+	ProjectSection(SolutionItems) = preProject
+		docs\logo.png = docs\logo.png
 	EndProjectSection
 EndProject
 Global

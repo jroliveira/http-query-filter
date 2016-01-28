@@ -11,9 +11,9 @@ environment:
   COVERALLS_REPO_TOKEN:
     secure: YNcKfqjNrHTGrAentcP9N/nk2JPImQW43NieZ+5O/gAlS/wNTYbaGTAhUroXHhXm
 before_build:
-  - nuget restore ".\restful-query-filter.sln"
+  - nuget restore ".\Restful.Query.Filter.sln"
 build:
-  project: .\restful-query-filter.sln
+  project: .\Restful.Query.Filter.sln
   verbosity: minimal
 test_script:
 - ps: >-

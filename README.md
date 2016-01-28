@@ -6,6 +6,8 @@
 [![NuGet](https://img.shields.io/nuget/dt/Restful.Query.Filter.svg)](https://www.nuget.org/packages/Restful.Query.Filter/)
 [![NuGet](https://img.shields.io/nuget/v/Restful.Query.Filter.svg)](https://www.nuget.org/packages/Restful.Query.Filter/)
 
+![RESTful Query Filter - Logo][logo]
+
 Sistema de filtro baseado no projeto [StrongLoop Node.js API Platform][strongloop] desenvolvido pela [Atlassian Confluence][atlassian].
 
 ## Features
@@ -130,3 +132,4 @@ Onde for FALSO:
 
 [strongloop]: https://docs.strongloop.com/display/SL/Installing+StrongLoop
 [atlassian]: https://www.atlassian.com/software/confluence
+[logo]: https://raw.github.com/jroliveira/restful-query-filter/master/docs/logo.png "RESTful Query Filter - Logo"

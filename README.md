@@ -8,7 +8,7 @@
 
 ![RESTful Query Filter - Logo][logo]
 
-Sistema de filtro baseado no projeto [StrongLoop Node.js API Platform][strongloop] desenvolvido pela [Atlassian Confluence][atlassian].
+Sistema de filtro baseado no projeto [StrongLoop Node.js API Platform][strongloop] desenvolvido pela [IBM Company][ibm].
 
 ## Features
 
@@ -18,7 +18,7 @@ Retorna apenas a quantidade de dados passada no filtro ou menos dados.
 
 Exemplo:
 
-``` js
+```
 /accounts?filter[limit]=5
 ```
 
@@ -28,7 +28,7 @@ Retorna apenas os dados ignorando os primeiros registros retornados na consulta.
 
 Exemplo:
 
-``` js
+```
 /accounts?filter[skip]=1
 ```
 
@@ -40,19 +40,19 @@ Exemplos:
 
 De forma CRESCENTE:
 
-``` js
+```
 /accounts?filter[order]=name%20asc
 ```
 
 De forma DECRESCENTE:
 
-``` js
+```
 /accounts?filter[order]=name%20desc
 ```
 
 De forma crescente E decrescente:
 
-``` js
+```
 /accounts?filter[order][0]=id%20asc&filter[order][1]=name%20desc
 ```
 
@@ -64,31 +64,31 @@ Exemplos:
 
 Onde for IGUAL:
 
-``` js
+```
 /accounts?filter[where][id]=100
 ```
 
 Onde for MAIOR QUE:
 
-``` js
+```
 /accounts?filter[where][id][gt]=100
 ```
 
 Onde for MENOR QUE:
 
-``` js
+```
 /accounts?filter[where][id][lt]=100
 ```
 
 Onde for maior que E igual:
 
-``` js
+```
 /accounts?filter[where][and][0][id][gt]=100&filter[where][and][1][name]=junior
 ```
 
 Onde for menor que OU igual:
 
-``` js
+```
 /accounts?filter[where][or][0][id][lt]=100&filter[where][or][1][name]=junior
 ```
 
@@ -102,13 +102,13 @@ Exemplos:
 
 Onde for VERDADEIRO:
 
-``` js
+```
 /accounts?filter[fields][id]=true
 ```
 
 Onde for FALSO:
 
-``` js
+```
 /accounts?filter[fields][id]=false
 ```
 
@@ -119,8 +119,8 @@ Onde for FALSO:
 ## Rodar os testes
 
 * `git clone https://github.com/jroliveira/restful-query-filter.git`
-* `bundler`
-* `rake test`
+* `npm install`
+* `npm test`
 
 ## Contribuições
 
@@ -130,6 +130,6 @@ Onde for FALSO:
 4. git push origin <branch-name>
 5. Create a pull request
 
-[strongloop]: https://docs.strongloop.com/display/SL/Installing+StrongLoop
-[atlassian]: https://www.atlassian.com/software/confluence
+[strongloop]: https://strongloop.com/
+[ibm]: http://www.ibm.com/
 [logo]: https://raw.github.com/jroliveira/restful-query-filter/master/docs/logo.png "RESTful Query Filter - Logo"

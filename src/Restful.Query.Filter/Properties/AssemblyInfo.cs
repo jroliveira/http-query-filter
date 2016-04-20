@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Restful.Query.Filter")]
-[assembly: AssemblyDescription("Sistema de filtro baseado no projeto StrongLoop Node.js API Platform desenvolvido pela Atlassian Confluence.")]
+[assembly: AssemblyDescription("Sistema de filtro baseado no projeto StrongLoop Node.js API Platform desenvolvido pela IBM.")]
 [assembly: AssemblyConfiguration("Release")]
 [assembly: AssemblyCompany("Junior Oliveira")]
 [assembly: AssemblyProduct("Restful.Query.Filter")]

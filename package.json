@@ -1,16 +1,36 @@
 {
   "name": "Restful.Query.Filter",
   "version": "2.1.0",
-  "description": "Sistema de filtro baseado no projeto StrongLoop Node.js API Platform desenvolvido pela Atlassian Confluence.",
+  "description": "Sistema de filtro baseado no projeto StrongLoop Node.js API Platform desenvolvido pela IBM.",
   "homepage": "https://github.com/jroliveira/restful-query-filter#readme",
   "repository": {
     "type": "git",
     "url": "https://github.com/jroliveira/restful-query-filter.git"
   },
-  "author": "Junior Oliveira",
+  "author": {
+    "name": "Junior Oliveira",
+    "email": "junolive@gmail.com",
+    "url": "http://jroliveira.net"
+  },
   "bugs": {
     "url": "https://github.com/jroliveira/restful-query-filter/issues"
   },
+  "readmeFilename": "README.md",
+  "scripts": {
+    "start": "\"npm run gulp:build\"",
+    "test": "\"npm run gulp:test\"",
+    "gulp": "gulp",
+    "gulp:build": "gulp build",
+    "gulp:test": "gulp test",
+    "gulp:deploy": "gulp nuget-package"
+  },
+  "keywords": [
+    "rest",
+    "restful",
+    "api",
+    "filter"
+  ],
+  "dependencies": {},
   "devDependencies": {
     "gulp": "^3.9.0",
     "gulp-dotnet-assembly-info": "^0.1.11",

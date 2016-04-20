@@ -109,3 +109,4 @@ UpgradeLog*.XML
 
 npm-debug.log
 node_modules
+.vs

@@ -11,9 +11,9 @@ const
     nugetPath: '.nuget/nuget.exe'
   });
 
-gulp.task('default', ['nuget-package']);
+gulp.task('default', ['build']);
 
-gulp.task('nuget-package', ['nuspec'], function () {
+gulp.task('nuget-package', ['nuspec', 'assemblyInfo'], function () {
   return nuget
     .pack({
       spec: 'Restful.Query.Filter.nuspec',
@@ -64,7 +64,7 @@ gulp.task('build', ['restore'], function () {
     }));
 });
 
-gulp.task('restore', ['assemblyInfo'], function () {
+gulp.task('restore', [], function () {
   return nuget
     .restore({
       packages: 'Restful.Query.Filter.sln',
@@ -79,9 +79,9 @@ gulp.task('assemblyInfo', [], function () {
       version: p.version,
       title: p.name,
       description: p.description,
-      company: p.author,
+      company: p.author.name,
       product: p.name,
-      copyright: 'Copyright (C) ' + p.author + ' ' + new Date().getFullYear()
+      copyright: 'Copyright (C) ' + p.author.name + ' ' + new Date().getFullYear()
     }))
     .pipe(gulp.dest('.'));
 });

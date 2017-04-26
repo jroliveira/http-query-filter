@@ -1,7 +1,9 @@
 language: csharp
-solution: Restful.Query.Filter.sln
-env:
- matrix:
-  - MONO_VERSION="3.8.0"
+dist: trusty
+sudo: required
+mono: none
+dotnet: 1.1.1
+before_script:
+ - chmod a+x ./build.sh
 script:
- - xbuild /verbosity:minimal /p:Configuration=Release Restful.Query.Filter.sln
+ - ./build.sh --quiet verify

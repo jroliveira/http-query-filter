@@ -1,11 +1,11 @@
-# RESTful Query Filter
+# Http Query Filter
 
 [![Build status](https://ci.appveyor.com/api/projects/status/ya2m0rky5km1p44q?svg=true)](https://ci.appveyor.com/project/junioro/restful-query-filter)
 [![Build Status](https://travis-ci.org/jroliveira/restful-query-filter.svg?branch=master)](https://travis-ci.org/jroliveira/restful-query-filter)
 [![Coverage Status](https://coveralls.io/repos/jroliveira/restful-query-filter/badge.svg?branch=master&service=github)](https://coveralls.io/github/jroliveira/restful-query-filter?branch=master)
 [![NuGet](https://img.shields.io/nuget/v/Restful.Query.Filter.svg)](https://www.nuget.org/packages/Restful.Query.Filter/)
 
-![RESTful Query Filter - Logo][logo]
+![Http Query Filter - Logo][logo]
 
 Sistema de filtro baseado no projeto [StrongLoop Node.js API Platform][strongloop] desenvolvido pela [IBM Company][ibm].
 

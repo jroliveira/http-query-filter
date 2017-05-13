@@ -8,19 +8,12 @@
 
     using Http.Query.Filter.Infraestructure.Extensions;
 
-    public class Fields : Collection<Field>
+    public class Fields : ReadOnlyCollection<KeyValuePair<string, bool>>
     {
-        private const string Pattern = @"filter\[fields]\[(?<property>\w+)]\=(?<show>true|false)";
+        private const string Pattern = @"filter\[fields]\[(?<field>\w+)]\=(?<show>true|false)";
 
-        public Fields(IEnumerable<Field> fields)
-        {
-            foreach (var field in fields)
-            {
-                this.Items.Add(field);
-            }
-        }
-
-        protected Fields()
+        public Fields(IList<KeyValuePair<string, bool>> fields)
+            : base(fields)
         {
         }
 
@@ -28,8 +21,10 @@
         {
             query = WebUtility.UrlDecode(query);
 
-            var fields = Get(query);
-            if (fields == null || !fields.Any())
+            var data = Get(query);
+            var fields = data as IList<KeyValuePair<string, bool>> ?? data.ToList();
+
+            if (!fields.Any())
             {
                 return null;
             }
@@ -37,15 +32,15 @@
             return new Fields(fields);
         }
 
-        private static IEnumerable<Field> Get(string query)
+        private static IEnumerable<KeyValuePair<string, bool>> Get(string query)
         {
             var matches = Regex.Matches(query, Pattern, RegexOptions.IgnoreCase);
 
             return
                 from Match match in matches
-                let property = match.Get("property")
+                let field = match.Get("field")
                 let show = GetShow(match)
-                select new Field(property, show);
+                select new KeyValuePair<string, bool>(field, show);
         }
 
         private static bool GetShow(Match match)

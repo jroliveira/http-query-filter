@@ -11,8 +11,8 @@
             &filter%5Blimit%5D=2
             &filter%5Border%5D%5B0%5D=id%20desc
             &filter%5Border%5D%5B1%5D=name%20asc
-            &filter%5Bwhere%5D%5Bor%5D%5B0%5D%5Bid%5D=2
-            &filter%5Bwhere%5D%5Bor%5D%5B1%5D%5Bid%5D=4
+            &filter%5Bwhere%5D%5Bid%5D=2
+            &filter%5Bwhere%5D%5Bid%5D=4
             &filter%5Bfields%5D%5Bid%5D=false";
 
         private const string QueryDecoded = @"
@@ -20,8 +20,8 @@
             &filter[limit]=2
             &filter[order][0]=id desc
             &filter[order][1]=name asc
-            &filter[where][or][0][id]=2
-            &filter[where][or][1][id]=4
+            &filter[where][id]=2
+            &filter[where][id]=4
             &filter[fields][id]=false";
 
         [Theory]

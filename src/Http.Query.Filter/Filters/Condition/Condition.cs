@@ -2,22 +2,19 @@ namespace Http.Query.Filter.Filters.Condition
 {
     using Http.Query.Filter.Filters.Condition.Operators;
 
-    public class Field
+    public class Condition
     {
-        public Field(string name, object value, Comparison comparison, Logical? logical)
+        public Condition(string field, object value, Comparison comparison)
         {
-            this.Name = name;
+            this.Field = field;
             this.Value = value;
             this.Comparison = comparison;
-            this.Logical = logical;
         }
 
-        public string Name { get; protected set; }
+        public string Field { get; protected set; }
 
         public object Value { get; protected set; }
 
         public Comparison Comparison { get; protected set; }
-
-        public Logical? Logical { get; protected set; }
     }
 }

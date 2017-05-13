@@ -3,7 +3,7 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/ya2m0rky5km1p44q?svg=true)](https://ci.appveyor.com/project/junioro/restful-query-filter)
 [![Build Status](https://travis-ci.org/jroliveira/restful-query-filter.svg?branch=master)](https://travis-ci.org/jroliveira/restful-query-filter)
 [![Coverage Status](https://coveralls.io/repos/jroliveira/restful-query-filter/badge.svg?branch=master&service=github)](https://coveralls.io/github/jroliveira/restful-query-filter?branch=master)
-[![NuGet](https://img.shields.io/nuget/v/Restful.Query.Filter.svg)](https://www.nuget.org/packages/Restful.Query.Filter/)
+[![NuGet](https://img.shields.io/nuget/v/Http.Query.Filter.svg)](https://www.nuget.org/packages/Http.Query.Filter/)
 
 ![Http Query Filter - Logo][logo]
 
@@ -79,18 +79,6 @@ Onde for MENOR QUE:
 /accounts?filter[where][id][lt]=100
 ```
 
-Onde for maior que E igual:
-
-```
-/accounts?filter[where][and][0][id][gt]=100&filter[where][and][1][name]=junior
-```
-
-Onde for menor que OU igual:
-
-```
-/accounts?filter[where][or][0][id][lt]=100&filter[where][or][1][name]=junior
-```
-
 ### Fields
 
 Retorna os dados respeitando a configuração de visualização de cada campo.
@@ -113,11 +101,11 @@ Onde for FALSO:
 
 ## Instalação
 
-* `Install-Package Restful.Query.Filter`
+* `Install-Package Http.Query.Filter`
 
 ## Rodar os testes
 
-* `git clone https://github.com/jroliveira/restful-query-filter.git`
+* `git clone https://github.com/jroliveira/http-query-filter.git`
 * `npm install`
 * `npm test`
 
@@ -131,4 +119,4 @@ Onde for FALSO:
 
 [strongloop]: https://strongloop.com/
 [ibm]: http://www.ibm.com/
-[logo]: https://raw.github.com/jroliveira/restful-query-filter/master/docs/logo.png "RESTful Query Filter - Logo"
+[logo]: https://raw.githubusercontent.com/jroliveira/http-query-filter/master/logo.png "Http Query Filter - Logo"

@@ -9,19 +9,12 @@
     using Http.Query.Filter.Filters.Condition.Operators;
     using Http.Query.Filter.Infraestructure.Extensions;
 
-    public class Where : Collection<Field>
+    public class Where : ReadOnlyCollection<Condition>
     {
-        private const string Pattern = @"filter\[where](\[(?<logical>and|or)]\[\d+])?\[(?<property>\w+)\](\[(?<comparison>gt|lt)\])?=(?<value>[^&]*)&?";
+        private const string Pattern = @"filter\[where]?\[(?<field>\w+)\](\[(?<comparison>gt|lt)\])?=(?<value>[^&]*)&?";
 
-        public Where(IEnumerable<Field> fields)
-        {
-            foreach (var field in fields)
-            {
-                this.Items.Add(field);
-            }
-        }
-
-        protected Where()
+        public Where(IList<Condition> conditions)
+            : base(conditions)
         {
         }
 
@@ -29,26 +22,27 @@
         {
             query = WebUtility.UrlDecode(query);
 
-            var fields = Get(query);
-            if (fields == null || !fields.Any())
+            var data = Get(query);
+            var conditions = data as IList<Condition> ?? data.ToList();
+
+            if (!conditions.Any())
             {
                 return null;
             }
 
-            return new Where(fields);
+            return new Where(conditions);
         }
 
-        private static IEnumerable<Field> Get(string query)
+        private static IEnumerable<Condition> Get(string query)
         {
             var matches = Regex.Matches(query, Pattern, RegexOptions.IgnoreCase);
 
             return
                 from Match match in matches
-                let property = match.Get("property")
+                let field = match.Get("field")
                 let value = match.Get("value")
                 let comparison = GetComparison(match)
-                let logical = GetLogical(match)
-                select new Field(property, value, comparison, logical);
+                select new Condition(field, value, comparison);
         }
 
         private static Comparison GetComparison(Match match)
@@ -63,23 +57,6 @@
             {
                 { "gt", Comparison.GreaterThan },
                 { "lt", Comparison.LessThan }
-            };
-
-            return operations[operation];
-        }
-
-        private static Logical? GetLogical(Match match)
-        {
-            var operation = match.Groups["logical"].Value.ToLower();
-            if (string.IsNullOrEmpty(operation))
-            {
-                return null;
-            }
-
-            var operations = new Dictionary<string, Logical>
-            {
-                { "and", Logical.And },
-                { "or", Logical.Or }
             };
 
             return operations[operation];

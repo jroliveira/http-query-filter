@@ -8,19 +8,12 @@
 
     using Http.Query.Filter.Infraestructure.Extensions;
 
-    public class OrderBy : Collection<Field>
+    public class OrderBy : ReadOnlyCollection<KeyValuePair<string, OrderByDirection>>
     {
-        private const string Pattern = @"filter\[order](\[\d+])?\=(?<property>\w+)\s(?<direction>asc|desc)";
+        private const string Pattern = @"filter\[order](\[\d+])?\=(?<field>\w+)\s(?<direction>asc|desc)";
 
-        public OrderBy(IEnumerable<Field> fields)
-        {
-            foreach (var field in fields)
-            {
-                this.Items.Add(field);
-            }
-        }
-
-        protected OrderBy()
+        public OrderBy(IList<KeyValuePair<string, OrderByDirection>> fields)
+            : base(fields)
         {
         }
 
@@ -28,8 +21,10 @@
         {
             query = WebUtility.UrlDecode(query);
 
-            var fields = Get(query);
-            if (fields == null || !fields.Any())
+            var data = Get(query);
+            var fields = data as IList<KeyValuePair<string, OrderByDirection>> ?? data.ToList();
+
+            if (!fields.Any())
             {
                 return null;
             }
@@ -37,15 +32,15 @@
             return new OrderBy(fields);
         }
 
-        private static IEnumerable<Field> Get(string query)
+        private static IEnumerable<KeyValuePair<string, OrderByDirection>> Get(string query)
         {
             var matches = Regex.Matches(query, Pattern, RegexOptions.IgnoreCase);
 
             return
                 from Match match in matches
-                let property = match.Get("property")
+                let field = match.Get("field")
                 let orderBy = GetDirection(match)
-                select new Field(property, orderBy);
+                select new KeyValuePair<string, OrderByDirection>(field, orderBy);
         }
 
         private static OrderByDirection GetDirection(Match match)

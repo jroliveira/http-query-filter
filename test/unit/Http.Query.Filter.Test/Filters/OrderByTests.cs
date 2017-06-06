@@ -13,7 +13,7 @@
     {
         [Theory]
         [ClassData(typeof(TestData))]
-        public void Parse_DadoQuery_DeveRetornarProperty(string query, OrderBy expected)
+        public void Parse_DadaQuery_DeveRetornarProperty(string query, OrderBy expected)
         {
             OrderBy actual = query;
 

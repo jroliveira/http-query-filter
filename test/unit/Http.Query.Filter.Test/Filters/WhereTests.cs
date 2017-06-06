@@ -15,7 +15,7 @@
     {
         [Theory]
         [ClassData(typeof(TestData))]
-        public void Parse_DadoQuery_DeveRetornarPropertyValue(string query, Where expected)
+        public void Parse_DadaQuery_DeveRetornarPropertyValue(string query, Where expected)
         {
             Where actual = query;
 

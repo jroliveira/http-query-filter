@@ -13,7 +13,7 @@
     {
         [Theory]
         [ClassData(typeof(TestData))]
-        public void Parse_DadoQuery_DeveRetornar(string query, Fields expected)
+        public void Parse_DadaQuery_DeveRetornar(string query, Fields expected)
         {
             Fields actual = query;
 

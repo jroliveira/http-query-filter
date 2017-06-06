@@ -100,21 +100,40 @@ Onde for FALSO:
 /accounts?filter[fields][id]=false
 ```
 
-## Instalação
+## Pre requirements
 
-* `Install-Package Http.Query.Filter`
+* Visual Studio 2017
 
-## Rodar os testes
+## Installing
 
-* `git clone https://github.com/jroliveira/http-query-filter.git`
-* `npm install`
-* `npm test`
+``` bash
+$ git clone https://github.com/jroliveira/http-query-filter.git
+$ dotnet restore
+```
 
-## Contribuições
+### Running tests
+
+``` bash
+$ dotnet test -c Release test/unit/Http.Query.Filter.Test/Http.Query.Filter.Test.csproj
+```
+
+## Building
+
+``` bash
+$ dotnet build
+```
+
+## How to use it
+
+``` PowerShell
+PM> Install-Package Http.Query.Filter
+```
+
+## Contributions
 
 1. Fork it
 2. git checkout -b <branch-name>
-3. git add --all && git commit -m "feature description"
+3. git add -A && git commit -m "feature description"
 4. git push origin <branch-name>
 5. Create a pull request
 

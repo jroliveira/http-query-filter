@@ -1,8 +1,7 @@
 # Http Query Filter
 
-[![Build status](https://ci.appveyor.com/api/projects/status/ya2m0rky5km1p44q?svg=true)](https://ci.appveyor.com/project/junioro/restful-query-filter)
-[![Build Status](https://travis-ci.org/jroliveira/restful-query-filter.svg?branch=master)](https://travis-ci.org/jroliveira/restful-query-filter)
-[![Coverage Status](https://coveralls.io/repos/jroliveira/restful-query-filter/badge.svg?branch=master&service=github)](https://coveralls.io/github/jroliveira/restful-query-filter?branch=master)
+[![Build status](https://ci.appveyor.com/api/projects/status/id8it23ojpmcwlbb?svg=true)](https://ci.appveyor.com/project/junioro/http-query-filter)
+[![Build Status](https://travis-ci.org/jroliveira/http-query-filter.svg?branch=master)](https://travis-ci.org/jroliveira/http-query-filter)
 [![NuGet](https://img.shields.io/nuget/v/Http.Query.Filter.svg)](https://www.nuget.org/packages/Http.Query.Filter/)
 
 ![Http Query Filter - Logo][logo]

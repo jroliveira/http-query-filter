@@ -1,22 +1,60 @@
-version: 1.0.{build}
-skip_tags: true
-configuration: Release
-assembly_info:
-  patch: true
-  file: '**\AssemblyInfo.*'
-  assembly_version: '{version}'
-  assembly_file_version: '{version}'
-  assembly_informational_version: '{version}'
-environment:
-  COVERALLS_REPO_TOKEN:
-    secure: YNcKfqjNrHTGrAentcP9N/nk2JPImQW43NieZ+5O/gAlS/wNTYbaGTAhUroXHhXm
-before_build:
-  - nuget restore ".\Restful.Query.Filter.sln"
-build:
-  project: .\Restful.Query.Filter.sln
-  verbosity: minimal
-test_script:
-- ps: >-
-    .\packages\OpenCover.4.6.166\tools\OpenCover.Console.exe -register:user -target:nunit-console.exe -register:user "-targetargs:""test\Restful.Query.Filter.Test\bin\$env:CONFIGURATION\Restful.Query.Filter.Test.dll"" /noshadow" -filter:"+[Restful.Query.Filter*]*" -output:opencoverCoverage.xml
+# Reference: https://www.appveyor.com/docs/appveyor-yml/
 
-    .\packages\coveralls.net.0.6.0\tools\csmacnz.Coveralls.exe --opencover -i opencoverCoverage.xml --repoToken $env:COVERALLS_REPO_TOKEN --commitId $env:APPVEYOR_REPO_COMMIT --commitBranch $env:APPVEYOR_REPO_BRANCH --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_JOB_ID
+#---------------------------------#
+#      general configuration      #
+#---------------------------------#
+
+# version format
+version: 3.0.0.{build}
+
+branches:
+  # whitelist
+  only:
+    - master
+
+# Do not build on tags (GitHub and BitBucket)
+skip_tags: true
+
+# Skipping commits affecting specific files (GitHub only). More details here: /docs/appveyor-yml
+skip_commits:
+  files:
+    - '**/*.md'
+    - '*.md'
+
+#---------------------------------#
+#    environment configuration    #
+#---------------------------------#
+environment:
+  APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+  DOTNET_CLI_TELEMETRY_OPTOUT: 1
+
+
+pull_requests:
+  do_not_increment_build_number: true
+
+
+#---------------------------------#
+#       build configuration       #
+#---------------------------------#
+
+# build platform, i.e. x86, x64, Any CPU. This setting is optional.
+platform: Any CPU
+
+# build Configuration, i.e. Debug, Release, etc.
+configuration:
+- Release
+
+before_build:
+  - dotnet restore
+
+build:
+  parallel: true                  # enable MSBuild parallel builds
+  verbosity: minimal              # MSBuild verbosity level
+  project: Http.Query.Filter.sln    # path to Visual Studio solution or project
+
+#---------------------------------#
+#       tests configuration       #
+#---------------------------------#
+
+test_script:
+- dotnet test -c %CONFIGURATION% test\unit\Http.Query.Filter.Test\Http.Query.Filter.Test.csproj

@@ -1,9 +1,9 @@
 language: csharp
-dist: trusty
-sudo: required
 mono: none
-dotnet: 1.1.1
-before_script:
- - chmod a+x ./build.sh
+dotnet: 1.0.4
+dist: trusty
+install:
+ - dotnet restore
 script:
- - ./build.sh --quiet verify
+ - dotnet build
+ - dotnet test -c Release test/unit/Http.Query.Filter.Test/Http.Query.Filter.Test.csproj

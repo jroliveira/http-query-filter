@@ -4,6 +4,7 @@
 [![Build Status](https://travis-ci.org/jroliveira/http-query-filter.svg?branch=master)](https://travis-ci.org/jroliveira/http-query-filter)
 [![NuGet](https://img.shields.io/nuget/v/Http.Query.Filter.svg)](https://www.nuget.org/packages/Http.Query.Filter/)
 [![NuGet](https://img.shields.io/nuget/dt/Http.Query.Filter.svg)](https://www.nuget.org/packages/Http.Query.Filter/)
+[![CodeFactor](https://www.codefactor.io/repository/github/jroliveira/http-query-filter/badge)](https://www.codefactor.io/repository/github/jroliveira/http-query-filter)
 [![License: MIT](http://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 ![Http Query Filter - Logo][logo]

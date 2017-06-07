@@ -2,11 +2,10 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard1.4</TargetFrameworks>
-    
-    <AssemblyName>Http.Query.Filter</AssemblyName>
-    <AssemblyVersion>3.0.0</AssemblyVersion>
-
-    <Version>3.0.0</Version>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <Version>3.0$(VersionSuffix)</Version>
     <Authors>Junior Oliveira</Authors>
     <Owners>Junior Oliveira</Owners>
     <Description>Sistema de filtro baseado no projeto StrongLoop Node.js API Platform desenvolvido pela Atlassian Confluence.</Description>
@@ -15,7 +14,6 @@
     <RepositoryUrl>https://github.com/jroliveira/http-query-filter</RepositoryUrl>
     
     <PackageId>Http.Query.Filter</PackageId>
-    <PackageVersion>3.0.0</PackageVersion>
     <PackageTags>rest restful api filter http querystring</PackageTags>
     <PackageLicenseUrl>https://github.com/jroliveira/http-query-filter/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/jroliveira/http-query-filter</PackageProjectUrl>

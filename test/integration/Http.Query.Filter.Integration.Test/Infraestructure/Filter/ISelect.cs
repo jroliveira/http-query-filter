@@ -4,11 +4,11 @@ namespace Http.Query.Filter.Integration.Test.Infraestructure.Filter
 
     using Http.Query.Filter;
 
-    internal interface IWhere<out TReturn, in TFilter, in TParam>
+    internal interface ISelect<in TFilter, in TParam>
         where TFilter : Filter
     {
-        Func<TParam, TReturn> Apply(TFilter filter);
+        Func<TParam, dynamic> Apply(TFilter filter);
 
-        TReturn Apply(TParam param);
+        dynamic Apply(TParam param);
     }
 }

@@ -1,13 +1,12 @@
 ﻿namespace Http.Query.Filter.Test.Filters
 {
-    using System;
-    using System.Collections;
     using System.Collections.Generic;
 
     using FluentAssertions;
 
     using Http.Query.Filter.Filters.Condition;
     using Http.Query.Filter.Filters.Condition.Operators;
+    using Http.Query.Filter.Test.Utils;
 
     using Xunit;
 
@@ -40,21 +39,9 @@
             actual.Should().BeNull();
         }
 
-        public class TestData : IEnumerable<object[]>
+        public class TestData : WhereTestData
         {
-            private static readonly Func<string, object, Comparison, Condition> Item = (field, value, comparison) => new Condition(field, value, comparison);
-            private static readonly Func<string, object, Comparison, Where> Field = (field, value, comparison) => Fields(data => data.Add(Item(field, value, comparison)));
-            private static readonly Func<Action<IList<Condition>>, Where> Fields = afterCreating =>
-            {
-                var data = new List<Condition>();
-                afterCreating(data);
-
-                var @return = new Where(data);
-
-                return @return;
-            };
-
-            private readonly List<object[]> data = new List<object[]>
+            protected override List<object[]> Data => new List<object[]>
             {
                 // Equal to
                 new object[] { "?filter[where][id]=",             Field("id",      string.Empty, Comparison.Equal) },
@@ -77,16 +64,6 @@
                 new object[] { "?Filter[Where][Id][Lt]=2",             Field("Id", 2,            Comparison.LessThan) },
                 new object[] { "?filter%5Bwhere%5D%5Bid%5D%5Blt%5D=2", Field("id", 2,            Comparison.LessThan) },
             };
-
-            public IEnumerator<object[]> GetEnumerator()
-            {
-                return this.data.GetEnumerator();
-            }
-
-            IEnumerator IEnumerable.GetEnumerator()
-            {
-                return this.GetEnumerator();
-            }
         }
     }
 }

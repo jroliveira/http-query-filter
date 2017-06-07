@@ -1,11 +1,10 @@
 ﻿namespace Http.Query.Filter.Test.Utils
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
 
-    public abstract class KeyValuePairTestData<TValue, TReturn> : IEnumerable<object[]>
+    public abstract class KeyValuePairTestData<TValue, TReturn> : TestDataBase
         where TReturn : ReadOnlyCollection<KeyValuePair<string, TValue>>
     {
         protected static readonly Func<string, TValue, KeyValuePair<string, TValue>> Item = (key, value) => new KeyValuePair<string, TValue>(key, value);
@@ -20,17 +19,5 @@
 
             return @return;
         };
-
-        protected abstract List<object[]> Data { get; }
-
-        public IEnumerator<object[]> GetEnumerator()
-        {
-            return this.Data.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return this.GetEnumerator();
-        }
     }
 }

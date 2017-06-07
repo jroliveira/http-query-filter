@@ -1,33 +1,26 @@
 # Reference: https://www.appveyor.com/docs/appveyor-yml/
-
 #---------------------------------#
 #      general configuration      #
 #---------------------------------#
 
-# version format
-version: 3.0.0.{build}
+version: 3.0.{build}
 
 branches:
-  # whitelist
   only:
     - master
 
-# Do not build on tags (GitHub and BitBucket)
 skip_tags: true
 
-# Skipping commits affecting specific files (GitHub only). More details here: /docs/appveyor-yml
-skip_commits:
-  files:
-    - '**/*.md'
-    - '*.md'
 
 #---------------------------------#
 #    environment configuration    #
 #---------------------------------#
-environment:
-  APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-  DOTNET_CLI_TELEMETRY_OPTOUT: 1
 
+image: Visual Studio 2015
+
+environment:
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
 
 pull_requests:
   do_not_increment_build_number: true
@@ -37,24 +30,34 @@ pull_requests:
 #       build configuration       #
 #---------------------------------#
 
-# build platform, i.e. x86, x64, Any CPU. This setting is optional.
 platform: Any CPU
 
-# build Configuration, i.e. Debug, Release, etc.
 configuration:
-- Release
+  - Release
 
 before_build:
   - dotnet restore
 
-build:
-  parallel: true                  # enable MSBuild parallel builds
-  verbosity: minimal              # MSBuild verbosity level
-  project: Http.Query.Filter.sln    # path to Visual Studio solution or project
+build_script:
+  - dotnet build -c %CONFIGURATION%
+
 
 #---------------------------------#
 #       tests configuration       #
 #---------------------------------#
 
 test_script:
-- dotnet test -c %CONFIGURATION% test\unit\Http.Query.Filter.Test\Http.Query.Filter.Test.csproj
+  - dotnet test -c %CONFIGURATION% test\unit\Http.Query.Filter.Test\Http.Query.Filter.Test.csproj
+
+
+#---------------------------------#
+#     deployment configuration    #
+#---------------------------------#
+
+deploy:
+  - provider: NuGet
+    server: https://www.nuget.org/packages/Http.Query.Filter
+    api_key:
+      secure: NxNpeauRwvVn3Uvt3UPyB2a+n4og2WWv9x4527DbKy3UomugXXZjGfqwr3IE6hVp
+    on:
+      branch: master

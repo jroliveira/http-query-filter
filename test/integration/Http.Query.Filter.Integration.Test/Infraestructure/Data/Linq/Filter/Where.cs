@@ -1,5 +1,6 @@
 namespace Http.Query.Filter.Integration.Test.Infraestructure.Data.Linq.Filter
 {
+    using System;
     using System.Linq;
     using System.Reflection;
 
@@ -10,9 +11,17 @@ namespace Http.Query.Filter.Integration.Test.Infraestructure.Data.Linq.Filter
 
     internal class Where : IWhere<bool, Filter, Account>
     {
-        public bool Apply(Filter filter, Account entity)
+        private Filter filter;
+
+        public Func<Account, bool> Apply(Filter filter)
         {
-            if (!filter.HasCondition)
+            this.filter = filter;
+            return this.Apply;
+        }
+
+        public bool Apply(Account entity)
+        {
+            if (!this.filter.HasCondition)
             {
                 return true;
             }
@@ -20,7 +29,7 @@ namespace Http.Query.Filter.Integration.Test.Infraestructure.Data.Linq.Filter
             var type = entity.GetType();
             const BindingFlags BindingAttr = BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance;
 
-            return filter
+            return this.filter
                 .Where
                 .All(condition => type
                     .GetProperty(condition.Field, BindingAttr)

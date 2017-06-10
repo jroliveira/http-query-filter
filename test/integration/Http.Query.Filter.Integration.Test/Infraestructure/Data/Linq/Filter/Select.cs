@@ -5,20 +5,19 @@ namespace Http.Query.Filter.Integration.Test.Infraestructure.Data.Linq.Filter
     using System.Reflection;
 
     using Http.Query.Filter;
-    using Http.Query.Filter.Integration.Test.Entities;
     using Http.Query.Filter.Integration.Test.Infraestructure.Filter;
 
-    internal class Select : ISelect<Filter, Account>
+    internal class Select<TEntity> : ISelect<Filter, TEntity>
     {
         private Filter filter;
 
-        public Func<Account, dynamic> Apply(Filter filter)
+        public Func<TEntity, dynamic> Apply(Filter filter)
         {
             this.filter = filter;
             return this.Apply;
         }
 
-        public dynamic Apply(Account entity)
+        public dynamic Apply(TEntity entity)
         {
             if (!this.filter.HasVisualization)
             {

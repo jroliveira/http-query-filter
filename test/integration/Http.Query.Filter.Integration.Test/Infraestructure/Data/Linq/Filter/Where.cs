@@ -5,21 +5,20 @@ namespace Http.Query.Filter.Integration.Test.Infraestructure.Data.Linq.Filter
     using System.Reflection;
 
     using Http.Query.Filter;
-    using Http.Query.Filter.Integration.Test.Entities;
     using Http.Query.Filter.Integration.Test.Infraestructure.Filter;
     using Http.Query.Filter.Integration.Test.Infraestructure.Filter.Extensions;
 
-    internal class Where : IWhere<bool, Filter, Account>
+    internal class Where<TEntity> : IWhere<bool, Filter, TEntity>
     {
         private Filter filter;
 
-        public Func<Account, bool> Apply(Filter filter)
+        public Func<TEntity, bool> Apply(Filter filter)
         {
             this.filter = filter;
             return this.Apply;
         }
 
-        public bool Apply(Account entity)
+        public bool Apply(TEntity entity)
         {
             if (!this.filter.HasCondition)
             {

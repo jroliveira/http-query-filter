@@ -2,25 +2,51 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
-    internal class Paged<T>
+    using Http.Query.Filter.Integration.Test.Infraestructure.Filter;
+
+    internal class Paged<TSource>
     {
-        public Paged(ICollection<T> data, int skip, int limit)
+        private readonly ISkip<int, Query.Filter.Filter> skip;
+        private readonly ILimit<int, Query.Filter.Filter> limit;
+
+        public Paged(
+            ISkip<int, Query.Filter.Filter> skip,
+            ILimit<int, Query.Filter.Filter> limit)
         {
-            this.Data = data;
-            this.Skip = skip;
-            this.Limit = limit;
+            this.skip = skip;
+            this.limit = limit;
+
+            this.Data = new List<TSource>();
+            this.Skip = this.skip.Apply(null);
+            this.Limit = this.limit.Apply(null);
         }
 
-        public ICollection<T> Data { get; }
+        public ICollection<TSource> Data { get; }
 
-        public int Skip { get; }
+        public int Skip { get; private set; }
 
-        public int Limit { get; }
+        public int Limit { get; private set; }
 
         public long Pages => this.Limit == 0 ? 1 : (long)Math.Ceiling((double)this.Data.Count / this.Limit);
 
-        public virtual void Add(T item)
+        public Paged<TSource> Paginate(Query.Filter.Filter filter)
+        {
+            this.Skip = this.skip.Apply(filter);
+            this.Limit = this.limit.Apply(filter);
+
+            return this;
+        }
+
+        public void AddRange(ICollection<TSource> data)
+        {
+            data
+                .ToList()
+                .ForEach(this.Data.Add);
+        }
+
+        public virtual void Add(TSource item)
         {
             this.Data.Add(item);
         }

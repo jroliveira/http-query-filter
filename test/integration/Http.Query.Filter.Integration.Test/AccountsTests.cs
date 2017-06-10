@@ -20,7 +20,7 @@
         public AccountsTests()
         {
             this.accounts = new Accounts();
-            this.getAll = new GetAllQuery(new Skip(), new Limit(), new Where(), new Select());
+            this.getAll = new GetAllQuery(new Skip(), new Limit());
         }
 
         [Fact]

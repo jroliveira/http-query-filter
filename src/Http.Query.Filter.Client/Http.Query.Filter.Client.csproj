@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.4</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Version>1.0$(VersionSuffix)</Version>
+    <Authors>Junior Oliveira</Authors>
+    <Owners>Junior Oliveira</Owners>
+    <Description>Client do sistema de filtro baseado no projeto StrongLoop Node.js API Platform desenvolvido pela Atlassian Confluence.</Description>
+
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/jroliveira/http-query-filter</RepositoryUrl>
+
+    <PackageId>Http.Query.Filter.Client</PackageId>
+    <PackageTags>rest restful api filter http querystring client</PackageTags>
+    <PackageLicenseUrl>https://github.com/jroliveira/http-query-filter/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/jroliveira/http-query-filter</PackageProjectUrl>
+    <PackageIconUrl>https://raw.github.com/jroliveira/http-query-filter/master/logo.png</PackageIconUrl>
+  </PropertyGroup>
+
+</Project>

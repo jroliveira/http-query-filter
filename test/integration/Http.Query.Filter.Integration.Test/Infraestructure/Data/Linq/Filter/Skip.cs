@@ -7,7 +7,7 @@ namespace Http.Query.Filter.Integration.Test.Infraestructure.Data.Linq.Filter
     {
         public int Apply(Filter filter)
         {
-            if (filter.Skip == null)
+            if (filter?.Skip == null)
             {
                 return 0;
             }

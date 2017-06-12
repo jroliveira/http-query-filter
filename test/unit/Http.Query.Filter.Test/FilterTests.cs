@@ -26,7 +26,7 @@
 
         [Theory]
         [InlineData(Query)]
-        [InlineData(QueryDecoded)]
+        [InlineData(QueryDecoded)] 
         public void Parse_DadaQueryComSkip_SkipNaoPodeSerNull(string query)
         {
             Filter actual = query;

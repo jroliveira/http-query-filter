@@ -6,6 +6,7 @@ namespace Http.Query.Filter.Filters
     public class Limit
     {
         private const string Pattern = @"filter\[limit]\=(?<limit>\d+)";
+        private static Regex regex = new Regex(Pattern, RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
         public Limit(int value)
         {
@@ -25,13 +26,19 @@ namespace Http.Query.Filter.Filters
 
         public static implicit operator Limit(string query)
         {
-            query = WebUtility.UrlDecode(query);
+            if (string.IsNullOrWhiteSpace(query))
+            {
+                return null;
+            }
 
-            var match = Regex.Match(query, Pattern, RegexOptions.IgnoreCase);
+            var match = regex.Match(WebUtility.UrlDecode(query));
 
-            return int.TryParse(match.Groups["limit"].Value, out int limit)
-                ? new Limit(limit)
-                : null;
+            if (match.Success && int.TryParse(match.Groups["limit"].Value, out int limit))
+            {
+                return new Limit(limit);
+            }
+
+            return null;
         }
     }
 }

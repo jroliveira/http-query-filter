@@ -13,6 +13,15 @@
     {
         private const string Pattern = @"filter\[where]?\[(?<field>\w+)\](\[(?<comparison>gt|lt)\])?=(?<value>[^&]*)&?";
 
+        private static Regex regex = new Regex(Pattern, RegexOptions.IgnoreCase | RegexOptions.Compiled);
+
+
+        private static Dictionary<string, Comparison> operations = new Dictionary<string, Comparison>
+            {
+                { "gt", Comparison.GreaterThan },
+                { "lt", Comparison.LessThan }
+            };
+
         public Where(IList<Condition> conditions)
             : base(conditions)
         {
@@ -20,10 +29,12 @@
 
         public static implicit operator Where(string query)
         {
-            query = WebUtility.UrlDecode(query);
+            if (string.IsNullOrWhiteSpace(query))
+            {
+                return null;
+            }
 
-            var data = Get(query);
-            var conditions = data as IList<Condition> ?? data.ToList();
+            var conditions = Get(WebUtility.UrlDecode(query));
 
             if (!conditions.Any())
             {
@@ -33,31 +44,26 @@
             return new Where(conditions);
         }
 
-        private static IEnumerable<Condition> Get(string query)
+        private static IList<Condition> Get(string query)
         {
-            var matches = Regex.Matches(query, Pattern, RegexOptions.IgnoreCase);
+            var matches = regex.Matches(query);
 
             return
-                from Match match in matches
-                let field = match.Get("field")
-                let value = match.Get("value")
-                let comparison = GetComparison(match)
-                select new Condition(field, value, comparison);
+                (from Match match in matches
+                 let field = match.Get("field")
+                 let value = match.Get("value")
+                 let comparison = GetComparison(match)
+                 select new Condition(field, value, comparison)).ToList();
         }
 
         private static Comparison GetComparison(Match match)
         {
             var operation = match.Groups["comparison"].Value.ToLower();
+
             if (string.IsNullOrEmpty(operation))
             {
                 return Comparison.Equal;
             }
-
-            var operations = new Dictionary<string, Comparison>
-            {
-                { "gt", Comparison.GreaterThan },
-                { "lt", Comparison.LessThan }
-            };
 
             return operations[operation];
         }

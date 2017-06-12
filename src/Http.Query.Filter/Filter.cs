@@ -25,6 +25,11 @@ namespace Http.Query.Filter
 
         public static implicit operator Filter(string query)
         {
+            if (string.IsNullOrEmpty(query))
+            {
+                return new Filter();
+            }
+
             var filter = new Filter
             {
                 Skip = query,

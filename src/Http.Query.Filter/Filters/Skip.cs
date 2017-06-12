@@ -6,6 +6,7 @@ namespace Http.Query.Filter.Filters
     public class Skip
     {
         private const string Pattern = @"filter\[skip]\=(?<skip>\d+)";
+        private static Regex regex = new Regex(Pattern, RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
         public Skip(int value)
         {
@@ -25,13 +26,19 @@ namespace Http.Query.Filter.Filters
 
         public static implicit operator Skip(string query)
         {
-            query = WebUtility.UrlDecode(query);
+            if (string.IsNullOrWhiteSpace(query))
+            {
+                return null;
+            }
 
-            var match = Regex.Match(query, Pattern, RegexOptions.IgnoreCase);
+            var match = regex.Match(WebUtility.UrlDecode(query));
 
-            return int.TryParse(match.Groups["skip"].Value, out int skip)
-                ? new Skip(skip)
-                : null;
+            if (match.Success && int.TryParse(match.Groups["skip"].Value, out int skip))
+            {
+                return new Skip(skip);
+            }
+
+            return null;
         }
     }
 }

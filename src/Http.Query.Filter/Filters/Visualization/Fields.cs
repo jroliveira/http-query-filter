@@ -12,17 +12,22 @@
     {
         private const string Pattern = @"filter\[fields]\[(?<field>\w+)]\=(?<show>true|false)";
 
+        private static Regex regex = new Regex(Pattern, RegexOptions.IgnoreCase | RegexOptions.Compiled);
+
+        private static Dictionary<string, bool> types = new Dictionary<string, bool>
+            {
+                { "true", true },
+                { "false", false }
+            };
+
         public Fields(IList<KeyValuePair<string, bool>> fields)
-            : base(fields)
+                : base(fields)
         {
         }
 
         public static implicit operator Fields(string query)
         {
-            query = WebUtility.UrlDecode(query);
-
-            var data = Get(query);
-            var fields = data as IList<KeyValuePair<string, bool>> ?? data.ToList();
+            var fields = Get(WebUtility.UrlDecode(query));
 
             if (!fields.Any())
             {
@@ -32,26 +37,20 @@
             return new Fields(fields);
         }
 
-        private static IEnumerable<KeyValuePair<string, bool>> Get(string query)
+        private static IList<KeyValuePair<string, bool>> Get(string query)
         {
-            var matches = Regex.Matches(query, Pattern, RegexOptions.IgnoreCase);
+            var matches = regex.Matches(query);
 
             return
-                from Match match in matches
-                let field = match.Get("field")
-                let show = GetShow(match)
-                select new KeyValuePair<string, bool>(field, show);
+                (from Match match in matches
+                 let field = match.Get("field")
+                 let show = GetShow(match)
+                 select new KeyValuePair<string, bool>(field, show)).ToList();
         }
 
         private static bool GetShow(Match match)
         {
             var show = match.Groups["show"].Value.ToLower();
-
-            var types = new Dictionary<string, bool>
-            {
-                { "true", true },
-                { "false", false }
-            };
 
             return types[show];
         }

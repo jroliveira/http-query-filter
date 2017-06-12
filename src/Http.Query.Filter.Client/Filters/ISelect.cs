@@ -2,6 +2,6 @@
 {
     public interface ISelect<TReturn>
     {
-        IFilter<TReturn> Select(params object[] fields);
+        IFilter<TReturn> Select(params string[] fields);
     }
 }

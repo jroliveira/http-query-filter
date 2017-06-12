@@ -24,19 +24,7 @@
         }
 
         [Fact]
-        public void GetAll_DadaQueryComFilterWhereEqualTo_DeveRetornar()
-        {
-            var expected = this.accounts.Where(item => item.Password == "333333");
-
-            var actual = this.getAll
-                .GetResult("filter[where][password]=333333")
-                .Data;
-
-            actual.ShouldAllBeEquivalentTo(expected);
-        }
-
-        [Fact]
-        public void GetAll_DadaQueryComFilterSkip_DeveRetornar()
+        public void GetAll_GivenQueryWithFilterSkip_ShouldReturn()
         {
             var expected = this.accounts.Skip(2);
 
@@ -48,7 +36,7 @@
         }
 
         [Fact]
-        public void GetAll_DadaQueryComFilterLimit_DeveRetornar()
+        public void GetAll_GivenQueryWithFilterLimit_ShouldReturn()
         {
             var expected = this.accounts.Take(5);
 
@@ -60,7 +48,19 @@
         }
 
         [Fact]
-        public void GetAll_DadaQueryComFilterWhereGreaterThan_DeveRetornar()
+        public void GetAll_GivenQueryWithFilterWhereEqualTo_ShouldReturn()
+        {
+            var expected = this.accounts.Where(item => item.Password == "333333");
+
+            var actual = this.getAll
+                .GetResult("filter[where][password]=333333")
+                .Data;
+
+            actual.ShouldAllBeEquivalentTo(expected);
+        }
+
+        [Fact]
+        public void GetAll_GivenQueryWithFilterWhereGreaterThan_ShouldReturn()
         {
             var expected = this.accounts.Where(item => item.Id < 2);
 
@@ -72,7 +72,7 @@
         }
 
         [Fact]
-        public void GetAll_DadaQueryComFilterWhereLessThan_DeveRetornar()
+        public void GetAll_GivenQueryWithFilterWhereLessThan_ShouldReturn()
         {
             var expected = this.accounts.Where(item => item.Id > 5);
 
@@ -84,7 +84,7 @@
         }
 
         [Fact]
-        public void GetAll_DadaQueryComFilterSelect_DeveRetornar()
+        public void GetAll_GivenQueryWithFilterSelect_ShouldReturn()
         {
             var expected = this.accounts
                 .Select(account => new Dictionary<string, object> { { "id", account.Id }, { "email", account.Email } })

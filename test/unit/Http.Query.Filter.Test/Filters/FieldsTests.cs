@@ -13,7 +13,7 @@
     {
         [Theory]
         [ClassData(typeof(TestData))]
-        public void Parse_DadaQuery_DeveRetornar(string query, Fields expected)
+        public void Parse_GivenQuery_ShouldReturn(string query, Fields expected)
         {
             Fields actual = query;
 
@@ -23,7 +23,7 @@
         [Theory]
         [InlineData("?filter[fields][id]=1")]
         [InlineData("?filter[fields][id]=")]
-        public void Parse_DadaQuery_DeveRetornarNull(string query)
+        public void Parse_GivenQuery_ShouldReturnNull(string query)
         {
             Fields actual = query;
 

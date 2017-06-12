@@ -14,7 +14,7 @@
     {
         [Theory]
         [ClassData(typeof(TestData))]
-        public void Parse_DadaQuery_DeveRetornarPropertyValue(string query, Where expected)
+        public void Parse_GivenQuery_ShouldReturn(string query, Where expected)
         {
             Where actual = query;
 
@@ -32,7 +32,7 @@
         [InlineData("?filter[condition][id][lt]=1")]
         [InlineData("?filter[where][last name]=Test")]
         [InlineData("?filter[where][id][lessthan]=1")]
-        public void Parse_DadaQuery_DeveRetornarNull(string query)
+        public void Parse_GivenQuery_ShouldReturnNull(string query)
         {
             Where actual = query;
 

@@ -12,7 +12,7 @@
         [InlineData("?filter[skip]=9", 9)]
         [InlineData("?FILTER[SKIP]=9", 9)]
         [InlineData("?filter%5Bskip%5D=1", 1)]
-        public void Parse_DadaQuery_ValueDeveSerIgual(string query, int expected)
+        public void Parse_GivenQuery_ValueShouldBe(string query, int expected)
         {
             Skip actual = query;
 
@@ -22,7 +22,7 @@
         [Theory]
         [InlineData("?filter[skip]=Nine")]
         [InlineData("?filter[skip]=")]
-        public void Parse_DadaQuery_DeveRetornarNull(string query)
+        public void Parse_GivenQuery_ShouldReturnNull(string query)
         {
             Skip actual = query;
 

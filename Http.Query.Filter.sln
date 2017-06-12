@@ -29,6 +29,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Http.Query.Filter.Client", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Http.Query.Filter.Client.Test", "test\unit\Http.Query.Filter.Client.Test\Http.Query.Filter.Client.Test.csproj", "{A8671134-6865-41E7-A80C-4190868BFB02}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{F6513FC2-3B98-4C8A-B8E7-8F8328518188}"
+	ProjectSection(SolutionItems) = preProject
+		docs\API.md = docs\API.md
+		docs\logo.png = docs\logo.png
+		docs\README.md = docs\README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

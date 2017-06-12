@@ -3,7 +3,7 @@
 #      general configuration      #
 #---------------------------------#
 
-version: 3.0.{build}
+version: '.{build}'
 
 branches:
   only:
@@ -16,7 +16,7 @@ skip_tags: true
 #    environment configuration    #
 #---------------------------------#
 
-image: Visual Studio 2015
+image: Visual Studio 2017
 
 environment:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
@@ -26,12 +26,9 @@ pull_requests:
   do_not_increment_build_number: true
 
 
-
 #---------------------------------#
 #       build configuration       #
 #---------------------------------#
-
-platform: Any CPU
 
 configuration:
   - Release
@@ -42,6 +39,10 @@ before_build:
 build_script:
   - dotnet build -c %CONFIGURATION%
 
+after_build:
+  - dotnet pack src\Http.Query.Filter\Http.Query.Filter.csproj -c %CONFIGURATION% --version-suffix "%APPVEYOR_BUILD_VERSION%"
+  - dotnet pack src\Http.Query.Filter.Client\Http.Query.Filter.Client.csproj -c %CONFIGURATION% --version-suffix "%APPVEYOR_BUILD_VERSION%"
+
 
 #---------------------------------#
 #       tests configuration       #
@@ -49,6 +50,16 @@ build_script:
 
 test_script:
   - dotnet test -c %CONFIGURATION% test\unit\Http.Query.Filter.Test\Http.Query.Filter.Test.csproj
+  - dotnet test -c %CONFIGURATION% test\unit\Http.Query.Filter.Client.Test\Http.Query.Filter.Client.Test.csproj
+  - dotnet test -c %CONFIGURATION% test\integration\Http.Query.Filter.Integration.Test\Http.Query.Filter.Integration.Test.csproj
+
+
+#---------------------------------#
+#      artifacts configuration    #
+#---------------------------------#
+
+artifacts:
+  - path: '**\*.nupkg'
 
 
 #---------------------------------#
@@ -57,7 +68,7 @@ test_script:
 
 deploy:
   - provider: NuGet
-    server: https://www.nuget.org/packages/Http.Query.Filter
+    server: https://www.nuget.org/api/v2/package
     api_key:
       secure: NxNpeauRwvVn3Uvt3UPyB2a+n4og2WWv9x4527DbKy3UomugXXZjGfqwr3IE6hVp
     on:

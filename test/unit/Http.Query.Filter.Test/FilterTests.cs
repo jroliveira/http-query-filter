@@ -26,8 +26,8 @@
 
         [Theory]
         [InlineData(Query)]
-        [InlineData(QueryDecoded)] 
-        public void Parse_DadaQueryComSkip_SkipNaoPodeSerNull(string query)
+        [InlineData(QueryDecoded)]
+        public void Parse_GivenQuery_SkipCannotBeNull(string query)
         {
             Filter actual = query;
 
@@ -37,7 +37,7 @@
         [Theory]
         [InlineData(Query)]
         [InlineData(QueryDecoded)]
-        public void Parse_DadaQueryComLimit_LimitNaoPodeSerNull(string query)
+        public void Parse_GivenQuery_LimitCannotBeNull(string query)
         {
             Filter actual = query;
 
@@ -47,7 +47,7 @@
         [Theory]
         [InlineData(Query)]
         [InlineData(QueryDecoded)]
-        public void Parse_DadaQueryComOrderBy_OrderByNaoPodeSerNull(string query)
+        public void Parse_GivenQuery_OrderByCannotBeNull(string query)
         {
             Filter actual = query;
 
@@ -58,7 +58,7 @@
         [Theory]
         [InlineData(Query)]
         [InlineData(QueryDecoded)]
-        public void Parse_DadaQueryComOrderBy_OrderByDeveConter2Elementos(string query)
+        public void Parse_GivenQuery_OrderByMustContainTwoElements(string query)
         {
             Filter actual = query;
 
@@ -68,7 +68,7 @@
         [Theory]
         [InlineData(Query)]
         [InlineData(QueryDecoded)]
-        public void Parse_DadaQueryComWhere_WhereNaoPodeSerNull(string query)
+        public void Parse_GivenQuery_WhereCannotBeNull(string query)
         {
             Filter actual = query;
 
@@ -79,7 +79,7 @@
         [Theory]
         [InlineData(Query)]
         [InlineData(QueryDecoded)]
-        public void Parse_DadaQueryComWhere_WhereDeveConter2Elementos(string query)
+        public void Parse_GivenQuery_WhereMustContainTwoElements(string query)
         {
             Filter actual = query;
 
@@ -89,7 +89,7 @@
         [Theory]
         [InlineData(Query)]
         [InlineData(QueryDecoded)]
-        public void Parse_DadaQueryComFields_FieldsNaoPodeSerNull(string query)
+        public void Parse_GivenQuery_FieldsCannotBeNull(string query)
         {
             Filter actual = query;
 
@@ -100,7 +100,7 @@
         [Theory]
         [InlineData(Query)]
         [InlineData(QueryDecoded)]
-        public void Parse_DadaQueryComFields_FieldsDeveConter1Elemento(string query)
+        public void Parse_GivenQuery_FieldsMustContainOneElement(string query)
         {
             Filter actual = query;
 

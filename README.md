@@ -9,103 +9,14 @@
 
 ![Http Query Filter - Logo][logo]
 
-Sistema de filtro baseado no projeto [StrongLoop Node.js API Platform][strongloop] desenvolvido pela [IBM Company][ibm].
+Project-based filter system [StrongLoop Node.js API Platform][strongloop] developed by [IBM Company][ibm].
+* [API documentation](docs/README.md)
 
-## Features
-
-### Limit
-
-Retorna apenas a quantidade de dados passada no filtro ou menos dados.
-
-Exemplo:
-
-```
-/accounts?filter[limit]=5
-```
-
-### Skip
-
-Retorna apenas os dados ignorando os primeiros registros retornados na consulta. Geralmente é utilizado para paginação.
-
-Exemplo:
-
-```
-/accounts?filter[skip]=1
-```
-
-### Order
-
-Retorna os dados ordenados de forma crescente (asc) ou decrescente(desc) com base em um propriedade especifica.
-
-Exemplos:
-
-De forma CRESCENTE:
-
-```
-/accounts?filter[order]=name%20asc
-```
-
-De forma DECRESCENTE:
-
-```
-/accounts?filter[order]=name%20desc
-```
-
-De forma crescente E decrescente:
-
-```
-/accounts?filter[order][0]=id%20asc&filter[order][1]=name%20desc
-```
-
-### Where
-
-Retorna os dados respeitando as condições solicitadas.
-
-Exemplos:
-
-Onde for IGUAL:
-
-```
-/accounts?filter[where][id]=100
-```
-
-Onde for MAIOR QUE:
-
-```
-/accounts?filter[where][id][gt]=100
-```
-
-Onde for MENOR QUE:
-
-```
-/accounts?filter[where][id][lt]=100
-```
-
-### Fields
-
-Retorna os dados respeitando a configuração de visualização de cada campo.
-
-obs.: A coluna por padrão será retornada na consulta.
-
-Exemplos:
-
-Onde for VERDADEIRO:
-
-```
-/accounts?filter[fields][id]=true
-```
-
-Onde for FALSO:
-
-```
-/accounts?filter[fields][id]=false
-```
-
-## Pre requirements
+### Pre requirements
 
 * Visual Studio 2017
 
-## Installing
+### Installing
 
 ``` bash
 $ git clone https://github.com/jroliveira/http-query-filter.git
@@ -116,21 +27,31 @@ $ dotnet restore
 
 ``` bash
 $ dotnet test -c Release test/unit/Http.Query.Filter.Test/Http.Query.Filter.Test.csproj
+$ dotnet test -c Release test/unit/Http.Query.Filter.Client.Test/Http.Query.Filter.Client.Test.csproj
+$ dotnet test -c Release test/integration/Http.Query.Filter.Integration.Test/Http.Query.Filter.Integration.Test.csproj
 ```
 
-## Building
+### Building
 
 ``` bash
 $ dotnet build
 ```
 
-## How to use it
+### How to use it
+
+**REST API**
 
 ``` PowerShell
 PM> Install-Package Http.Query.Filter
 ```
 
-## Contributions
+**Client API**
+
+``` PowerShell
+PM> Install-Package Http.Query.Filter.Client
+```
+
+### Contributions
 
 1. Fork it
 2. git checkout -b <branch-name>
@@ -138,6 +59,10 @@ PM> Install-Package Http.Query.Filter
 4. git push origin <branch-name>
 5. Create a pull request
 
+### License
+
+The code is available under the [MIT license](LICENSE).
+
 [strongloop]: https://strongloop.com/
 [ibm]: http://www.ibm.com/
-[logo]: https://raw.githubusercontent.com/jroliveira/http-query-filter/master/logo.png "Http Query Filter - Logo"
+[logo]: https://raw.githubusercontent.com/jroliveira/http-query-filter/master/docs/logo.png "Http Query Filter - Logo"

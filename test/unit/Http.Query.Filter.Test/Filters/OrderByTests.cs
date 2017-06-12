@@ -13,7 +13,7 @@
     {
         [Theory]
         [ClassData(typeof(TestData))]
-        public void Parse_DadaQuery_DeveRetornarProperty(string query, OrderBy expected)
+        public void Parse_GivenQuery_ShouldReturn(string query, OrderBy expected)
         {
             OrderBy actual = query;
 
@@ -23,7 +23,7 @@
         [Theory]
         [InlineData("?filter[order]=name%20des")]
         [InlineData("?filter[order]=last name asc")]
-        public void Parse_DadaQuery_DeveRetornarNull(string query)
+        public void Parse_GivenQuery_ShouldReturnNull(string query)
         {
             OrderBy actual = query;
 

@@ -9,12 +9,21 @@
         private readonly Func<string, Task<TReturn>> execute;
         private readonly ICollection<string> filters;
 
+        /// <summary>
+        /// Filter's constructor
+        /// </summary>
+        /// <param name="execute">execute is a function that will be executed after compiling the filters</param>
         public Filter(Func<string, Task<TReturn>> execute)
         {
             this.execute = execute;
             this.filters = new List<string>();
         }
 
+        /// <summary>
+        /// A skip filter omits the specified number of returned records.
+        /// </summary>
+        /// <param name="skip">skip is the number of records to skip.</param>
+        /// <returns></returns>
         public IFilter<TReturn> Skip(int skip)
         {
             if (skip < 0)
@@ -26,6 +35,11 @@
             return this;
         }
 
+        /// <summary>
+        /// A limit filter limits the number of records returned to the specified number (or less).
+        /// </summary>
+        /// <param name="limit">limit is the maximum number of results (records) to return.</param>
+        /// <returns></returns>
         public IFilter<TReturn> Limit(int limit)
         {
             if (limit < 1)
@@ -37,7 +51,14 @@
             return this;
         }
 
-        public IFilter<TReturn> Select(params object[] fields)
+        /// <summary>
+        /// A select filter specifies properties to include from the results.
+        /// </summary>
+        /// <param name="fields">
+        /// fields are the names of the properties to include from the results.
+        /// </param>
+        /// <returns></returns>
+        public IFilter<TReturn> Select(params string[] fields)
         {
             foreach (var field in fields)
             {
@@ -47,6 +68,10 @@
             return this;
         }
 
+        /// <summary>
+        /// Performs the operation with selected filters
+        /// </summary>
+        /// <returns>Returns the API data</returns>
         public async Task<TReturn> BuildAsync()
         {
             var queryFilter = string.Join("&", this.filters);

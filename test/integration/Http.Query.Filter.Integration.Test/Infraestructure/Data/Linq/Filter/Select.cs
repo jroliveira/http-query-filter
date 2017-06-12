@@ -2,6 +2,7 @@ namespace Http.Query.Filter.Integration.Test.Infraestructure.Data.Linq.Filter
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Reflection;
 
     using Http.Query.Filter;
@@ -29,13 +30,8 @@ namespace Http.Query.Filter.Integration.Test.Infraestructure.Data.Linq.Filter
 
             var props = new Dictionary<string, object>();
 
-            foreach (var field in this.filter.Fields)
+            foreach (var field in this.filter.Fields.Where(field => field.Value))
             {
-                if (!field.Value)
-                {
-                    continue;
-                }
-
                 var value = type
                     .GetProperty(field.Key, BindingAttr)
                     .GetValue(entity);

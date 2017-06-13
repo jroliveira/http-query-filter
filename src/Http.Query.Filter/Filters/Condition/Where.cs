@@ -15,7 +15,6 @@
 
         private static Regex regex = new Regex(Pattern, RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
-
         private static Dictionary<string, Comparison> operations = new Dictionary<string, Comparison>
             {
                 { "gt", Comparison.GreaterThan },

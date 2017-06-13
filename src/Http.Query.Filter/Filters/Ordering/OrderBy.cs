@@ -13,7 +13,6 @@
         private const string Pattern = @"filter\[order](\[\d+])?\=(?<field>\w+)\s(?<direction>asc|desc)";
         private static Regex regex = new Regex(Pattern, RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
-
         private static Dictionary<string, OrderByDirection> types = new Dictionary<string, OrderByDirection>
             {
                 { "asc", OrderByDirection.Ascending },

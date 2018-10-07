@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.4</TargetFrameworks>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   
   <PropertyGroup>
@@ -21,7 +21,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.1.1" />
   </ItemGroup>
 
 </Project>

@@ -3,31 +3,30 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
-    using System.Net;
     using System.Text.RegularExpressions;
+    using Http.Query.Filter.Infrastructure.Extensions;
+    using static System.Net.WebUtility;
+    using static System.Text.RegularExpressions.RegexOptions;
 
-    using Http.Query.Filter.Infraestructure.Extensions;
-
-    public class Fields : ReadOnlyCollection<KeyValuePair<string, bool>>
+    public sealed class Fields : ReadOnlyCollection<KeyValuePair<string, bool>>
     {
         private const string Pattern = @"filter\[fields]\[(?<field>\w+)]\=(?<show>true|false)";
 
-        private static Regex regex = new Regex(Pattern, RegexOptions.IgnoreCase | RegexOptions.Compiled);
-
-        private static Dictionary<string, bool> types = new Dictionary<string, bool>
-            {
-                { "true", true },
-                { "false", false }
-            };
+        private static readonly Regex Regex = new Regex(Pattern, IgnoreCase | Compiled);
+        private static readonly IReadOnlyDictionary<string, bool> Types = new Dictionary<string, bool>
+        {
+            { "true", true },
+            { "false", false },
+        };
 
         public Fields(IList<KeyValuePair<string, bool>> fields)
-                : base(fields)
+            : base(fields)
         {
         }
 
         public static implicit operator Fields(string query)
         {
-            var fields = Get(WebUtility.UrlDecode(query));
+            var fields = Get(UrlDecode(query));
 
             if (!fields.Any())
             {
@@ -39,7 +38,7 @@
 
         private static IList<KeyValuePair<string, bool>> Get(string query)
         {
-            var matches = regex.Matches(query);
+            var matches = Regex.Matches(query);
 
             return
                 (from Match match in matches
@@ -52,7 +51,7 @@
         {
             var show = match.Groups["show"].Value.ToLower();
 
-            return types[show];
+            return Types[show];
         }
     }
 }

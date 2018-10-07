@@ -1,45 +1,38 @@
-namespace Http.Query.Filter
+﻿namespace Http.Query.Filter
 {
-    using Http.Query.Filter.Filters;
     using Http.Query.Filter.Filters.Condition;
     using Http.Query.Filter.Filters.Ordering;
+    using Http.Query.Filter.Filters.Pagination;
     using Http.Query.Filter.Filters.Visualization;
+    using static System.String;
 
-    public class Filter
+    public sealed class Filter : IFilter
     {
-        public virtual Limit Limit { get; protected set; }
+        public Limit Limit { get; private set; }
 
-        public virtual Skip Skip { get; protected set; }
+        public Skip Skip { get; private set; }
 
-        public virtual OrderBy OrderBy { get; protected set; }
+        public OrderBy OrderBy { get; private set; }
 
-        public virtual Where Where { get; protected set; }
+        public Where Where { get; private set; }
 
-        public virtual Fields Fields { get; protected set; }
+        public Fields Fields { get; private set; }
 
-        public virtual bool HasCondition => this.Where != null;
+        public bool HasCondition => this.Where != null;
 
-        public virtual bool HasOrdering => this.OrderBy != null;
+        public bool HasOrdering => this.OrderBy != null;
 
-        public virtual bool HasVisualization => this.Fields != null;
+        public bool HasVisualization => this.Fields != null;
 
-        public static implicit operator Filter(string query)
-        {
-            if (string.IsNullOrEmpty(query))
-            {
-                return new Filter();
-            }
-
-            var filter = new Filter
+        public static implicit operator Filter(string query) => IsNullOrEmpty(query)
+            ? new Filter()
+            : new Filter
             {
                 Skip = query,
                 Limit = query,
                 OrderBy = query,
                 Where = query,
-                Fields = query
+                Fields = query,
             };
-
-            return filter;
-        }
     }
 }

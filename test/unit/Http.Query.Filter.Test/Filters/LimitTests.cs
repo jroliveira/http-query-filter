@@ -1,22 +1,20 @@
 ﻿namespace Http.Query.Filter.Test.Filters
 {
     using FluentAssertions;
-
-    using Http.Query.Filter.Filters;
-
+    using Http.Query.Filter.Filters.Pagination;
     using Xunit;
 
     public class LimitTests
     {
         [Theory]
-        [InlineData("?filter[limit]=9", 9)]
-        [InlineData("?FILTER[LIMIT]=9", 9)]
-        [InlineData("?filter%5Blimit%5D=9", 9)]
-        public void Parse_GivenQuery_ValueShouldBe(string query, int expected)
+        [InlineData("?filter[limit]=9", 9U)]
+        [InlineData("?FILTER[LIMIT]=9", 9U)]
+        [InlineData("?filter%5Blimit%5D=9", 9U)]
+        public void Parse_GivenQuery_ValueShouldBe(string query, uint expected)
         {
             Limit actual = query;
 
-            actual.Value.ShouldBeEquivalentTo(expected);
+            actual.Value.Should().Be(expected);
         }
 
         [Theory]
@@ -26,7 +24,7 @@
         {
             Limit actual = query;
 
-            actual.Should().BeNull();
+            actual.Value.Should().BeNull();
         }
     }
 }

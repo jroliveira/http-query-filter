@@ -3,21 +3,22 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
-    using System.Net;
     using System.Text.RegularExpressions;
+    using Http.Query.Filter.Infrastructure.Extensions;
+    using static Http.Query.Filter.Filters.Ordering.OrderByDirection;
+    using static System.Net.WebUtility;
+    using static System.String;
+    using static System.Text.RegularExpressions.RegexOptions;
 
-    using Http.Query.Filter.Infraestructure.Extensions;
-
-    public class OrderBy : ReadOnlyCollection<KeyValuePair<string, OrderByDirection>>
+    public sealed class OrderBy : ReadOnlyCollection<KeyValuePair<string, OrderByDirection>>
     {
         private const string Pattern = @"filter\[order](\[\d+])?\=(?<field>\w+)\s(?<direction>asc|desc)";
-        private static Regex regex = new Regex(Pattern, RegexOptions.IgnoreCase | RegexOptions.Compiled);
-
-        private static Dictionary<string, OrderByDirection> types = new Dictionary<string, OrderByDirection>
-            {
-                { "asc", OrderByDirection.Ascending },
-                { "desc", OrderByDirection.Descending }
-            };
+        private static readonly Regex Regex = new Regex(Pattern, IgnoreCase | Compiled);
+        private static readonly Dictionary<string, OrderByDirection> Types = new Dictionary<string, OrderByDirection>
+        {
+            { "asc", Ascending },
+            { "desc", Descending },
+        };
 
         public OrderBy(IList<KeyValuePair<string, OrderByDirection>> fields)
             : base(fields)
@@ -26,12 +27,12 @@
 
         public static implicit operator OrderBy(string query)
         {
-            if (string.IsNullOrEmpty(query))
+            if (IsNullOrEmpty(query))
             {
                 return null;
             }
 
-            var fields = Get(WebUtility.UrlDecode(query));
+            var fields = Get(UrlDecode(query));
 
             if (!fields.Any())
             {
@@ -43,7 +44,7 @@
 
         private static IList<KeyValuePair<string, OrderByDirection>> Get(string query)
         {
-            var matches = regex.Matches(query);
+            var matches = Regex.Matches(query);
 
             return
                 (from Match match in matches
@@ -56,7 +57,7 @@
         {
             var direction = match.Groups["direction"].Value.ToLower();
 
-            return types[direction];
+            return Types[direction];
         }
     }
 }

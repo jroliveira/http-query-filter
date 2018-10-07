@@ -2,7 +2,7 @@
 {
     internal sealed class Account : Entity<int>
     {
-        public Account(int id, string email, string password)
+        internal Account(int id, string email, string password)
         {
             this.Id = id;
             this.Email = email;

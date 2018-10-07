@@ -1,20 +1,20 @@
-namespace Http.Query.Filter.Filters.Condition
+﻿namespace Http.Query.Filter.Filters.Condition
 {
     using Http.Query.Filter.Filters.Condition.Operators;
 
-    public class Condition
+    public sealed class Condition
     {
-        public Condition(string field, object value, Comparison comparison)
+        public Condition(string field, string value, Comparison comparison)
         {
             this.Field = field;
             this.Value = value;
             this.Comparison = comparison;
         }
 
-        public string Field { get; protected set; }
+        public string Field { get; }
 
-        public object Value { get; protected set; }
+        public string Value { get; }
 
-        public Comparison Comparison { get; protected set; }
+        public Comparison Comparison { get; }
     }
 }

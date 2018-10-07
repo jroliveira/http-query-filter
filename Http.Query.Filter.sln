@@ -7,9 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Http.Query.Filter", "src\Ht
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2387706C-FD2E-4C04-B170-F1EAB4C41ECF}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		.gitignore = .gitignore
 		.travis.yml = .travis.yml
 		appveyor.yml = appveyor.yml
+		code-analysis.ruleset = code-analysis.ruleset
+		Directory.Build.props = Directory.Build.props
 		LICENSE = LICENSE
 		README.md = README.md
 		Settings.StyleCop = Settings.StyleCop
@@ -23,11 +26,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Http.Query.Filter.Test", "t
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "integration", "integration", "{C9DEF327-8982-487B-87B4-074526DE468B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Http.Query.Filter.Integration.Test", "test\integration\Http.Query.Filter.Integration.Test\Http.Query.Filter.Integration.Test.csproj", "{C773E825-1DE8-416E-AAE9-4A309FB6B6DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Http.Query.Filter.Integration.Test", "test\integration\Http.Query.Filter.Integration.Test\Http.Query.Filter.Integration.Test.csproj", "{C773E825-1DE8-416E-AAE9-4A309FB6B6DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Http.Query.Filter.Client", "src\Http.Query.Filter.Client\Http.Query.Filter.Client.csproj", "{AB1C7DE8-6D4B-4EDE-A43E-688E1CD2E1F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Http.Query.Filter.Client", "src\Http.Query.Filter.Client\Http.Query.Filter.Client.csproj", "{AB1C7DE8-6D4B-4EDE-A43E-688E1CD2E1F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Http.Query.Filter.Client.Test", "test\unit\Http.Query.Filter.Client.Test\Http.Query.Filter.Client.Test.csproj", "{A8671134-6865-41E7-A80C-4190868BFB02}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Http.Query.Filter.Client.Test", "test\unit\Http.Query.Filter.Client.Test\Http.Query.Filter.Client.Test.csproj", "{A8671134-6865-41E7-A80C-4190868BFB02}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{F6513FC2-3B98-4C8A-B8E7-8F8328518188}"
 	ProjectSection(SolutionItems) = preProject
@@ -72,5 +75,8 @@ Global
 		{C9DEF327-8982-487B-87B4-074526DE468B} = {19DFDD00-586A-4FA8-A46C-D40BBE5F51B3}
 		{C773E825-1DE8-416E-AAE9-4A309FB6B6DA} = {C9DEF327-8982-487B-87B4-074526DE468B}
 		{A8671134-6865-41E7-A80C-4190868BFB02} = {441E37A1-F116-4A2D-97B7-FD4B33F3C975}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {821F894C-A052-461F-90B0-F4CD63105E74}
 	EndGlobalSection
 EndGlobal

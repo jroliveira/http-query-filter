@@ -1,12 +1,9 @@
 ﻿namespace Http.Query.Filter.Test.Filters
 {
     using System.Collections.Generic;
-
     using FluentAssertions;
-
     using Http.Query.Filter.Filters.Visualization;
     using Http.Query.Filter.Test.Utils;
-
     using Xunit;
 
     public class FieldsTests
@@ -17,7 +14,7 @@
         {
             Fields actual = query;
 
-            actual.ShouldAllBeEquivalentTo(expected);
+            actual.Should().BeEquivalentTo(expected);
         }
 
         [Theory]
@@ -45,8 +42,8 @@
                     {
                         data.Add(Item("id", true));
                         data.Add(Item("name", false));
-                    })
-                }
+                    }),
+                },
             };
         }
     }

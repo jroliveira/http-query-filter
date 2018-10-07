@@ -3,23 +3,24 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
-    using System.Net;
     using System.Text.RegularExpressions;
-
     using Http.Query.Filter.Filters.Condition.Operators;
-    using Http.Query.Filter.Infraestructure.Extensions;
+    using Http.Query.Filter.Infrastructure.Extensions;
+    using static Http.Query.Filter.Filters.Condition.Operators.Comparison;
+    using static System.Net.WebUtility;
+    using static System.String;
+    using static System.Text.RegularExpressions.RegexOptions;
 
-    public class Where : ReadOnlyCollection<Condition>
+    public sealed class Where : ReadOnlyCollection<Condition>
     {
         private const string Pattern = @"filter\[where]?\[(?<field>\w+)\](\[(?<comparison>gt|lt)\])?=(?<value>[^&]*)&?";
 
-        private static Regex regex = new Regex(Pattern, RegexOptions.IgnoreCase | RegexOptions.Compiled);
-
-        private static Dictionary<string, Comparison> operations = new Dictionary<string, Comparison>
-            {
-                { "gt", Comparison.GreaterThan },
-                { "lt", Comparison.LessThan }
-            };
+        private static readonly Regex Regex = new Regex(Pattern, IgnoreCase | Compiled);
+        private static readonly Dictionary<string, Comparison> Operations = new Dictionary<string, Comparison>
+        {
+            { "gt", GreaterThan },
+            { "lt", LessThan },
+        };
 
         public Where(IList<Condition> conditions)
             : base(conditions)
@@ -28,12 +29,12 @@
 
         public static implicit operator Where(string query)
         {
-            if (string.IsNullOrWhiteSpace(query))
+            if (IsNullOrWhiteSpace(query))
             {
                 return null;
             }
 
-            var conditions = Get(WebUtility.UrlDecode(query));
+            var conditions = Get(UrlDecode(query));
 
             if (!conditions.Any())
             {
@@ -45,7 +46,7 @@
 
         private static IList<Condition> Get(string query)
         {
-            var matches = regex.Matches(query);
+            var matches = Regex.Matches(query);
 
             return
                 (from Match match in matches
@@ -59,12 +60,12 @@
         {
             var operation = match.Groups["comparison"].Value.ToLower();
 
-            if (string.IsNullOrEmpty(operation))
+            if (IsNullOrEmpty(operation))
             {
-                return Comparison.Equal;
+                return Equal;
             }
 
-            return operations[operation];
+            return Operations[operation];
         }
     }
 }

@@ -7,14 +7,8 @@
     {
         protected abstract List<object[]> Data { get; }
 
-        public IEnumerator<object[]> GetEnumerator()
-        {
-            return this.Data.GetEnumerator();
-        }
+        public IEnumerator<object[]> GetEnumerator() => this.Data.GetEnumerator();
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return this.GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 }

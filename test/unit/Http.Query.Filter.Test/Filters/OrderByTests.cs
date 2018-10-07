@@ -1,12 +1,9 @@
 ﻿namespace Http.Query.Filter.Test.Filters
 {
     using System.Collections.Generic;
-
     using FluentAssertions;
-
     using Http.Query.Filter.Filters.Ordering;
     using Http.Query.Filter.Test.Utils;
-
     using Xunit;
 
     public class OrderByTests
@@ -17,7 +14,7 @@
         {
             OrderBy actual = query;
 
-            actual.ShouldAllBeEquivalentTo(expected);
+            actual.Should().BeEquivalentTo(expected);
         }
 
         [Theory]
@@ -44,8 +41,8 @@
                     {
                         data.Add(Item("id", OrderByDirection.Ascending));
                         data.Add(Item("name", OrderByDirection.Descending));
-                    })
-                }
+                    }),
+                },
             };
         }
     }

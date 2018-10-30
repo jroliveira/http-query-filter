@@ -10,9 +10,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
 		.travis.yml = .travis.yml
+		after.Http.Query.Filter.sln.targets = after.Http.Query.Filter.sln.targets
 		appveyor.yml = appveyor.yml
 		code-analysis.ruleset = code-analysis.ruleset
+		CONTRIBUTING.md = CONTRIBUTING.md
 		Directory.Build.props = Directory.Build.props
+		Directory.Build.targets = Directory.Build.targets
 		LICENSE = LICENSE
 		README.md = README.md
 		Settings.StyleCop = Settings.StyleCop
@@ -37,6 +40,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{F6513FC2-3
 		docs\API.md = docs\API.md
 		docs\logo.png = docs\logo.png
 		docs\README.md = docs\README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cakebuild", "cakebuild", "{DB141A71-17A4-426C-B3A8-76BB179EBC46}"
+	ProjectSection(SolutionItems) = preProject
+		cakebuild\build.cake = cakebuild\build.cake
+		cakebuild\build.ps1 = cakebuild\build.ps1
+		cakebuild\build.sh = cakebuild\build.sh
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tasks", "tasks", "{1D963753-B1E6-4CBC-BE2C-90E1A06DBF13}"
+	ProjectSection(SolutionItems) = preProject
+		cakebuild\tasks\build.cake = cakebuild\tasks\build.cake
+		cakebuild\tasks\clean.cake = cakebuild\tasks\clean.cake
+		cakebuild\tasks\pack.cake = cakebuild\tasks\pack.cake
+		cakebuild\tasks\restore.cake = cakebuild\tasks\restore.cake
+		cakebuild\tasks\test.cake = cakebuild\tasks\test.cake
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{D0F0E59A-BF01-4D24-A0D3-84F2AD5E2432}"
+	ProjectSection(SolutionItems) = preProject
+		cakebuild\tools\packages.config = cakebuild\tools\packages.config
 	EndProjectSection
 EndProject
 Global
@@ -75,6 +99,8 @@ Global
 		{C9DEF327-8982-487B-87B4-074526DE468B} = {19DFDD00-586A-4FA8-A46C-D40BBE5F51B3}
 		{C773E825-1DE8-416E-AAE9-4A309FB6B6DA} = {C9DEF327-8982-487B-87B4-074526DE468B}
 		{A8671134-6865-41E7-A80C-4190868BFB02} = {441E37A1-F116-4A2D-97B7-FD4B33F3C975}
+		{1D963753-B1E6-4CBC-BE2C-90E1A06DBF13} = {DB141A71-17A4-426C-B3A8-76BB179EBC46}
+		{D0F0E59A-BF01-4D24-A0D3-84F2AD5E2432} = {DB141A71-17A4-426C-B3A8-76BB179EBC46}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {821F894C-A052-461F-90B0-F4CD63105E74}

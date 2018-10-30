@@ -1,6 +1,7 @@
 ﻿namespace Http.Query.Filter.Integration.Test.Infrastructure.Data.Linq.Collections
 {
     using System.Collections.ObjectModel;
+
     using Http.Query.Filter.Integration.Test.Entities;
 
     internal class Accounts : Collection<Account>

@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using static System.String;
 
     public sealed class Filter<TReturn> : IFilter<TReturn>

@@ -4,8 +4,10 @@
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text.RegularExpressions;
+
     using Http.Query.Filter.Filters.Condition.Operators;
     using Http.Query.Filter.Infrastructure.Extensions;
+
     using static Http.Query.Filter.Filters.Condition.Operators.Comparison;
     using static System.Net.WebUtility;
     using static System.String;

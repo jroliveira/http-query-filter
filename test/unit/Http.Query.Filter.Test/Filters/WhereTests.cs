@@ -1,10 +1,14 @@
 ﻿namespace Http.Query.Filter.Test.Filters
 {
     using System.Collections.Generic;
+
     using FluentAssertions;
+
     using Http.Query.Filter.Filters.Condition;
     using Http.Query.Filter.Test.Utils;
+
     using Xunit;
+
     using static Http.Query.Filter.Filters.Condition.Operators.Comparison;
     using static System.String;
 

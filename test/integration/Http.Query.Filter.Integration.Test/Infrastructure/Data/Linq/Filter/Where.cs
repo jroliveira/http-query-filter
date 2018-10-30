@@ -2,9 +2,11 @@
 {
     using System;
     using System.Linq;
+
     using Http.Query.Filter;
     using Http.Query.Filter.Integration.Test.Infrastructure.Filter;
     using Http.Query.Filter.Integration.Test.Infrastructure.Filter.Extensions;
+
     using static System.Reflection.BindingFlags;
 
     internal class Where<TEntity> : IWhere<bool, Filter, TEntity>

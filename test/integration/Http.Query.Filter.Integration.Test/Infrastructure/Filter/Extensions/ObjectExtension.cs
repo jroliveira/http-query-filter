@@ -1,6 +1,7 @@
 ﻿namespace Http.Query.Filter.Integration.Test.Infrastructure.Filter.Extensions
 {
     using System;
+
     using Http.Query.Filter.Filters.Condition.Operators;
 
     internal static class ObjectExtension

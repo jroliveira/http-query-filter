@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+
     using Http.Query.Filter.Integration.Test.Infrastructure.Filter;
 
     internal class Paged<TSource>

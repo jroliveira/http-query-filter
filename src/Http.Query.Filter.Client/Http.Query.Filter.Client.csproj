@@ -8,7 +8,7 @@
     <Version>1.0$(VersionSuffix)</Version>
     <Authors>Junior Oliveira</Authors>
     <Owners>Junior Oliveira</Owners>
-    <Description>Client do sistema de filtro baseado no projeto StrongLoop Node.js API Platform desenvolvido pela Atlassian Confluence.</Description>
+    <Description>Client of project-based filter system StrongLoop Node.js API Platform developed by IBM Company.</Description>
 
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/jroliveira/http-query-filter</RepositoryUrl>
@@ -17,7 +17,7 @@
     <PackageTags>rest restful api filter http querystring client</PackageTags>
     <PackageLicenseUrl>https://github.com/jroliveira/http-query-filter/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/jroliveira/http-query-filter</PackageProjectUrl>
-    <PackageIconUrl>https://raw.github.com/jroliveira/http-query-filter/master/logo.png</PackageIconUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/jroliveira/http-query-filter/master/docs/logo.png</PackageIconUrl>
   </PropertyGroup>
 
 </Project>

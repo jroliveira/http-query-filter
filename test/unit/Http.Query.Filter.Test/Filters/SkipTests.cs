@@ -1,7 +1,9 @@
 ﻿namespace Http.Query.Filter.Test.Filters
 {
     using FluentAssertions;
+
     using Http.Query.Filter.Filters.Pagination;
+
     using Xunit;
 
     public class SkipTests

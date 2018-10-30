@@ -1,6 +1,7 @@
 ﻿namespace Http.Query.Filter.Test
 {
     using FluentAssertions;
+
     using Xunit;
 
     public class FilterTests

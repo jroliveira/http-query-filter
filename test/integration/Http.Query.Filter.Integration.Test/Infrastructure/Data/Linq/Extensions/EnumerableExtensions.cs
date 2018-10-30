@@ -2,8 +2,10 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+
     using Http.Query.Filter;
     using Http.Query.Filter.Integration.Test.Infrastructure.Data.Linq.Filter;
+
     using static System.Convert;
 
     internal static class EnumerableExtensions

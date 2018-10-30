@@ -1,6 +1,7 @@
 ﻿namespace Http.Query.Filter.Integration.Test.Infrastructure.Data.Linq.Queries.Account
 {
     using System.Linq;
+
     using Http.Query.Filter;
     using Http.Query.Filter.Integration.Test.Infrastructure.Data.Linq.Collections;
     using Http.Query.Filter.Integration.Test.Infrastructure.Data.Linq.Extensions;

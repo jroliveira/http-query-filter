@@ -3,8 +3,10 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
     using Http.Query.Filter;
     using Http.Query.Filter.Integration.Test.Infrastructure.Filter;
+
     using static System.Reflection.BindingFlags;
 
     internal class Select<TEntity> : ISelect<Filter, TEntity>

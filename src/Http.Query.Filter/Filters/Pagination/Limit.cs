@@ -1,6 +1,7 @@
 ﻿namespace Http.Query.Filter.Filters.Pagination
 {
     using System.Text.RegularExpressions;
+
     using static System.Net.WebUtility;
     using static System.String;
     using static System.Text.RegularExpressions.RegexOptions;

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+
     using Http.Query.Filter.Filters.Condition;
     using Http.Query.Filter.Filters.Condition.Operators;
 

@@ -1,3 +1,5 @@
+![Http Query Filter - Logo][logo]
+
 # Http Query Filter
 
 [![Build status](https://ci.appveyor.com/api/projects/status/id8it23ojpmcwlbb?svg=true)](https://ci.appveyor.com/project/junioro/http-query-filter)
@@ -7,62 +9,82 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/jroliveira/http-query-filter/badge)](https://www.codefactor.io/repository/github/jroliveira/http-query-filter)
 [![License: MIT](http://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-![Http Query Filter - Logo][logo]
-
 Project-based filter system [StrongLoop Node.js API Platform][strongloop] developed by [IBM Company][ibm].
-* [API documentation](docs/README.md)
 
-### Pre requirements
+## Installing / Getting started
 
-* Visual Studio 2017
-
-### Installing
-
-``` bash
-$ git clone https://github.com/jroliveira/http-query-filter.git
-$ dotnet restore
+```bash
+# Install package
+$ dotnet add package Http.Query.Filter
 ```
 
-### Running tests
+## Developing
 
-``` bash
-$ dotnet test -c Release test/unit/Http.Query.Filter.Test/Http.Query.Filter.Test.csproj
-$ dotnet test -c Release test/unit/Http.Query.Filter.Client.Test/Http.Query.Filter.Client.Test.csproj
-$ dotnet test -c Release test/integration/Http.Query.Filter.Integration.Test/Http.Query.Filter.Integration.Test.csproj
+### Built With
+
+ - [.NET Core](https://docs.microsoft.com/en-us/dotnet/core/)
+ - [C#](https://docs.microsoft.com/en-us/dotnet/csharp/)
+
+### Pre requisites
+
+Download and install:
+
+ - [.NET Core SDK](https://www.microsoft.com/net/download)
+
+#### Installing the Cake
+
+[Cake](https://github.com/cake-build/cake) (C# Make) is a cross-platform build automation system with a C# DSL for tasks such as compiling code, copying files and folders, running unit tests, compressing files and building NuGet packages.
+
+```bash
+$ dotnet tool install -g Cake.Tool --version 0.30.0
+```
+
+### Setting up Dev
+
+```bash
+# Clone this repository
+$ git clone https://github.com/jroliveira/http-query-filter.git
+
+# Go into the repository
+$ cd http-query-filter
 ```
 
 ### Building
 
-``` bash
+```bash
+$ dotnet cake ./cakebuild/build.cake
+```
+
+or
+
+```bash
+# Restore dependencies
+$ dotnet restore
+
+# Build project
 $ dotnet build
 ```
 
-### How to use it
+### Deploying / Publishing
 
-**REST API**
-
-``` PowerShell
-PM> Install-Package Http.Query.Filter
+``` bash
+$ dotnet cake ./cakebuild/build.cake --target=Deploy
 ```
 
-**Client API**
+## Tests
 
-``` PowerShell
-PM> Install-Package Http.Query.Filter.Client
+``` bash
+$ dotnet test
 ```
 
-### Contributions
+## Api Reference
 
-1. Fork it
-2. git checkout -b <branch-name>
-3. git add -A && git commit -m "feature description"
-4. git push origin <branch-name>
-5. Create a pull request
+[Documentation](docs/README.md)
 
-### License
+## Licensing
 
 The code is available under the [MIT license](LICENSE).
 
 [strongloop]: https://strongloop.com/
 [ibm]: http://www.ibm.com/
-[logo]: https://raw.githubusercontent.com/jroliveira/http-query-filter/master/docs/logo.png "Http Query Filter - Logo"
+[logo]: docs/logo.png "Http Query Filter - Logo"

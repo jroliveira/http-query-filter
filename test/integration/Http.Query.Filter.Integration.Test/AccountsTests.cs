@@ -2,11 +2,14 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+
     using FluentAssertions;
+
     using Http.Query.Filter.Integration.Test.Entities;
     using Http.Query.Filter.Integration.Test.Infrastructure.Data.Linq.Collections;
     using Http.Query.Filter.Integration.Test.Infrastructure.Data.Linq.Filter;
     using Http.Query.Filter.Integration.Test.Infrastructure.Data.Linq.Queries.Account;
+
     using Xunit;
 
     public class AccountsTests

@@ -4,30 +4,34 @@
 
     using Http.Query.Filter;
     using Http.Query.Filter.Integration.Test.Infrastructure.Data.Linq.Collections;
-    using Http.Query.Filter.Integration.Test.Infrastructure.Data.Linq.Extensions;
     using Http.Query.Filter.Integration.Test.Infrastructure.Filter;
 
     internal class GetAllQuery
     {
-        private readonly Paged<object> paged;
+        private readonly IPagination<uint, Filter> skip;
+        private readonly IPagination<uint, Filter> limit;
 
-        internal GetAllQuery(ISkip<uint, Filter> skip, ILimit<uint, Filter> limit) => this.paged = new Paged<dynamic>(skip, limit);
+        internal GetAllQuery(
+            IPagination<uint, Filter> skip,
+            IPagination<uint, Filter> limit)
+        {
+            this.skip = skip;
+            this.limit = limit;
+        }
 
         internal virtual Paged<dynamic> GetResult(Filter filter)
         {
-            var data = Accounts
-                .Data
+            var data = new Accounts()
                 .Skip(filter)
                 .Limit(filter)
                 .Where(filter)
                 .Select(filter)
                 .ToList();
 
-            this.paged
-                .Paginate(filter)
-                .AddRange(data);
-
-            return this.paged;
+            return new Paged<dynamic>(
+                data,
+                this.skip.Apply(filter),
+                this.limit.Apply(filter));
         }
     }
 }

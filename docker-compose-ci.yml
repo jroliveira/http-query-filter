@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  nuget-server:
+    image: sunside/simple-nuget-server
+    restart: always
+    container_name: http-query-filter-nuget-server
+    ports:
+      - "9001:80"
+    environment:
+      - NUGET_API_KEY=123456

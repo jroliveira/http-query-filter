@@ -3,8 +3,8 @@
     internal sealed class Account : Entity<int>
     {
         internal Account(int id, string email, string password)
+            : base(id)
         {
-            this.Id = id;
             this.Email = email;
             this.Password = password;
         }

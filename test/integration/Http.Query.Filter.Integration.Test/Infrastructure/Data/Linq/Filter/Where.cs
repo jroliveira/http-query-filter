@@ -7,25 +7,28 @@
     using Http.Query.Filter.Integration.Test.Infrastructure.Filter;
     using Http.Query.Filter.Integration.Test.Infrastructure.Filter.Extensions;
 
-    using static System.Reflection.BindingFlags;
+    using static System.String;
 
-    internal class Where<TEntity> : IWhere<bool, Filter, TEntity>
+    internal readonly struct Where<TParam> : IWhere<bool, Filter, TParam>
     {
-        private Filter filter;
-
-        public Func<TEntity, bool> Apply(Filter filter)
+        public Func<TParam, bool> Apply(Filter filter) => (TParam param) =>
         {
-            this.filter = filter;
-            return this.Apply;
-        }
+            if (param == null)
+            {
+                return true;
+            }
 
-        public bool Apply(TEntity entity) => !this.filter.HasCondition || this.filter
-             .Where
-             .All(condition => entity
-                 .GetType()
-                 .GetProperty(condition.Field, IgnoreCase | Public | Instance)
-                 .GetValue(entity)
-                 .ToString()
-                 .Verify(condition.Value.ToString(), condition.Comparison));
+            if (!filter.HasCondition)
+            {
+                return true;
+            }
+
+            return filter
+                .Where
+                .All(condition => param
+                    .GetOrElse(condition.Field, Empty)
+                    .ToString()
+                    .Verify(condition.Value, condition.Comparison));
+        };
     }
 }

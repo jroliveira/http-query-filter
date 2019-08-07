@@ -8,14 +8,14 @@
 
     public sealed class Filter<TReturn> : IFilter<TReturn>
     {
-        private readonly Func<string, Task<TReturn>> execute;
+        private readonly Func<string, Task<TReturn>> done;
         private readonly ICollection<string> filters = new List<string>();
 
         /// <summary>
         /// Filter's constructor.
         /// </summary>
-        /// <param name="execute">execute is a function that will be executed after compiling the filters.</param>
-        public Filter(Func<string, Task<TReturn>> execute) => this.execute = execute;
+        /// <param name="done">done is a function that will be executed after compiling the filters.</param>
+        public Filter(Func<string, Task<TReturn>> done) => this.done = done;
 
         /// <summary>
         /// A skip filter omits the specified number of returned records.
@@ -65,6 +65,6 @@
         /// Performs the operation with selected filters.
         /// </summary>
         /// <returns>Returns the API data.</returns>
-        public Task<TReturn> BuildAsync() => this.execute(Join("&", this.filters));
+        public Task<TReturn> Build() => this.done(Join("&", this.filters));
     }
 }

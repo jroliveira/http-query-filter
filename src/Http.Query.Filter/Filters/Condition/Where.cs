@@ -1,5 +1,6 @@
 ﻿namespace Http.Query.Filter.Filters.Condition
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
@@ -8,24 +9,29 @@
     using Http.Query.Filter.Filters.Condition.Operators;
     using Http.Query.Filter.Infrastructure.Extensions;
 
-    using static Http.Query.Filter.Filters.Condition.Operators.Comparison;
     using static System.Net.WebUtility;
     using static System.String;
     using static System.Text.RegularExpressions.RegexOptions;
+    using static Http.Query.Filter.Filters.Condition.Operators.Comparison;
 
     public sealed class Where : ReadOnlyCollection<Condition>
     {
         private const string Pattern = @"filter\[where]?\[(?<field>\w+)\](\[(?<comparison>gt|lt)\])?=(?<value>[^&]*)&?";
 
-        private static readonly Regex Regex = new Regex(Pattern, IgnoreCase | Compiled);
+        private static readonly Func<string, MatchCollection> Matches = new Regex(Pattern, IgnoreCase | Compiled).Matches;
         private static readonly Dictionary<string, Comparison> Operations = new Dictionary<string, Comparison>
         {
             { "gt", GreaterThan },
             { "lt", LessThan },
         };
 
-        public Where(IList<Condition> conditions)
-            : base(conditions)
+        internal Where()
+            : this(new List<Condition>())
+        {
+        }
+
+        internal Where(IEnumerable<Condition> conditions)
+            : base(conditions.ToList())
         {
         }
 
@@ -33,41 +39,30 @@
         {
             if (IsNullOrWhiteSpace(query))
             {
-                return null;
+                return new Where();
             }
 
-            var conditions = Get(UrlDecode(query));
+            var conditions = GetConditions(query);
 
-            if (!conditions.Any())
-            {
-                return null;
-            }
-
-            return new Where(conditions);
+            return conditions.Any()
+                ? new Where(conditions)
+                : new Where();
         }
 
-        private static IList<Condition> Get(string query)
-        {
-            var matches = Regex.Matches(query);
-
-            return
-                (from Match match in matches
-                 let field = match.Get("field")
-                 let value = match.Get("value")
-                 let comparison = GetComparison(match)
-                 select new Condition(field, value, comparison)).ToList();
-        }
+        private static IEnumerable<Condition> GetConditions(string query) =>
+            from Match match in Matches(UrlDecode(query))
+            let field = match.GetValue("field")
+            let value = match.GetValue("value")
+            let comparison = GetComparison(match)
+            select new Condition(field, value, comparison);
 
         private static Comparison GetComparison(Match match)
         {
-            var operation = match.Groups["comparison"].Value.ToLower();
+            var operation = match.GetValue("comparison").ToLower();
 
-            if (IsNullOrEmpty(operation))
-            {
-                return Equal;
-            }
-
-            return Operations[operation];
+            return IsNullOrEmpty(operation)
+                ? Equal
+                : Operations[operation];
         }
     }
 }

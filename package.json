@@ -1,0 +1,48 @@
+{
+  "name": "http-query-filter",
+  "version": "3.0.27",
+  "description": "Project-based filter system StrongLoop Node.js API Platform developed by IBM Company.",
+  "homepage": "https://github.com/jroliveira/http-query-filter#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jroliveira/http-query-filter.git"
+  },
+  "keywords": [
+    "csharp",
+    "rest",
+    "package",
+    "http",
+    "filter",
+    "querystring",
+    "dotnet-standard"
+  ],
+  "author": "Junior Oliveira (https://jroliveira.net)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jroliveira/http-query-filter/issues"
+  },
+  "readmeFilename": "README.md",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "release": "standard-version",
+    "postinstall": "dotnet tool install Cake.Tool --version 0.33.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "8.0.0",
+    "@commitlint/config-conventional": "8.0.0",
+    "cz-conventional-changelog": "2.1.0",
+    "husky": "3.0.0",
+    "standard-version": "6.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "dotnet cake",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}

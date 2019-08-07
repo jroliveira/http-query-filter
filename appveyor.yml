@@ -3,8 +3,6 @@
 #      general configuration      #
 #---------------------------------#
 
-version: '.{build}'
-
 branches:
   only:
     - master
@@ -33,43 +31,8 @@ pull_requests:
 configuration:
   - Release
 
-before_build:
-  - dotnet restore
+install:
+  - cmd: dotnet tool install --global Cake.Tool --version 0.33.0
 
 build_script:
-  - dotnet build -c %CONFIGURATION%
-
-after_build:
-  - dotnet pack src\Http.Query.Filter\Http.Query.Filter.csproj -c %CONFIGURATION% --version-suffix "%APPVEYOR_BUILD_VERSION%"
-  - dotnet pack src\Http.Query.Filter.Client\Http.Query.Filter.Client.csproj -c %CONFIGURATION% --version-suffix "%APPVEYOR_BUILD_VERSION%"
-
-
-#---------------------------------#
-#       tests configuration       #
-#---------------------------------#
-
-test_script:
-  - dotnet test -c %CONFIGURATION% test\unit\Http.Query.Filter.Test\Http.Query.Filter.Test.csproj
-  - dotnet test -c %CONFIGURATION% test\unit\Http.Query.Filter.Client.Test\Http.Query.Filter.Client.Test.csproj
-  - dotnet test -c %CONFIGURATION% test\integration\Http.Query.Filter.Integration.Test\Http.Query.Filter.Integration.Test.csproj
-
-
-#---------------------------------#
-#      artifacts configuration    #
-#---------------------------------#
-
-artifacts:
-  - path: '**\*.nupkg'
-
-
-#---------------------------------#
-#     deployment configuration    #
-#---------------------------------#
-
-deploy:
-  - provider: NuGet
-    server: https://www.nuget.org/api/v2/package
-    api_key:
-      secure: c+t+t7j+Y2QtAhLm35+YbZB+IFaMN+a77YPT8a/jKz7Y3t7OAk0LBCbIKqJwurRk
-    on:
-      branch: master
+  - cmd: dotnet cake

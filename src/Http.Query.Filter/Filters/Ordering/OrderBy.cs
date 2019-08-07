@@ -1,5 +1,6 @@
 ﻿namespace Http.Query.Filter.Filters.Ordering
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
@@ -7,23 +8,29 @@
 
     using Http.Query.Filter.Infrastructure.Extensions;
 
-    using static Http.Query.Filter.Filters.Ordering.OrderByDirection;
     using static System.Net.WebUtility;
     using static System.String;
     using static System.Text.RegularExpressions.RegexOptions;
+    using static Http.Query.Filter.Filters.Ordering.OrderByDirection;
 
     public sealed class OrderBy : ReadOnlyCollection<KeyValuePair<string, OrderByDirection>>
     {
         private const string Pattern = @"filter\[order](\[\d+])?\=(?<field>\w+)\s(?<direction>asc|desc)";
-        private static readonly Regex Regex = new Regex(Pattern, IgnoreCase | Compiled);
+
+        private static readonly Func<string, MatchCollection> Matches = new Regex(Pattern, IgnoreCase | Compiled).Matches;
         private static readonly Dictionary<string, OrderByDirection> Types = new Dictionary<string, OrderByDirection>
         {
             { "asc", Ascending },
             { "desc", Descending },
         };
 
-        public OrderBy(IList<KeyValuePair<string, OrderByDirection>> fields)
-            : base(fields)
+        internal OrderBy()
+            : this(new List<KeyValuePair<string, OrderByDirection>>())
+        {
+        }
+
+        internal OrderBy(IEnumerable<KeyValuePair<string, OrderByDirection>> fields)
+            : base(fields.ToList())
         {
         }
 
@@ -31,35 +38,22 @@
         {
             if (IsNullOrEmpty(query))
             {
-                return null;
+                return new OrderBy();
             }
 
-            var fields = Get(UrlDecode(query));
+            var fields = GetFields(query);
 
-            if (!fields.Any())
-            {
-                return null;
-            }
-
-            return new OrderBy(fields);
+            return fields.Any()
+                ? new OrderBy(fields)
+                : new OrderBy();
         }
 
-        private static IList<KeyValuePair<string, OrderByDirection>> Get(string query)
-        {
-            var matches = Regex.Matches(query);
+        private static IEnumerable<KeyValuePair<string, OrderByDirection>> GetFields(string query) =>
+            from Match match in Matches(UrlDecode(query))
+            let field = match.GetValue("field")
+            let orderBy = GetDirection(match)
+            select new KeyValuePair<string, OrderByDirection>(field, orderBy);
 
-            return
-                (from Match match in matches
-                 let field = match.Get("field")
-                 let orderBy = GetDirection(match)
-                 select new KeyValuePair<string, OrderByDirection>(field, orderBy)).ToList();
-        }
-
-        private static OrderByDirection GetDirection(Match match)
-        {
-            var direction = match.Groups["direction"].Value.ToLower();
-
-            return Types[direction];
-        }
+        private static OrderByDirection GetDirection(Match match) => Types[match.GetValue("direction").ToLower()];
     }
 }

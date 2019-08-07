@@ -1,29 +1,46 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.6
+VisualStudioVersion = 15.0.28307.572
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Http.Query.Filter", "src\Http.Query.Filter\Http.Query.Filter.csproj", "{6D94C318-C94B-4DC5-A49B-89D26E1BF675}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2387706C-FD2E-4C04-B170-F1EAB4C41ECF}"
 	ProjectSection(SolutionItems) = preProject
+		.dockerignore = .dockerignore
 		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
 		.gitignore = .gitignore
 		.travis.yml = .travis.yml
 		after.Http.Query.Filter.sln.targets = after.Http.Query.Filter.sln.targets
 		appveyor.yml = appveyor.yml
+		build.cake = build.cake
+		build.ps1 = build.ps1
+		build.sh = build.sh
+		cake.config = cake.config
+		CHANGELOG.md = CHANGELOG.md
 		code-analysis.ruleset = code-analysis.ruleset
+		commitlint.config.js = commitlint.config.js
 		CONTRIBUTING.md = CONTRIBUTING.md
 		Directory.Build.props = Directory.Build.props
 		Directory.Build.targets = Directory.Build.targets
-		LICENSE = LICENSE
+		docker-compose-ci.yml = docker-compose-ci.yml
+		Dockerfile = Dockerfile
+		LICENSE.txt = LICENSE.txt
+		nuget.config = nuget.config
+		package.json = package.json
 		README.md = README.md
-		Settings.StyleCop = Settings.StyleCop
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{19DFDD00-586A-4FA8-A46C-D40BBE5F51B3}"
+	ProjectSection(SolutionItems) = preProject
+		test\Directory.Build.props = test\Directory.Build.props
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "unit", "unit", "{441E37A1-F116-4A2D-97B7-FD4B33F3C975}"
+	ProjectSection(SolutionItems) = preProject
+		test\unit\Directory.Build.props = test\unit\Directory.Build.props
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Http.Query.Filter.Test", "test\unit\Http.Query.Filter.Test\Http.Query.Filter.Test.csproj", "{1DDC5CA5-59F0-42D4-AA7A-665A39D74164}"
 EndProject
@@ -42,25 +59,43 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{F6513FC2-3
 		docs\README.md = docs\README.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cakebuild", "cakebuild", "{DB141A71-17A4-426C-B3A8-76BB179EBC46}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{6DD0B821-D69A-46D3-A903-0BAD6D5D5489}"
 	ProjectSection(SolutionItems) = preProject
-		cakebuild\build.cake = cakebuild\build.cake
-		cakebuild\build.ps1 = cakebuild\build.ps1
-		cakebuild\build.sh = cakebuild\build.sh
+		build\build-solution.cake = build\build-solution.cake
+		build\check-release-requirements.cake = build\check-release-requirements.cake
+		build\ci-env.dev.json = build\ci-env.dev.json
+		build\ci-env.json = build\ci-env.json
+		build\data.cake = build\data.cake
+		build\delete-temp-directories.cake = build\delete-temp-directories.cake
+		build\destroy-ci-environment.cake = build\destroy-ci-environment.cake
+		build\generate-changelog.cake = build\generate-changelog.cake
+		build\generate-nuget-package.cake = build\generate-nuget-package.cake
+		build\helpers.cake = build\helpers.cake
+		build\mock-ci-environment.cake = build\mock-ci-environment.cake
+		build\push-git-tag-and-changes.cake = build\push-git-tag-and-changes.cake
+		build\push-nuget-package.cake = build\push-nuget-package.cake
+		build\restore-nuget-packages.cake = build\restore-nuget-packages.cake
+		build\run-tests.cake = build\run-tests.cake
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tasks", "tasks", "{1D963753-B1E6-4CBC-BE2C-90E1A06DBF13}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{5D209901-76D5-4540-83B8-E7E16635CDC6}"
 	ProjectSection(SolutionItems) = preProject
-		cakebuild\tasks\build.cake = cakebuild\tasks\build.cake
-		cakebuild\tasks\clean.cake = cakebuild\tasks\clean.cake
-		cakebuild\tasks\pack.cake = cakebuild\tasks\pack.cake
-		cakebuild\tasks\restore.cake = cakebuild\tasks\restore.cake
-		cakebuild\tasks\test.cake = cakebuild\tasks\test.cake
+		tools\packages.config = tools\packages.config
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{D0F0E59A-BF01-4D24-A0D3-84F2AD5E2432}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6A80864B-EA1A-44EA-AF8C-936DC7AB0D37}"
 	ProjectSection(SolutionItems) = preProject
-		cakebuild\tools\packages.config = cakebuild\tools\packages.config
+		src\Directory.Build.props = src\Directory.Build.props
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{672ED4EF-2696-4B2E-9D84-733F8197E9B0}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\nuget.exe = .nuget\nuget.exe
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".config", ".config", "{FF96CE6C-3CB1-433F-992D-C8BB7B3EEEA6}"
+	ProjectSection(SolutionItems) = preProject
+		.config\dotnet-tools.json = .config\dotnet-tools.json
 	EndProjectSection
 EndProject
 Global
@@ -94,13 +129,13 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{6D94C318-C94B-4DC5-A49B-89D26E1BF675} = {6A80864B-EA1A-44EA-AF8C-936DC7AB0D37}
 		{441E37A1-F116-4A2D-97B7-FD4B33F3C975} = {19DFDD00-586A-4FA8-A46C-D40BBE5F51B3}
 		{1DDC5CA5-59F0-42D4-AA7A-665A39D74164} = {441E37A1-F116-4A2D-97B7-FD4B33F3C975}
 		{C9DEF327-8982-487B-87B4-074526DE468B} = {19DFDD00-586A-4FA8-A46C-D40BBE5F51B3}
 		{C773E825-1DE8-416E-AAE9-4A309FB6B6DA} = {C9DEF327-8982-487B-87B4-074526DE468B}
+		{AB1C7DE8-6D4B-4EDE-A43E-688E1CD2E1F4} = {6A80864B-EA1A-44EA-AF8C-936DC7AB0D37}
 		{A8671134-6865-41E7-A80C-4190868BFB02} = {441E37A1-F116-4A2D-97B7-FD4B33F3C975}
-		{1D963753-B1E6-4CBC-BE2C-90E1A06DBF13} = {DB141A71-17A4-426C-B3A8-76BB179EBC46}
-		{D0F0E59A-BF01-4D24-A0D3-84F2AD5E2432} = {DB141A71-17A4-426C-B3A8-76BB179EBC46}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {821F894C-A052-461F-90B0-F4CD63105E74}

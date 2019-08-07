@@ -23,7 +23,7 @@ A *limit* filter limits the number of records returned to the specified number (
 var data = client
     .GetAll()
     .Limit(n)
-    .BuildAsync();
+    .Build();
 ```
 
 Where *n* is the maximum number of results (records) to return.
@@ -44,7 +44,7 @@ A *skip* filter omits the specified number of returned records. This is useful, 
 var data = client
     .GetAll()
     .Skip(n)
-    .BuildAsync();
+    .Build();
 ```
 
 Where *n* is the number of records to skip.
@@ -126,7 +126,7 @@ Order by two or more properties:
 var data = client
     .GetAll()
     .Select(propertyName)
-    .BuildAsync();
+    .Build();
 ```
 
 Order by two or more properties:
@@ -135,7 +135,7 @@ Order by two or more properties:
 var data = client
     .GetAll()
     .Select(propertyName, propertyName)
-    .BuildAsync();
+    .Build();
 ```
 
 Where *propertyName* is the name of the property (field) to include.

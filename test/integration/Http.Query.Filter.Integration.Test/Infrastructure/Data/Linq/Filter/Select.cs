@@ -6,39 +6,33 @@
 
     using Http.Query.Filter;
     using Http.Query.Filter.Integration.Test.Infrastructure.Filter;
+    using Http.Query.Filter.Integration.Test.Infrastructure.Filter.Extensions;
 
-    using static System.Reflection.BindingFlags;
-
-    internal class Select<TEntity> : ISelect<Filter, TEntity>
+    internal readonly struct Select<TParam> : ISelect<Filter, TParam>
     {
-        private Filter filter;
-
-        public Func<TEntity, dynamic> Apply(Filter filter)
+        public Func<TParam, dynamic> Apply(Filter filter) => (TParam param) =>
         {
-            this.filter = filter;
-            return this.Apply;
-        }
-
-        public dynamic Apply(TEntity entity)
-        {
-            if (!this.filter.HasVisualization)
+            if (param == null)
             {
-                return entity;
+                return new Dictionary<string, object>();
+            }
+
+            if (!filter.HasVisualization)
+            {
+                return param;
             }
 
             var props = new Dictionary<string, object>();
 
-            foreach (var field in this.filter.Fields.Where(field => field.Value))
+            foreach (var (key, _) in filter.Fields.Where(field => field.Value))
             {
-                var value = entity
-                    .GetType()
-                    .GetProperty(field.Key, IgnoreCase | Public | Instance)
-                    .GetValue(entity);
-
-                props.Add(field.Key, value);
+                if (param.GetOrElse(key, new { }) is object value)
+                {
+                    props.Add(key, value);
+                }
             }
 
             return props;
-        }
+        };
     }
 }

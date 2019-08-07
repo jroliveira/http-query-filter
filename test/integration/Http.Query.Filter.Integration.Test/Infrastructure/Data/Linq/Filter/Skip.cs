@@ -4,10 +4,9 @@
     using Http.Query.Filter.Filters.Pagination;
     using Http.Query.Filter.Integration.Test.Infrastructure.Filter;
 
-    internal class Skip : ISkip<uint, Filter>
+    internal readonly struct Skip : IPagination<uint, Filter>
     {
         public uint Apply(Filter filter) => filter
-            .GetOrElse(new Filter())
             .Skip
             .GetOrElse(0U);
     }

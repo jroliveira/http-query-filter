@@ -8,7 +8,5 @@
         where TFilter : IFilter
     {
         Func<TParam, TReturn> Apply(TFilter filter);
-
-        TReturn Apply(TParam param);
     }
 }

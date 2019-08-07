@@ -1,27 +1,20 @@
 ﻿namespace Http.Query.Filter.Integration.Test.Infrastructure.Filter.Extensions
 {
-    using System;
-
-    using Http.Query.Filter.Filters.Condition.Operators;
+    using static System.Reflection.BindingFlags;
 
     internal static class ObjectExtension
     {
-        internal static bool Verify(this string fieldValue, string queryValue, Comparison comparison)
+        internal static object GetOrElse<TObject>(this TObject @this, string property, object @default)
         {
-            switch (comparison)
+            if (@this == null)
             {
-                case Comparison.GreaterThan:
-                    return int.Parse(fieldValue) > int.Parse(queryValue);
-
-                case Comparison.LessThan:
-                    return int.Parse(fieldValue) < int.Parse(queryValue);
-
-                case Comparison.Equal:
-                    return queryValue == fieldValue;
-
-                default:
-                    throw new ArgumentOutOfRangeException();
+                return @default;
             }
+
+            return @this
+                .GetType()
+                .GetProperty(property, IgnoreCase | Public | Instance)
+                .GetValue(@this);
         }
     }
 }

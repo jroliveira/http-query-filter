@@ -4,10 +4,9 @@
     using Http.Query.Filter.Filters.Pagination;
     using Http.Query.Filter.Integration.Test.Infrastructure.Filter;
 
-    internal class Limit : ILimit<uint, Filter>
+    internal readonly struct Limit : IPagination<uint, Filter>
     {
         public uint Apply(Filter filter) => filter
-            .GetOrElse(new Filter())
             .Limit
             .GetOrElse(100U);
     }

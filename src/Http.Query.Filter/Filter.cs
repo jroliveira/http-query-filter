@@ -1,39 +1,39 @@
 ﻿namespace Http.Query.Filter
 {
+    using System.Linq;
+
     using Http.Query.Filter.Filters.Condition;
     using Http.Query.Filter.Filters.Ordering;
     using Http.Query.Filter.Filters.Pagination;
     using Http.Query.Filter.Filters.Visualization;
 
-    using static System.String;
-
     public sealed class Filter : IFilter
     {
-        public Limit Limit { get; private set; }
+        internal Filter(string query)
+        {
+            this.Limit = query;
+            this.Skip = query;
+            this.OrderBy = query;
+            this.Where = query;
+            this.Fields = query;
+        }
 
-        public Skip Skip { get; private set; }
+        public Limit Limit { get; }
 
-        public OrderBy OrderBy { get; private set; }
+        public Skip Skip { get; }
 
-        public Where Where { get; private set; }
+        public OrderBy OrderBy { get; }
 
-        public Fields Fields { get; private set; }
+        public Where Where { get; }
 
-        public bool HasCondition => this.Where != null;
+        public Fields Fields { get; }
 
-        public bool HasOrdering => this.OrderBy != null;
+        public bool HasCondition => this.Where.Any();
 
-        public bool HasVisualization => this.Fields != null;
+        public bool HasOrdering => this.OrderBy.Any();
 
-        public static implicit operator Filter(string query) => IsNullOrEmpty(query)
-            ? new Filter()
-            : new Filter
-            {
-                Skip = query,
-                Limit = query,
-                OrderBy = query,
-                Where = query,
-                Fields = query,
-            };
+        public bool HasVisualization => this.Fields.Any();
+
+        public static implicit operator Filter(string query) => new Filter(query);
     }
 }

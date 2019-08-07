@@ -8,7 +8,5 @@
         where TFilter : IFilter
     {
         Func<TParam, dynamic> Apply(TFilter filter);
-
-        dynamic Apply(TParam param);
     }
 }

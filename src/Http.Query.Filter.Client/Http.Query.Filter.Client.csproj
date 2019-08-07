@@ -1,23 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <Version>1.0$(VersionSuffix)</Version>
-    <Authors>Junior Oliveira</Authors>
-    <Owners>Junior Oliveira</Owners>
-    <Description>Client of project-based filter system StrongLoop Node.js API Platform developed by IBM Company.</Description>
-
-    <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/jroliveira/http-query-filter</RepositoryUrl>
-
     <PackageId>Http.Query.Filter.Client</PackageId>
     <PackageTags>rest restful api filter http querystring client</PackageTags>
-    <PackageLicenseUrl>https://github.com/jroliveira/http-query-filter/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/jroliveira/http-query-filter</PackageProjectUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/jroliveira/http-query-filter/master/docs/logo.png</PackageIconUrl>
   </PropertyGroup>
 
 </Project>

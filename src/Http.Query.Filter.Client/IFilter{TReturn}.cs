@@ -4,7 +4,7 @@
     using Http.Query.Filter.Client.Filters;
     using Http.Query.Filter.Client.Filters.Pagination;
 
-    public interface IFilter<TReturn> : IPagination<TReturn>, ISelect<TReturn>, IBuilderAsync<TReturn>
+    public interface IFilter<TReturn> : IPagination<TReturn>, ISelect<TReturn>, IBuilder<TReturn>
     {
     }
 }

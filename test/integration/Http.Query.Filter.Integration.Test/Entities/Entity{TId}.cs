@@ -2,6 +2,8 @@
 {
     internal class Entity<TId>
     {
-        public TId Id { get; protected set; }
+        public Entity(TId id) => this.Id = id;
+
+        public TId Id { get; }
     }
 }

@@ -1,6 +1,6 @@
 {
   "name": "http-query-filter",
-  "version": "3.0.27",
+  "version": "3.0.28",
   "description": "Project-based filter system StrongLoop Node.js API Platform developed by IBM Company.",
   "homepage": "https://github.com/jroliveira/http-query-filter#readme",
   "repository": {

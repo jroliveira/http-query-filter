@@ -84,6 +84,42 @@
         }
 
         [Fact]
+        public void GetAll_GivenQueryWithFilterWhereAnd_ShouldReturn()
+        {
+            var expected = this.accounts.Where(item => item.Id > 10 && item.Email == "junoliv.e@gmail.com");
+
+            var actual = this.getAll
+                .GetResult("filter[where][and][0][id][gt]=10&filter[where][and][1][email]=junoliv.e@gmail.com")
+                .Data;
+
+            actual.Should().BeEquivalentTo(expected);
+        }
+
+        [Fact]
+        public void GetAll_GivenQueryWithFilterWhereOr_ShouldReturn()
+        {
+            var expected = this.accounts.Where(item => item.Id > 10 || item.Email == "junoliv.e@gmail.com");
+
+            var actual = this.getAll
+                .GetResult("filter[where][or][0][id][gt]=10&filter[where][or][1][email]=junoliv.e@gmail.com")
+                .Data;
+
+            actual.Should().BeEquivalentTo(expected);
+        }
+
+        [Fact(Skip = "in development")]
+        public void GetAll_GivenQueryWithFilterWhereOrAnd_ShouldReturn()
+        {
+            var expected = this.accounts.Where(item => item.Id > 9 || (item.Email == "junoliv.e@gmail.com" && item.Id > 10));
+
+            var actual = this.getAll
+                .GetResult("filter[where][or][0][id][gt]=9&filter[where][and][1][email]=junoliv.e@gmail.com&filter[where][and][2][id][gt]=10")
+                .Data;
+
+            actual.Should().BeEquivalentTo(expected);
+        }
+
+        [Fact]
         public void GetAll_GivenQueryWithFilterSelect_ShouldReturn()
         {
             var expected = this.accounts

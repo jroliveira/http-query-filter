@@ -18,7 +18,7 @@
         private const string Pattern = @"filter\[order](\[\d+])?\=(?<field>\w+)\s(?<direction>asc|desc)";
 
         private static readonly Func<string, MatchCollection> Matches = new Regex(Pattern, IgnoreCase | Compiled).Matches;
-        private static readonly Dictionary<string, OrderByDirection> Types = new Dictionary<string, OrderByDirection>
+        private static readonly IReadOnlyDictionary<string, OrderByDirection> Types = new Dictionary<string, OrderByDirection>
         {
             { "asc", Ascending },
             { "desc", Descending },

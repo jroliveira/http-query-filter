@@ -1,13 +1,11 @@
 ﻿namespace Http.Query.Filter.Integration.Test.Infrastructure.Data.Linq.Filter
 {
     using System;
-    using System.Linq;
 
     using Http.Query.Filter;
     using Http.Query.Filter.Integration.Test.Infrastructure.Filter;
-    using Http.Query.Filter.Integration.Test.Infrastructure.Filter.Extensions;
 
-    using static System.String;
+    using static Http.Query.Filter.Filters.Condition.Operators.Logical;
 
     internal readonly struct Where<TParam> : IWhere<bool, Filter, TParam>
     {
@@ -23,12 +21,9 @@
                 return true;
             }
 
-            return filter
-                .Where
-                .All(condition => param
-                    .GetOrElse(condition.Field, Empty)
-                    .ToString()
-                    .Verify(condition.Value, condition.Comparison));
+            var satisfy = filter.Where(param);
+
+            return satisfy(And) && satisfy(Or);
         };
     }
 }

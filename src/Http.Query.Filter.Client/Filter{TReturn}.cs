@@ -2,7 +2,10 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
+
+    using Http.Query.Filter.Client.Filters.Condition;
 
     using static System.String;
 
@@ -66,5 +69,15 @@
         /// </summary>
         /// <returns>Returns the API data.</returns>
         public Task<TReturn> Build() => this.done(Join("&", this.filters));
+
+        public IFilter<TReturn> Where(ICondition condition)
+        {
+            foreach (var filter in condition.InnerConditions)
+            {
+                this.filters.Add(filter.ToString());
+            }
+
+            return this;
+        }
     }
 }

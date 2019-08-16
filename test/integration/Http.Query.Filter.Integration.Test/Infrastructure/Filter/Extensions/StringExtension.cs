@@ -1,7 +1,5 @@
 ﻿namespace Http.Query.Filter.Integration.Test.Infrastructure.Filter.Extensions
 {
-    using System;
-
     using Http.Query.Filter.Filters.Condition.Operators;
 
     using static System.Int32;
@@ -13,8 +11,7 @@
         {
             GreaterThan => Parse(fieldValue) > Parse(queryValue),
             LessThan => Parse(fieldValue) < Parse(queryValue),
-            Equal => queryValue == fieldValue,
-            _ => throw new ArgumentOutOfRangeException()
+            _ => queryValue == fieldValue,
         };
     }
 }

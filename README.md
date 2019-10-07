@@ -7,9 +7,10 @@
 [![NuGet](https://img.shields.io/nuget/v/Http.Query.Filter.svg)](https://www.nuget.org/packages/Http.Query.Filter/)
 [![NuGet](https://img.shields.io/nuget/dt/Http.Query.Filter.svg)](https://www.nuget.org/packages/Http.Query.Filter/)
 [![CodeFactor](https://www.codefactor.io/repository/github/jroliveira/http-query-filter/badge)](https://www.codefactor.io/repository/github/jroliveira/http-query-filter)
+[![Maintainability](https://api.codeclimate.com/v1/badges/62b3f82f9fc66560bbd7/maintainability)](https://codeclimate.com/github/jroliveira/http-query-filter/maintainability)
 [![License: MIT](http://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.txt)
 
-Project-based filter system [StrongLoop Node.js API Platform][strongloop] developed by [IBM Company][ibm].
+Project-based filter system [StrongLoop Node.js API Platform][strongloop] developed by [IBM Company][ibm] and [Resource Query Language (RQL)](rql).
 
 ## Installing / Getting started
 
@@ -64,7 +65,7 @@ or with docker
 $ docker build --tag http-query-filter .
 ```
 
-## Testing
+### Testing
 
 ``` bash
 $ dotnet cake
@@ -104,3 +105,4 @@ The code is available under the [MIT license](LICENSE.txt).
 [strongloop]: https://strongloop.com/
 [ibm]: http://www.ibm.com/
 [logo]: docs/logo.png "Http Query Filter - Logo"
+[rql]: https://github.com/persvr/rql

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.572
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29418.71
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Http.Query.Filter", "src\Http.Query.Filter\Http.Query.Filter.csproj", "{6D94C318-C94B-4DC5-A49B-89D26E1BF675}"
 EndProject
@@ -38,9 +38,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{19DFDD00-5
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "unit", "unit", "{441E37A1-F116-4A2D-97B7-FD4B33F3C975}"
-	ProjectSection(SolutionItems) = preProject
-		test\unit\Directory.Build.props = test\unit\Directory.Build.props
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Http.Query.Filter.Test", "test\unit\Http.Query.Filter.Test\Http.Query.Filter.Test.csproj", "{1DDC5CA5-59F0-42D4-AA7A-665A39D74164}"
 EndProject

@@ -1,20 +1,18 @@
 ﻿namespace Http.Query.Filter.Filters.Pagination
 {
-    using System;
-    using System.Text.RegularExpressions;
-
-    using Http.Query.Filter.Infrastructure.Extensions;
+    using Http.Query.Filter.Infrastructure;
 
     using static System.Net.WebUtility;
     using static System.String;
-    using static System.Text.RegularExpressions.RegexOptions;
     using static System.UInt32;
 
     public readonly struct Skip : IPagination
     {
-        private const string Pattern = @"filter\[skip]\=(?<skip>\d+)";
-
-        private static readonly Func<string, Match> Match = new Regex(Pattern, IgnoreCase | Compiled).Match;
+        private static readonly Pattern[] Patterns =
+        {
+            @"filter\[skip]\=(?<skip>\d+)",
+            @"skip\=(?<skip>\d+)",
+        };
 
         private Skip(uint? value) => this.Value = value;
 
@@ -29,11 +27,17 @@
                 return default;
             }
 
-            var match = Match(UrlDecode(query));
+            var decodedQuery = UrlDecode(query);
 
-            return match.Success && TryParse(match.GetValue("skip"), out var skip)
-                ? new Skip(skip)
-                : default;
+            foreach (var pattern in Patterns)
+            {
+                if (pattern.TryGetValue(decodedQuery, "skip", TryParse, out uint skip))
+                {
+                    return new Skip(skip);
+                }
+            }
+
+            return default;
         }
     }
 }

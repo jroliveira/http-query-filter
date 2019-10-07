@@ -12,6 +12,8 @@
         [InlineData("?filter[skip]=9", 9U)]
         [InlineData("?FILTER[SKIP]=9", 9U)]
         [InlineData("?filter%5Bskip%5D=1", 1U)]
+        [InlineData("?skip=9", 9U)]
+        [InlineData("?SKIP=9", 9U)]
         public void Parse_GivenQuery_ValueShouldBe(string query, uint expected)
         {
             Skip actual = query;
@@ -22,6 +24,8 @@
         [Theory]
         [InlineData("?filter[skip]=Nine")]
         [InlineData("?filter[skip]=")]
+        [InlineData("?skip=Nine")]
+        [InlineData("?skip=")]
         public void Parse_GivenQuery_ShouldReturnNull(string query)
         {
             Skip actual = query;

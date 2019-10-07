@@ -17,6 +17,12 @@ A *limit* filter limits the number of records returned to the specified number (
 ?filter[limit]=n
 ```
 
+or RQL
+
+```
+?limit=n
+```
+
 **Client API**
 
 ``` cs
@@ -36,6 +42,12 @@ A *skip* filter omits the specified number of returned records. This is useful, 
 
 ```
 ?filter[skip]=n
+```
+
+or RQL
+
+```
+?skip=n
 ```
 
 **Client API**

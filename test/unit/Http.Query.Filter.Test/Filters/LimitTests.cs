@@ -12,6 +12,8 @@
         [InlineData("?filter[limit]=9", 9U)]
         [InlineData("?FILTER[LIMIT]=9", 9U)]
         [InlineData("?filter%5Blimit%5D=9", 9U)]
+        [InlineData("?limit=9", 9U)]
+        [InlineData("?LIMIT=9", 9U)]
         public void Parse_GivenQuery_ValueShouldBe(string query, uint expected)
         {
             Limit actual = query;
@@ -22,6 +24,8 @@
         [Theory]
         [InlineData("?filter[limit]=Nine")]
         [InlineData("?filter[limit]=")]
+        [InlineData("?limit=Nine")]
+        [InlineData("?limit=")]
         public void Parse_GivenQuery_ShouldReturnNull(string query)
         {
             Limit actual = query;

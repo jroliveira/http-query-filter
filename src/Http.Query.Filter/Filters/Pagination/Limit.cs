@@ -1,20 +1,18 @@
 ﻿namespace Http.Query.Filter.Filters.Pagination
 {
-    using System;
-    using System.Text.RegularExpressions;
-
-    using Http.Query.Filter.Infrastructure.Extensions;
+    using Http.Query.Filter.Infrastructure;
 
     using static System.Net.WebUtility;
     using static System.String;
-    using static System.Text.RegularExpressions.RegexOptions;
     using static System.UInt32;
 
     public readonly struct Limit : IPagination
     {
-        private const string Pattern = @"filter\[limit]\=(?<limit>\d+)";
-
-        private static readonly Func<string, Match> Match = new Regex(Pattern, IgnoreCase | Compiled).Match;
+        private static readonly Pattern[] Patterns =
+        {
+            @"filter\[limit]\=(?<limit>\d+)",
+            @"limit\=(?<limit>\d+)",
+        };
 
         private Limit(uint? value) => this.Value = value;
 
@@ -29,11 +27,17 @@
                 return default;
             }
 
-            var match = Match(UrlDecode(query));
+            var decodedQuery = UrlDecode(query);
 
-            return match.Success && TryParse(match.GetValue("limit"), out var limit)
-                ? new Limit(limit)
-                : default;
+            foreach (var pattern in Patterns)
+            {
+                if (pattern.TryGetValue(decodedQuery, "limit", TryParse, out uint limit))
+                {
+                    return new Limit(limit);
+                }
+            }
+
+            return default;
         }
     }
 }

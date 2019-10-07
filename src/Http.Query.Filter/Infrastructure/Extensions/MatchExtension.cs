@@ -4,6 +4,6 @@
 
     internal static class MatchExtension
     {
-        public static string GetValue(this Match @this, string group) => @this.Groups[group].Value;
+        internal static string GetValue(this Match @this, string group) => @this.Groups[group].Value;
     }
 }

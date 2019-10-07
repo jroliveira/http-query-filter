@@ -24,13 +24,13 @@
             { "desc", Descending },
         };
 
-        internal OrderBy()
-            : this(new List<KeyValuePair<string, OrderByDirection>>())
+        internal OrderBy(IEnumerable<KeyValuePair<string, OrderByDirection>> fields)
+            : base(fields.ToList())
         {
         }
 
-        internal OrderBy(IEnumerable<KeyValuePair<string, OrderByDirection>> fields)
-            : base(fields.ToList())
+        private OrderBy()
+            : this(new List<KeyValuePair<string, OrderByDirection>>())
         {
         }
 
@@ -48,11 +48,11 @@
                 : new OrderBy();
         }
 
-        private static IEnumerable<KeyValuePair<string, OrderByDirection>> GetFields(string query) =>
+        private static IReadOnlyCollection<KeyValuePair<string, OrderByDirection>> GetFields(string query) => new List<KeyValuePair<string, OrderByDirection>>(
             from Match match in Matches(UrlDecode(query))
             let field = match.GetValue("field")
             let orderBy = GetDirection(match)
-            select new KeyValuePair<string, OrderByDirection>(field, orderBy);
+            select new KeyValuePair<string, OrderByDirection>(field, orderBy));
 
         private static OrderByDirection GetDirection(Match match) => Types[match.GetValue("direction").ToLower()];
     }

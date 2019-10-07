@@ -3,7 +3,7 @@
 
   <PropertyGroup>
     <Language>C#</Language>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>8.0</LangVersion>
     <NoWarn>1591</NoWarn>
 
     <RepositoryType>git</RepositoryType>
@@ -15,6 +15,13 @@
     <Copyright>© Copyright (c) 2019 Junior Oliveira.</Copyright>
     <PackageProjectUrl>https://github.com/jroliveira/http-query-filter</PackageProjectUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/jroliveira/http-query-filter/master/docs/logo.png</PackageIconUrl>
+  </PropertyGroup>
+
+  <!-- C# 8 nullability checks -->
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <NullableContextOptions>enable</NullableContextOptions>
+    <NullableReferenceTypes>true</NullableReferenceTypes>
   </PropertyGroup>
 
   <!-- Support for building in Visual Studio versions 15.9 and up -->

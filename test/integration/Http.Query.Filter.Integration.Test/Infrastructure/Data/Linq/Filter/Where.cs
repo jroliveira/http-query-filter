@@ -11,7 +11,7 @@
 
     internal readonly struct Where<TParam> : IWhere<bool, Filter, TParam>
     {
-        public Func<TParam, bool> Apply(Filter filter) => (TParam param) =>
+        public Func<TParam, bool> Apply(Filter filter) => param =>
         {
             if (param == null)
             {

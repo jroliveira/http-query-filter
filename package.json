@@ -25,7 +25,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "release": "standard-version",
-    "postinstall": "dotnet tool install Cake.Tool --version 0.33.0"
+    "postinstall": "dotnet tool install Cake.Tool --version 0.35.0"
   },
   "devDependencies": {
     "@commitlint/cli": "8.0.0",

@@ -9,22 +9,12 @@
 
     internal static class StringExtension
     {
-        internal static bool Verify(this string fieldValue, string queryValue, Comparison comparison)
+        internal static bool Verify(this string fieldValue, string queryValue, Comparison comparison) => comparison switch
         {
-            switch (comparison)
-            {
-                case GreaterThan:
-                    return Parse(fieldValue) > Parse(queryValue);
-
-                case LessThan:
-                    return int.Parse(fieldValue) < Parse(queryValue);
-
-                case Equal:
-                    return queryValue == fieldValue;
-
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
+            GreaterThan => Parse(fieldValue) > Parse(queryValue),
+            LessThan => Parse(fieldValue) < Parse(queryValue),
+            Equal => queryValue == fieldValue,
+            _ => throw new ArgumentOutOfRangeException()
+        };
     }
 }

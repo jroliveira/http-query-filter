@@ -25,13 +25,13 @@
             { "lt", LessThan },
         };
 
-        internal Where()
-            : this(new List<Condition>())
+        internal Where(IEnumerable<Condition> conditions)
+            : base(conditions.ToList())
         {
         }
 
-        internal Where(IEnumerable<Condition> conditions)
-            : base(conditions.ToList())
+        private Where()
+            : this(new List<Condition>())
         {
         }
 
@@ -49,12 +49,12 @@
                 : new Where();
         }
 
-        private static IEnumerable<Condition> GetConditions(string query) =>
+        private static IReadOnlyCollection<Condition> GetConditions(string query) => new List<Condition>(
             from Match match in Matches(UrlDecode(query))
             let field = match.GetValue("field")
             let value = match.GetValue("value")
             let comparison = GetComparison(match)
-            select new Condition(field, value, comparison);
+            select new Condition(field, value, comparison));
 
         private static Comparison GetComparison(Match match)
         {

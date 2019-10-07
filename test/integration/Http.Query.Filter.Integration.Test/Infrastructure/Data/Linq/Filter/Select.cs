@@ -10,7 +10,7 @@
 
     internal readonly struct Select<TParam> : ISelect<Filter, TParam>
     {
-        public Func<TParam, dynamic> Apply(Filter filter) => (TParam param) =>
+        public Func<TParam, dynamic> Apply(Filter filter) => param =>
         {
             if (param == null)
             {
@@ -26,7 +26,7 @@
 
             foreach (var (key, _) in filter.Fields.Where(field => field.Value))
             {
-                if (param.GetOrElse(key, new { }) is object value)
+                if (param.GetOrElse(key, new { }) is { } value)
                 {
                     props.Add(key, value);
                 }

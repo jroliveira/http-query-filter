@@ -16,7 +16,7 @@
 
         private static readonly Func<string, Match> Match = new Regex(Pattern, IgnoreCase | Compiled).Match;
 
-        internal Limit(uint? value) => this.Value = value;
+        private Limit(uint? value) => this.Value = value;
 
         public uint? Value { get; }
 

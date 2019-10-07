@@ -23,13 +23,13 @@
             { "false", false },
         };
 
-        internal Fields()
-            : this(new List<KeyValuePair<string, bool>>())
+        internal Fields(IEnumerable<KeyValuePair<string, bool>> fields)
+            : base(fields.ToList())
         {
         }
 
-        internal Fields(IEnumerable<KeyValuePair<string, bool>> fields)
-            : base(fields.ToList())
+        private Fields()
+            : this(new List<KeyValuePair<string, bool>>())
         {
         }
 
@@ -47,11 +47,11 @@
                 : new Fields();
         }
 
-        private static IEnumerable<KeyValuePair<string, bool>> GetFields(string query) =>
+        private static IReadOnlyCollection<KeyValuePair<string, bool>> GetFields(string query) => new List<KeyValuePair<string, bool>>(
             from Match match in Matches(UrlDecode(query))
             let field = match.GetValue("field")
             let show = GetShow(match)
-            select new KeyValuePair<string, bool>(field, show);
+            select new KeyValuePair<string, bool>(field, show));
 
         private static bool GetShow(Match match) => Types[match.GetValue("show").ToLower()];
     }

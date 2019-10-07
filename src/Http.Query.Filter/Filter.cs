@@ -9,7 +9,7 @@
 
     public sealed class Filter : IFilter
     {
-        internal Filter(string query)
+        private Filter(string query)
         {
             this.Limit = query;
             this.Skip = query;

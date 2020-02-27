@@ -36,7 +36,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "dotnet cake",
+      "pre-push": "dotnet cake",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },

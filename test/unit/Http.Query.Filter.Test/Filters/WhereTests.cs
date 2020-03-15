@@ -6,11 +6,11 @@
     using FluentAssertions;
 
     using Http.Query.Filter.Filters.Condition;
+    using Http.Query.Filter.Filters.Condition.Operators;
 
     using Xunit;
 
     using static System.String;
-    using static Http.Query.Filter.Filters.Condition.Operators.Comparison;
     using static Http.Query.Filter.Filters.Condition.Operators.Logical;
 
     public class WhereTests
@@ -52,18 +52,18 @@
                 yield return new object[] { "?filter%5Bwhere%5D%5Bid%5D=2", Expected(new Condition("id", "2")) };
 
                 // Greater than
-                yield return new object[] { "?filter[where][id][gt]=", Expected(new Condition("id", Empty, GreaterThan)) };
-                yield return new object[] { "?filter[where][id][gt]=2", Expected(new Condition("id", "2", GreaterThan)) };
-                yield return new object[] { "?FILTER[WHERE][ID][GT]=2", Expected(new Condition("ID", "2", GreaterThan)) };
-                yield return new object[] { "?Filter[Where][Id][Gt]=2", Expected(new Condition("Id", "2", GreaterThan)) };
-                yield return new object[] { "?filter%5Bwhere%5D%5Bid%5D%5Bgt%5D=2", Expected(new Condition("id", "2", GreaterThan)) };
+                yield return new object[] { "?filter[where][id][gt]=", Expected(new Condition("id", Empty, Comparison.GreaterThan)) };
+                yield return new object[] { "?filter[where][id][gt]=2", Expected(new Condition("id", "2", Comparison.GreaterThan)) };
+                yield return new object[] { "?FILTER[WHERE][ID][GT]=2", Expected(new Condition("ID", "2", Comparison.GreaterThan)) };
+                yield return new object[] { "?Filter[Where][Id][Gt]=2", Expected(new Condition("Id", "2", Comparison.GreaterThan)) };
+                yield return new object[] { "?filter%5Bwhere%5D%5Bid%5D%5Bgt%5D=2", Expected(new Condition("id", "2", Comparison.GreaterThan)) };
 
                 // Less than
-                yield return new object[] { "?filter[where][id][lt]=", Expected(new Condition("id", Empty, LessThan)) };
-                yield return new object[] { "?filter[where][id][lt]=2", Expected(new Condition("id", "2", LessThan)) };
-                yield return new object[] { "?FILTER[WHERE][ID][LT]=2", Expected(new Condition("ID", "2", LessThan)) };
-                yield return new object[] { "?Filter[Where][Id][Lt]=2", Expected(new Condition("Id", "2", LessThan)) };
-                yield return new object[] { "?filter%5Bwhere%5D%5Bid%5D%5Blt%5D=2", Expected(new Condition("id", "2", LessThan)) };
+                yield return new object[] { "?filter[where][id][lt]=", Expected(new Condition("id", Empty, Comparison.LessThan)) };
+                yield return new object[] { "?filter[where][id][lt]=2", Expected(new Condition("id", "2", Comparison.LessThan)) };
+                yield return new object[] { "?FILTER[WHERE][ID][LT]=2", Expected(new Condition("ID", "2", Comparison.LessThan)) };
+                yield return new object[] { "?Filter[Where][Id][Lt]=2", Expected(new Condition("Id", "2", Comparison.LessThan)) };
+                yield return new object[] { "?filter%5Bwhere%5D%5Bid%5D%5Blt%5D=2", Expected(new Condition("id", "2", Comparison.LessThan)) };
 
                 // And
                 yield return new object[] { "?filter[where][and][0][id]=&filter[where][and][1][name]=", Expected(new Condition("id", Empty), new Condition("name", Empty, And, 1)) };

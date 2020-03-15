@@ -2,7 +2,6 @@
 {
     using System.Text.RegularExpressions;
 
-    using Http.Query.Filter.Filters.Pagination;
     using Http.Query.Filter.Infrastructure.Extensions;
 
     using static System.Text.RegularExpressions.RegexOptions;
@@ -12,8 +11,6 @@
         private readonly Regex regex;
 
         private Pattern(Regex regex) => this.regex = regex;
-
-        public static implicit operator Regex(Pattern regex) => regex.regex;
 
         public static implicit operator Pattern(string pattern) => new Pattern(new Regex(pattern, IgnoreCase | Compiled));
 

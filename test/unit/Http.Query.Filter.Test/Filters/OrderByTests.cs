@@ -35,22 +35,21 @@
 
         public class TestData : IEnumerable<object[]>
         {
-            private static readonly Func<string, OrderByDirection, OrderBy> Field = (key, value) => Fields(new List<KeyValuePair<string, OrderByDirection>>
+            private static readonly Func<string, OrderByDirection, OrderBy> OrderBy = (key, value) => OrderByData(new List<KeyValuePair<string, OrderByDirection>>
             {
                 new KeyValuePair<string, OrderByDirection>(key, value),
             });
 
-            private static readonly Func<IEnumerable<KeyValuePair<string, OrderByDirection>>, OrderBy> Fields = data => new OrderBy(data);
+            private static readonly Func<IEnumerable<KeyValuePair<string, OrderByDirection>>, OrderBy> OrderByData = data => new OrderBy(data);
 
             public IEnumerator<object[]> GetEnumerator()
             {
-                yield return new object[] { "?filter[order]=id asc", Field("id", Ascending) };
-                yield return new object[] { "?FILTER[ORDER]=ID DESC", Field("ID", Descending) };
-                yield return new object[] { "?filter%5Border%5D=id%20asc", Field("id", Ascending) };
+                yield return new object[] { "?filter[order]=id asc", OrderBy("id", Ascending) };
+                yield return new object[] { "?FILTER[ORDER]=ID DESC", OrderBy("ID", Descending) };
+                yield return new object[] { "?filter%5Border%5D=id%20asc", OrderBy("id", Ascending) };
                 yield return new object[]
                 {
-                    "?filter[order][0]=id asc&filter[order][1]=name desc",
-                    Fields(new List<KeyValuePair<string, OrderByDirection>>
+                    "?filter[order][0]=id asc&filter[order][1]=name desc", OrderByData(new List<KeyValuePair<string, OrderByDirection>>
                     {
                         new KeyValuePair<string, OrderByDirection>("id", Ascending),
                         new KeyValuePair<string, OrderByDirection>("name", Descending),

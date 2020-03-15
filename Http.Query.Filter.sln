@@ -26,8 +26,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Directory.Build.targets = Directory.Build.targets
 		docker-compose-ci.yml = docker-compose-ci.yml
 		Dockerfile = Dockerfile
+		Http.Query.Filter.sln.DotSettings = Http.Query.Filter.sln.DotSettings
 		LICENSE.txt = LICENSE.txt
 		nuget.config = nuget.config
+		package-lock.json = package-lock.json
 		package.json = package.json
 		README.md = README.md
 	EndProjectSection

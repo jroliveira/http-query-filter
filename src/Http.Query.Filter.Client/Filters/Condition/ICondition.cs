@@ -2,10 +2,12 @@
 {
     using System.Collections.Generic;
 
-    using Http.Query.Filter.Client.Filters.Condition.Operators;
-
-    public interface ICondition : ILogical
+    public interface ICondition
     {
         IReadOnlyCollection<ICondition> InnerConditions { get; }
+
+        ICondition And(ICondition condition);
+
+        ICondition Or(ICondition condition);
     }
 }

@@ -6,7 +6,7 @@
     using static System.String;
     using static System.UInt32;
 
-    public readonly struct Limit : IPagination
+    public readonly struct Limit
     {
         private static readonly Pattern[] Patterns =
         {
@@ -14,11 +14,11 @@
             @"limit\=(?<limit>\d+)",
         };
 
-        private Limit(uint? value) => this.Value = value;
+        private readonly uint? value;
 
-        public uint? Value { get; }
+        private Limit(uint? value) => this.value = value;
 
-        public static implicit operator uint?(Limit limit) => limit.Value;
+        public static implicit operator uint?(Limit limit) => limit.value;
 
         public static implicit operator Limit(string query)
         {
@@ -39,5 +39,7 @@
 
             return default;
         }
+
+        public uint GetOrElse(uint @default) => this.value ?? @default;
     }
 }

@@ -6,7 +6,7 @@
     using static System.String;
     using static System.UInt32;
 
-    public readonly struct Skip : IPagination
+    public readonly struct Skip
     {
         private static readonly Pattern[] Patterns =
         {
@@ -14,11 +14,11 @@
             @"skip\=(?<skip>\d+)",
         };
 
-        private Skip(uint? value) => this.Value = value;
+        private readonly uint? value;
 
-        public uint? Value { get; }
+        private Skip(uint? value) => this.value = value;
 
-        public static implicit operator uint?(Skip skip) => skip.Value;
+        public static implicit operator uint?(Skip skip) => skip.value;
 
         public static implicit operator Skip(string query)
         {
@@ -39,5 +39,7 @@
 
             return default;
         }
+
+        public uint GetOrElse(uint @default) => this.value ?? @default;
     }
 }

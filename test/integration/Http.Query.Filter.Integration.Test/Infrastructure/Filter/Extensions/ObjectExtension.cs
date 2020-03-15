@@ -4,17 +4,11 @@
 
     internal static class ObjectExtension
     {
-        internal static object GetOrElse<TObject>(this TObject @this, string property, object @default)
-        {
-            if (@this == null)
-            {
-                return @default;
-            }
-
-            return @this
+        internal static object GetOrElse<TObject>(this TObject @this, string property, object @default) => @this == null
+            ? @default
+            : @this
                 .GetType()
                 .GetProperty(property, IgnoreCase | Public | Instance)
-                .GetValue(@this);
-        }
+                ?.GetValue(@this) ?? @default;
     }
 }

@@ -29,30 +29,15 @@
         {
         }
 
-        private OrderBy()
-            : this(new List<KeyValuePair<string, OrderByDirection>>())
-        {
-        }
+        public static implicit operator OrderBy(string query) => new OrderBy(GetFields(query));
 
-        public static implicit operator OrderBy(string query)
-        {
-            if (IsNullOrEmpty(query))
-            {
-                return new OrderBy();
-            }
-
-            var fields = GetFields(query);
-
-            return fields.Any()
-                ? new OrderBy(fields)
-                : new OrderBy();
-        }
-
-        private static IReadOnlyCollection<KeyValuePair<string, OrderByDirection>> GetFields(string query) => new List<KeyValuePair<string, OrderByDirection>>(
-            from Match match in Matches(UrlDecode(query))
-            let field = match.GetValue("field")
-            let orderBy = GetDirection(match)
-            select new KeyValuePair<string, OrderByDirection>(field, orderBy));
+        private static IEnumerable<KeyValuePair<string, OrderByDirection>> GetFields(string query) => IsNullOrEmpty(query)
+            ? new List<KeyValuePair<string, OrderByDirection>>()
+            : new List<KeyValuePair<string, OrderByDirection>>(
+                from Match match in Matches(UrlDecode(query))
+                let field = match.GetValue("field")
+                let orderBy = GetDirection(match)
+                select new KeyValuePair<string, OrderByDirection>(field, orderBy));
 
         private static OrderByDirection GetDirection(Match match) => Types[match.GetValue("direction").ToLower()];
     }

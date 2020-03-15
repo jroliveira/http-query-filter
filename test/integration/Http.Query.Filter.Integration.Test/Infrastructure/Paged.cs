@@ -1,6 +1,5 @@
 ﻿namespace Http.Query.Filter.Integration.Test.Infrastructure
 {
-    using System;
     using System.Collections.Generic;
 
     internal class Paged<TSource>
@@ -17,7 +16,5 @@
         internal uint Skip { get; }
 
         internal uint Limit { get; }
-
-        internal long Pages => this.Limit == 0 ? 1 : (long)Math.Ceiling((double)this.Data.Count / this.Limit);
     }
 }

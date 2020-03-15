@@ -26,10 +26,7 @@
 
             foreach (var (key, _) in filter.Fields.Where(field => field.Value))
             {
-                if (param.GetOrElse(key, new { }) is { } value)
-                {
-                    props.Add(key, value);
-                }
+                props.Add(key, param.GetOrElse(key, new { }));
             }
 
             return props;

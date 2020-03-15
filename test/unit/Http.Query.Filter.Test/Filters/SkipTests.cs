@@ -14,11 +14,13 @@
         [InlineData("?filter%5Bskip%5D=1", 1U)]
         [InlineData("?skip=9", 9U)]
         [InlineData("?SKIP=9", 9U)]
-        public void Parse_GivenQuery_ValueShouldBe(string query, uint expected)
+        public void Parse_GivenQuery_ValueShouldBe(string query, uint? expected)
         {
-            Skip actual = query;
+            Skip skip = query;
 
-            actual.Value.Should().Be(expected);
+            uint? actual = skip;
+
+            actual.Should().Be(expected);
         }
 
         [Theory]
@@ -26,11 +28,15 @@
         [InlineData("?filter[skip]=")]
         [InlineData("?skip=Nine")]
         [InlineData("?skip=")]
+        [InlineData("")]
+        [InlineData(default)]
         public void Parse_GivenQuery_ShouldReturnNull(string query)
         {
-            Skip actual = query;
+            Skip skip = query;
 
-            actual.Value.Should().BeNull();
+            uint? actual = skip;
+
+            actual.Should().BeNull();
         }
     }
 }

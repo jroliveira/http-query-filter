@@ -17,7 +17,7 @@
 
     public sealed class Where : ReadOnlyCollection<Condition>
     {
-        private const string Pattern = @"filter\[where]?(\[(?<logical>and|or)\]\[(?<index>\d+)\])?(\[(?<field>\w+)\])?(\[(?<comparison>gt|lt)\])?=(?<value>[^&]*)&?";
+        private const string Pattern = @"filter\[where]?(\[(?<logical>and|or)\])?(\[(?<index>\d+)\])?(\[(?<field>\w+)\])?(\[(?<comparison>gt|lt)\])?=(?<value>[^&]*)&?";
 
         private static readonly Func<string, MatchCollection> Matches = new Regex(Pattern, IgnoreCase | Compiled).Matches;
         private static readonly IReadOnlyDictionary<string, Comparison> ComparisonOperations = new Dictionary<string, Comparison>
@@ -37,33 +37,18 @@
         {
         }
 
-        private Where()
-            : this(new List<Condition>())
-        {
-        }
+        public static implicit operator Where(string query) => new Where(GetConditions(query));
 
-        public static implicit operator Where(string query)
-        {
-            if (IsNullOrWhiteSpace(query))
-            {
-                return new Where();
-            }
-
-            var conditions = GetConditions(query);
-
-            return conditions.Any()
-                ? new Where(conditions)
-                : new Where();
-        }
-
-        private static IReadOnlyCollection<Condition> GetConditions(string query) => new List<Condition>(
-            from Match match in Matches(UrlDecode(query))
-            let field = match.GetValue("field")
-            let value = match.GetValue("value")
-            let comparison = GetOrElseOperator(match, "comparison", ComparisonOperations, Equal)
-            let logical = GetOrElseOperator(match, "logical", LogicalOperations, And)
-            let index = ushort.TryParse(match.GetValue("index"), out var number) ? number : default
-            select new Condition(field, value, comparison, logical, index));
+        private static IEnumerable<Condition> GetConditions(string query) => IsNullOrWhiteSpace(query)
+            ? new List<Condition>()
+            : new List<Condition>(
+                from Match match in Matches(UrlDecode(query))
+                let field = match.GetValue("field")
+                let value = match.GetValue("value")
+                let comparison = GetOrElseOperator(match, "comparison", ComparisonOperations, Equal)
+                let logical = GetOrElseOperator(match, "logical", LogicalOperations, And)
+                let index = ushort.TryParse(match.GetValue("index"), out var number) ? number : default
+                select new Condition(field, value, comparison, logical, index));
 
         private static TOperator GetOrElseOperator<TOperator>(
             Match match,

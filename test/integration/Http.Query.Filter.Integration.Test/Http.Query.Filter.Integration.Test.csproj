@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\src\Http.Query.Filter.Client\Http.Query.Filter.Client.csproj" />
     <ProjectReference Include="..\..\..\src\Http.Query.Filter\Http.Query.Filter.csproj" />
   </ItemGroup>
 

@@ -1,25 +1,23 @@
 ﻿namespace Http.Query.Filter.Client.Filters.Condition
 {
-    using Http.Query.Filter.Client.Filters.Condition.Operators;
+    using static Http.Query.Filter.Client.Filters.Condition.Condition;
 
-    public sealed class Field : IComparison
+    internal sealed class Field
     {
         private readonly string name;
 
-        internal Field(string name) => this.name = name;
+        private Field(string name) => this.name = name;
 
         public static implicit operator Field(string name) => new Field(name);
 
-        public static implicit operator string(Field field) => field.name;
-
-        public static Field NewField(string name) => name;
-
         public override string ToString() => this.name;
 
-        public ICondition GreaterThan(object value) => new Condition(this.name, value, "gt");
+        internal static Field NewField(string name) => new Field(name);
 
-        public ICondition LessThan(object value) => new Condition(this.name, value, "lt");
+        internal ICondition GreaterThan(object value) => NewCondition(this.name, value, "gt");
 
-        public ICondition Equal(object value) => new Condition(this.name, value);
+        internal ICondition LessThan(object value) => NewCondition(this.name, value, "lt");
+
+        internal ICondition Equal(object value) => NewCondition(this.name, value);
     }
 }

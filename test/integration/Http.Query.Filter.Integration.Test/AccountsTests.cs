@@ -5,12 +5,15 @@
 
     using FluentAssertions;
 
+    using Http.Query.Filter.Client.Filters.Condition;
     using Http.Query.Filter.Integration.Test.Entities;
     using Http.Query.Filter.Integration.Test.Infrastructure.Data.Linq.Collections;
     using Http.Query.Filter.Integration.Test.Infrastructure.Data.Linq.Filter;
     using Http.Query.Filter.Integration.Test.Infrastructure.Data.Linq.Queries.Account;
 
     using Xunit;
+
+    using static Http.Query.Filter.Client.FilterBuilder;
 
     public class AccountsTests
     {
@@ -28,11 +31,13 @@
         {
             var expected = this.accounts.Skip(2);
 
-            var actual = this.getAll
-                .GetResult("filter[skip]=2")
-                .Data;
-
-            actual.Should().BeEquivalentTo(expected);
+            this.getAll
+                .GetResult(NewFilterBuilder()
+                    .Skip(2)
+                    .Build())
+                .Data
+                .Should()
+                .BeEquivalentTo(expected);
         }
 
         [Fact]
@@ -41,7 +46,9 @@
             var expected = this.accounts.Take(5);
 
             var actual = this.getAll
-                .GetResult("filter[limit]=5")
+                .GetResult(NewFilterBuilder()
+                    .Limit(5)
+                    .Build())
                 .Data;
 
             actual.Should().BeEquivalentTo(expected);
@@ -53,7 +60,9 @@
             var expected = this.accounts.Where(item => item.Password == "333333");
 
             var actual = this.getAll
-                .GetResult("filter[where][password]=333333")
+                .GetResult(NewFilterBuilder()
+                    .Where("password".Equal("333333"))
+                    .Build())
                 .Data;
 
             actual.Should().BeEquivalentTo(expected);
@@ -65,7 +74,9 @@
             var expected = this.accounts.Where(item => item.Id < 2);
 
             var actual = this.getAll
-                .GetResult("filter[where][id][lt]=2")
+                .GetResult(NewFilterBuilder()
+                    .Where("id".LessThan(2))
+                    .Build())
                 .Data;
 
             actual.Should().BeEquivalentTo(expected);
@@ -77,7 +88,9 @@
             var expected = this.accounts.Where(item => item.Id > 5);
 
             var actual = this.getAll
-                .GetResult("filter[where][id][gt]=5")
+                .GetResult(NewFilterBuilder()
+                    .Where("id".GreaterThan(5))
+                    .Build())
                 .Data;
 
             actual.Should().BeEquivalentTo(expected);
@@ -89,7 +102,10 @@
             var expected = this.accounts.Where(item => item.Id > 10 && item.Email == "junoliv.e@gmail.com");
 
             var actual = this.getAll
-                .GetResult("filter[where][and][0][id][gt]=10&filter[where][and][1][email]=junoliv.e@gmail.com")
+                .GetResult(NewFilterBuilder()
+                    .Where("id".GreaterThan(10)
+                        .And("email".Equal("junoliv.e@gmail.com")))
+                    .Build())
                 .Data;
 
             actual.Should().BeEquivalentTo(expected);
@@ -101,7 +117,10 @@
             var expected = this.accounts.Where(item => item.Id > 10 || item.Email == "junoliv.e@gmail.com");
 
             var actual = this.getAll
-                .GetResult("filter[where][or][0][id][gt]=10&filter[where][or][1][email]=junoliv.e@gmail.com")
+                .GetResult(NewFilterBuilder()
+                    .Where("id".GreaterThan(10)
+                        .Or("email".Equal("junoliv.e@gmail.com")))
+                    .Build())
                 .Data;
 
             actual.Should().BeEquivalentTo(expected);
@@ -113,7 +132,11 @@
             var expected = this.accounts.Where(item => item.Id > 9 || (item.Email == "junoliv.e@gmail.com" && item.Id > 10));
 
             var actual = this.getAll
-                .GetResult("filter[where][or][0][id][gt]=9&filter[where][and][1][email]=junoliv.e@gmail.com&filter[where][and][2][id][gt]=10")
+                .GetResult(NewFilterBuilder()
+                    .Where("id".GreaterThan(9)
+                        .Or("email".Equal("junoliv.e@gmail.com")
+                            .And("id".GreaterThan(10))))
+                    .Build())
                 .Data;
 
             actual.Should().BeEquivalentTo(expected);
@@ -131,7 +154,9 @@
                 .ToList();
 
             var actual = this.getAll
-                .GetResult("filter[fields][id]=true&filter[fields][email]=true")
+                .GetResult(NewFilterBuilder()
+                    .Select("id", "email")
+                    .Build())
                 .Data;
 
             actual.Should().BeEquivalentTo(expected);

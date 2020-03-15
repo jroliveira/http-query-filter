@@ -14,11 +14,13 @@
         [InlineData("?filter%5Blimit%5D=9", 9U)]
         [InlineData("?limit=9", 9U)]
         [InlineData("?LIMIT=9", 9U)]
-        public void Parse_GivenQuery_ValueShouldBe(string query, uint expected)
+        public void Parse_GivenQuery_ValueShouldBe(string query, uint? expected)
         {
-            Limit actual = query;
+            Limit limit = query;
 
-            actual.Value.Should().Be(expected);
+            uint? actual = limit;
+
+            actual.Should().Be(expected);
         }
 
         [Theory]
@@ -26,11 +28,15 @@
         [InlineData("?filter[limit]=")]
         [InlineData("?limit=Nine")]
         [InlineData("?limit=")]
+        [InlineData("")]
+        [InlineData(default)]
         public void Parse_GivenQuery_ShouldReturnNull(string query)
         {
-            Limit actual = query;
+            Limit limit = query;
 
-            actual.Value.Should().BeNull();
+            uint? actual = limit;
+
+            actual.Should().BeNull();
         }
     }
 }

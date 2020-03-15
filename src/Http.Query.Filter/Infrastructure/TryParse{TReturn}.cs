@@ -1,4 +1,4 @@
-﻿namespace Http.Query.Filter.Filters.Pagination
+﻿namespace Http.Query.Filter.Infrastructure
 {
     internal delegate bool TryParse<TReturn>(string input, out TReturn @return);
 }

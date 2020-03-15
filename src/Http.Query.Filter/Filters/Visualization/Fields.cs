@@ -28,30 +28,15 @@
         {
         }
 
-        private Fields()
-            : this(new List<KeyValuePair<string, bool>>())
-        {
-        }
+        public static implicit operator Fields(string query) => new Fields(GetFields(query));
 
-        public static implicit operator Fields(string query)
-        {
-            if (IsNullOrWhiteSpace(query))
-            {
-                return new Fields();
-            }
-
-            var fields = GetFields(query);
-
-            return fields.Any()
-                ? new Fields(fields)
-                : new Fields();
-        }
-
-        private static IReadOnlyCollection<KeyValuePair<string, bool>> GetFields(string query) => new List<KeyValuePair<string, bool>>(
-            from Match match in Matches(UrlDecode(query))
-            let field = match.GetValue("field")
-            let show = GetShow(match)
-            select new KeyValuePair<string, bool>(field, show));
+        private static IEnumerable<KeyValuePair<string, bool>> GetFields(string query) => IsNullOrWhiteSpace(query)
+            ? new List<KeyValuePair<string, bool>>()
+            : new List<KeyValuePair<string, bool>>(
+                from Match match in Matches(UrlDecode(query))
+                let field = match.GetValue("field")
+                let show = GetShow(match)
+                select new KeyValuePair<string, bool>(field, show));
 
         private static bool GetShow(Match match) => Types[match.GetValue("show").ToLower()];
     }

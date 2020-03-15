@@ -1,11 +1,11 @@
 ## API documentation
 
 Jump to:
-  [limit](#limit) |
-  [skip](#skip) |
-  [order](#order) |
-  [where](#where) |
-  [fields](#fields)
+  [limit](#limit-) |
+  [skip](#skip-) |
+  [order](#order-) |
+  [where](#where-) |
+  [fields](#fields-)
 
 ### Limit [&uarr;](#api-documentation)
 
@@ -26,8 +26,8 @@ or RQL
 **Client API**
 
 ``` cs
-var data = client
-    .GetAll()
+FilterBuilder
+    .NewFilterBuilder()
     .Limit(n)
     .Build();
 ```
@@ -53,8 +53,8 @@ or RQL
 **Client API**
 
 ``` cs
-var data = client
-    .GetAll()
+FilterBuilder
+    .NewFilterBuilder()
     .Skip(n)
     .Build();
 ```
@@ -110,8 +110,8 @@ A *where* filter specifies a set of logical conditions to match, similar to a WH
 **Client API**
 
 ``` cs
-var data = client
-    .GetAll()
+FilterBuilder
+    .NewFilterBuilder()
     .Where("property".Equal("value"))
     .Build();
 ```
@@ -127,8 +127,8 @@ var data = client
 **Client API**
 
 ``` cs
-var data = client
-    .GetAll()
+FilterBuilder
+    .NewFilterBuilder()
     .Where("property".GreaterThan(value))
     .Build();
 ```
@@ -144,8 +144,8 @@ var data = client
 **Client API**
 
 ``` cs
-var data = client
-    .GetAll()
+FilterBuilder
+    .NewFilterBuilder()
     .Where("property".LessThan(value))
     .Build();
 ```
@@ -167,11 +167,9 @@ Where:
 
 **Client API**
 
-&#9888; in development!
-
 ``` cs
-var data = client
-    .GetAll()
+FilterBuilder
+    .NewFilterBuilder()
     .Where("property".Equal("value")
         .And("property".GreaterThan(value)))
     .Build();
@@ -187,11 +185,9 @@ var data = client
 
 **Client API**
 
-&#9888; in development!
-
 ``` cs
-var data = client
-    .GetAll()
+FilterBuilder
+    .NewFilterBuilder()
     .Where("property".Equal("value")
         .Or("property".LessThan(value)))
     .Build();
@@ -210,8 +206,8 @@ var data = client
 **Client API**
 
 ``` cs
-var data = client
-    .GetAll()
+FilterBuilder
+    .NewFilterBuilder()
     .Where("property".GreaterThan(value)
         .Or("property".Equal("value")
             .And("property".GreaterThan(value))))
@@ -242,8 +238,8 @@ Order by two or more properties:
 **Client API**
 
 ``` cs
-var data = client
-    .GetAll()
+FilterBuilder
+    .NewFilterBuilder()
     .Select(property)
     .Build();
 ```
@@ -251,8 +247,8 @@ var data = client
 Order by two or more properties:
 
 ``` cs
-var data = client
-    .GetAll()
+FilterBuilder
+    .NewFilterBuilder()
     .Select(property, property)
     .Build();
 ```

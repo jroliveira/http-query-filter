@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.30](https://github.com/jroliveira/http-query-filter/compare/3.0.29...3.0.30) (2020-03-15)
+
+
+
 ### [3.0.29](https://github.com/jroliveira/http-query-filter/compare/3.0.28...3.0.29) (2020-02-27)
 
 

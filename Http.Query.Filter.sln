@@ -20,6 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		cake.config = cake.config
 		CHANGELOG.md = CHANGELOG.md
 		code-analysis.ruleset = code-analysis.ruleset
+		CODE_OF_CONDUCT.md = CODE_OF_CONDUCT.md
 		commitlint.config.js = commitlint.config.js
 		CONTRIBUTING.md = CONTRIBUTING.md
 		Directory.Build.props = Directory.Build.props
@@ -97,6 +98,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".config", ".config", "{FF96
 		.config\dotnet-tools.json = .config\dotnet-tools.json
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{9DE39003-79ED-4376-9671-10F034E237C7}"
+	ProjectSection(SolutionItems) = preProject
+		.github\PULL_REQUEST_TEMPLATE.md = .github\PULL_REQUEST_TEMPLATE.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ISSUE_TEMPLATE", "ISSUE_TEMPLATE", "{4EC7A05E-1D06-43F6-B048-7B7B8351010B}"
+	ProjectSection(SolutionItems) = preProject
+		.github\ISSUE_TEMPLATE\1-bug-report.md = .github\ISSUE_TEMPLATE\1-bug-report.md
+		.github\ISSUE_TEMPLATE\2-feature-request.md = .github\ISSUE_TEMPLATE\2-feature-request.md
+		.github\ISSUE_TEMPLATE\3-help.md = .github\ISSUE_TEMPLATE\3-help.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -135,6 +148,7 @@ Global
 		{C773E825-1DE8-416E-AAE9-4A309FB6B6DA} = {C9DEF327-8982-487B-87B4-074526DE468B}
 		{AB1C7DE8-6D4B-4EDE-A43E-688E1CD2E1F4} = {6A80864B-EA1A-44EA-AF8C-936DC7AB0D37}
 		{A8671134-6865-41E7-A80C-4190868BFB02} = {441E37A1-F116-4A2D-97B7-FD4B33F3C975}
+		{4EC7A05E-1D06-43F6-B048-7B7B8351010B} = {9DE39003-79ED-4376-9671-10F034E237C7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {821F894C-A052-461F-90B0-F4CD63105E74}

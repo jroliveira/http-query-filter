@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.31](https://github.com/jroliveira/http-query-filter/compare/3.0.30...3.0.31) (2020-06-08)
+
+
+### Features
+
+* add inq operator ([b210a1c](https://github.com/jroliveira/http-query-filter/commit/b210a1c))
+
+
+
 ### [3.0.30](https://github.com/jroliveira/http-query-filter/compare/3.0.29...3.0.30) (2020-03-15)
 
 

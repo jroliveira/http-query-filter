@@ -5,5 +5,6 @@
         GreaterThan = 1,
         LessThan = 2,
         Equal = 3,
+        Inq = 4,
     }
 }

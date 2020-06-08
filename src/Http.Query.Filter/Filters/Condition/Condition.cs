@@ -8,12 +8,12 @@
     public sealed class Condition
     {
         internal Condition(string field, string value)
-            : this(field, value, Equal, And, 0)
+            : this(field, value, Equal, Undefined, 0)
         {
         }
 
         internal Condition(string field, string value, Comparison comparison)
-            : this(field, value, comparison, And, 0)
+            : this(field, value, comparison, Undefined, 0)
         {
         }
 

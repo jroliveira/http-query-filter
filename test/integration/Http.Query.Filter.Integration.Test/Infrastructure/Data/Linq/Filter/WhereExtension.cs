@@ -31,7 +31,7 @@
             {
                 Or => conditions.Any(satisfy),
                 And => conditions.All(satisfy),
-                _ => conditions.All(satisfy)
+                _ => conditions.Any(satisfy)
             };
         };
 

@@ -59,6 +59,11 @@
             .Build(this.done("filter[where][id][lt]=10"));
 
         [Fact]
+        public Task Inq_GivenFilter_ShouldReturn() => NewFilterBuilder()
+            .Where("id".Inq(10, 11))
+            .Build(this.done("filter[where][id][inq]=10&filter[where][id][inq]=11"));
+
+        [Fact]
         public Task And_GivenFilter_ShouldReturn() => NewFilterBuilder()
             .Where("id".GreaterThan(10)
                 .And("email".Equal("junoliv.e@gmail.com")))

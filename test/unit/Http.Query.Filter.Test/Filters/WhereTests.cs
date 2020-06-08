@@ -65,12 +65,18 @@
                 yield return new object[] { "?Filter[Where][Id][Lt]=2", Expected(new Condition("Id", "2", Comparison.LessThan)) };
                 yield return new object[] { "?filter%5Bwhere%5D%5Bid%5D%5Blt%5D=2", Expected(new Condition("id", "2", Comparison.LessThan)) };
 
+                yield return new object[] { "?filter[where][id][inq]=&filter[where][id][inq]=Empty", Expected(new Condition("id", Empty, Comparison.Inq), new Condition("id", "Empty", Comparison.Inq)) };
+                yield return new object[] { "?filter[where][id][inq]=2&filter[where][id][inq]=3", Expected(new Condition("id", "2", Comparison.Inq), new Condition("id", "3", Comparison.Inq)) };
+                yield return new object[] { "?FILTER[WHERE][ID][INQ]=2&FILTER[WHERE][ID][INQ]=3", Expected(new Condition("ID", "2", Comparison.Inq), new Condition("ID", "3", Comparison.Inq)) };
+                yield return new object[] { "?Filter[Where][Id][Inq]=2&Filter[Where][Id][Inq]=3", Expected(new Condition("Id", "2", Comparison.Inq), new Condition("Id", "3", Comparison.Inq)) };
+                yield return new object[] { "?filter%5Bwhere%5D%5Bid%5D%5Binq%5D=2&filter%5Bwhere%5D%5Bid%5D%5Binq%5D=3", Expected(new Condition("id", "2", Comparison.Inq), new Condition("id", "3", Comparison.Inq)) };
+
                 // And
-                yield return new object[] { "?filter[where][and][0][id]=&filter[where][and][1][name]=", Expected(new Condition("id", Empty), new Condition("name", Empty, And, 1)) };
-                yield return new object[] { "?filter[where][and][0][id]=2&filter[where][and][1][name]=junior", Expected(new Condition("id", "2"), new Condition("name", "junior", And, 1)) };
-                yield return new object[] { "?FILTER[WHERE][AND][0][ID]=2&FILTER[WHERE][AND][1][NAME]=junior", Expected(new Condition("ID", "2"), new Condition("NAME", "junior", And, 1)) };
-                yield return new object[] { "?Filter[Where][And][0][Id]=2&Filter[Where][And][1][Name]=junior", Expected(new Condition("Id", "2"), new Condition("Name", "junior", And, 1)) };
-                yield return new object[] { "?filter%5Bwhere%5D%5Band%5D%5B0%5D%5Bid%5D=2&filter%5Bwhere%5D%5Band%5D%5B1%5D%5Bname%5D=junior", Expected(new Condition("id", "2"), new Condition("name", "junior", And, 1)) };
+                yield return new object[] { "?filter[where][and][0][id]=&filter[where][and][1][name]=", Expected(new Condition("id", Empty, And, 0), new Condition("name", Empty, And, 1)) };
+                yield return new object[] { "?filter[where][and][0][id]=2&filter[where][and][1][name]=junior", Expected(new Condition("id", "2", And, 0), new Condition("name", "junior", And, 1)) };
+                yield return new object[] { "?FILTER[WHERE][AND][0][ID]=2&FILTER[WHERE][AND][1][NAME]=junior", Expected(new Condition("ID", "2", And, 0), new Condition("NAME", "junior", And, 1)) };
+                yield return new object[] { "?Filter[Where][And][0][Id]=2&Filter[Where][And][1][Name]=junior", Expected(new Condition("Id", "2", And, 0), new Condition("Name", "junior", And, 1)) };
+                yield return new object[] { "?filter%5Bwhere%5D%5Band%5D%5B0%5D%5Bid%5D=2&filter%5Bwhere%5D%5Band%5D%5B1%5D%5Bname%5D=junior", Expected(new Condition("id", "2", And, 0), new Condition("name", "junior", And, 1)) };
 
                 // Or
                 yield return new object[] { "?filter[where][or][0][id]=&filter[where][or][1][name]=", Expected(new Condition("id", Empty, Or, 0), new Condition("name", Empty, Or, 1)) };

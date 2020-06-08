@@ -97,6 +97,20 @@
         }
 
         [Fact]
+        public void GetAll_GivenQueryWithFilterWhereInq_ShouldReturn()
+        {
+            var expected = this.accounts.Where(item => new[] { 10, 11 }.Contains(item.Id));
+
+            var actual = this.getAll
+                .GetResult(NewFilterBuilder()
+                    .Where("id".Inq(10, 11))
+                    .Build())
+                .Data;
+
+            actual.Should().BeEquivalentTo(expected);
+        }
+
+        [Fact]
         public void GetAll_GivenQueryWithFilterWhereAnd_ShouldReturn()
         {
             var expected = this.accounts.Where(item => item.Id > 10 && item.Email == "junoliv.e@gmail.com");

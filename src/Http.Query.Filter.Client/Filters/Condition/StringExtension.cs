@@ -9,5 +9,7 @@
         public static ICondition LessThan(this string @this, object value) => NewField(@this).LessThan(value);
 
         public static ICondition Equal(this string @this, object value) => NewField(@this).Equal(value);
+
+        public static ICondition Inq(this string @this, params object[] values) => NewField(@this).Inq(values);
     }
 }

@@ -19,5 +19,7 @@
         internal ICondition LessThan(object value) => NewCondition(this.name, value, "lt");
 
         internal ICondition Equal(object value) => NewCondition(this.name, value);
+
+        internal ICondition Inq(params object[] values) => NewCondition(this.name, values, "inq");
     }
 }

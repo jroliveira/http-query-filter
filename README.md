@@ -10,7 +10,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/62b3f82f9fc66560bbd7/maintainability)](https://codeclimate.com/github/jroliveira/http-query-filter/maintainability)
 [![License: MIT](http://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.txt)
 
-Project-based filter system [StrongLoop Node.js API Platform][strongloop] developed by [IBM Company][ibm] and [Resource Query Language (RQL)](rql).
+Project-based filter system [LoopBack Querying data][loopback] developed by [IBM Company][ibm] and [Resource Query Language (RQL)][rql].
 
 ## Installing / Getting started
 
@@ -102,7 +102,7 @@ $ dotnet cake --target=Release
 
 The code is available under the [MIT license](LICENSE.txt).
 
-[strongloop]: https://strongloop.com/
+[loopback]: https://loopback.io/doc/en/lb4/Querying-data.html
 [ibm]: http://www.ibm.com/
 [logo]: docs/logo.png "Http Query Filter - Logo"
 [rql]: https://github.com/persvr/rql

@@ -219,6 +219,30 @@ Where:
  - *property* is the name of a property (field) in the model being queried.
  - *value* is a literal value. 
 
+##### Inq
+
+The *inq* operator checks whether the value of the specified property matches any of the values provided in an array.
+
+**REST API**
+
+```
+?filter[where][property][inq]=value1&filter[where][property][inq]=value2
+```
+
+**Client API**
+
+``` cs
+FilterBuilder
+    .NewFilterBuilder()
+    .Where("property".Inq("value1", "value2"))
+    .Build();
+```
+
+Where:
+
+ - *property* is the name of a property (field) in the model being queried.
+ - *value1*, *value2*, and so on, are literal values in an array. 
+
 ### Fields [&uarr;](#api-documentation)
 
 A *fields* filter specifies properties (fields) to include from the results.

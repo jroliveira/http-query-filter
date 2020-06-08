@@ -17,13 +17,14 @@
 
     public sealed class Where : ReadOnlyCollection<Condition>
     {
-        private const string Pattern = @"filter\[where]?(\[(?<logical>and|or)\])?(\[(?<index>\d+)\])?(\[(?<field>\w+)\])?(\[(?<comparison>gt|lt)\])?=(?<value>[^&]*)&?";
+        private const string Pattern = @"filter\[where]?(\[(?<logical>and|or)\])?(\[(?<index>\d+)\])?(\[(?<field>\w+)\])?(\[(?<comparison>gt|lt|inq)\])?=(?<value>[^&]*)&?";
 
         private static readonly Func<string, MatchCollection> Matches = new Regex(Pattern, IgnoreCase | Compiled).Matches;
         private static readonly IReadOnlyDictionary<string, Comparison> ComparisonOperations = new Dictionary<string, Comparison>
         {
             { "gt", GreaterThan },
             { "lt", LessThan },
+            { "inq", Inq },
         };
 
         private static readonly IReadOnlyDictionary<string, Logical> LogicalOperations = new Dictionary<string, Logical>
@@ -46,7 +47,7 @@
                 let field = match.GetValue("field")
                 let value = match.GetValue("value")
                 let comparison = GetOrElseOperator(match, "comparison", ComparisonOperations, Equal)
-                let logical = GetOrElseOperator(match, "logical", LogicalOperations, And)
+                let logical = GetOrElseOperator(match, "logical", LogicalOperations, Undefined)
                 let index = ushort.TryParse(match.GetValue("index"), out var number) ? number : default
                 select new Condition(field, value, comparison, logical, index));
 

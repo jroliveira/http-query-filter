@@ -2,7 +2,8 @@
 {
     public enum Logical : byte
     {
-        And = 1,
-        Or = 2,
+        Undefined = 1,
+        And = 2,
+        Or = 3,
     }
 }

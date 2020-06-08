@@ -23,7 +23,7 @@
 
             var satisfy = filter.Where(param);
 
-            return satisfy(And) && satisfy(Or);
+            return satisfy(And) && satisfy(Or) && satisfy(Undefined);
         };
     }
 }

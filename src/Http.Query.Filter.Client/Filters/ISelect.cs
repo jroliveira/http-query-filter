@@ -1,6 +1,6 @@
 ﻿namespace Http.Query.Filter.Client.Filters
 {
-    public interface ISelect : IFilter
+    public interface ISelect : IFilterBase
     {
         /// <summary>
         /// A select filter specifies properties to include from the results.
@@ -9,14 +9,14 @@
         /// fields are the names of the properties to include from the results.
         /// </param>
         /// <returns></returns>
-        IFilter Select(params string[] fields)
+        IFilterBuilder Select(params string[] fields)
         {
             foreach (var field in fields)
             {
-                this.AddFilter($"filter[fields][{field}]=true");
+                this.Builder.AddFilter($"filter[fields][{field}]=true");
             }
 
-            return this;
+            return this.Builder;
         }
     }
 }

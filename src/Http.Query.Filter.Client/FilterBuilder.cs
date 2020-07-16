@@ -8,6 +8,8 @@
 
         public ICollection<string> Filters { get; }
 
+        public IFilterBuilder Builder => this;
+
         public static IFilterBuilder NewFilterBuilder() => new FilterBuilder();
     }
 }

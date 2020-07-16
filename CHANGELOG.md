@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.32](https://github.com/jroliveira/http-query-filter/compare/3.0.31...3.0.32) (2020-07-16)
+
+
+### Features
+
+* update dependencies ([7fa8a2b](https://github.com/jroliveira/http-query-filter/commit/7fa8a2bc6341cc9b26e8d07d1e26dea0e6f04b9c))
+
 ### [3.0.31](https://github.com/jroliveira/http-query-filter/compare/3.0.30...3.0.31) (2020-06-08)
 
 
